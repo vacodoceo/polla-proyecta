@@ -1,9 +1,14 @@
 # Polla Proyecta
 
-## To build:
+## Setup:
+Setup consist on building the docker-container
 
 ``` docker-compose build ```
 
-## To run:
+And creating the database
+
+``` docker-compose run web rails db:create ```
+
+## Run:
 
 ``` docker-compose up ```
