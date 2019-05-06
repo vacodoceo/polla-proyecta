@@ -1,6 +1,9 @@
 # Polla Proyecta
 
-To build and run:
+## To build:
 
-` docker-compose build `
-` docker-compose up `
+``` docker-compose build ```
+
+## To run:
+
+``` docker-compose up ```
