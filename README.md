@@ -1,6 +1,6 @@
 # Polla Proyecta
 
-## Setup:
+## Setup
 Setup consist on building the docker-container
 
 ``` docker-compose build ```
@@ -13,7 +13,7 @@ And running migrations
 
 ``` docker-compose run web rails db:migrate ```
 
-## Run:
+## Run
 
 Just run on terminal
 
