@@ -5,9 +5,13 @@ Setup consist on building the docker-container
 
 ``` docker-compose build ```
 
-And creating the database
+Creating the database
 
 ``` docker-compose run web rails db:create ```
+
+And running migrations
+
+``` docker-compose run web rails db:migrate ```
 
 ## Run:
 
