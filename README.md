@@ -1,24 +1,22 @@
-# README
+# Polla Proyecta
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
+Setup consist on building the docker-container
 
-Things you may want to cover:
+``` docker-compose build ```
 
-* Ruby version
+Creating the database
 
-* System dependencies
+``` docker-compose run web rails db:create ```
 
-* Configuration
+And running migrations
 
-* Database creation
+``` docker-compose run web rails db:migrate ```
 
-* Database initialization
+## Run
 
-* How to run the test suite
+Just run on terminal
 
-* Services (job queues, cache servers, search engines, etc.)
+``` docker-compose up ```
 
-* Deployment instructions
-
-* ...
+And open localhost:3000
