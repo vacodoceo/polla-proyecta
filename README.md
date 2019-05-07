@@ -15,4 +15,8 @@ And running migrations
 
 ## Run:
 
+Just run on terminal
+
 ``` docker-compose up ```
+
+And open localhost:3000
