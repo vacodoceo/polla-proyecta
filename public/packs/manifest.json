@@ -1,0 +1,35 @@
+{
+  "application.js": "/packs/js/application-9b1d8a6c2fe6c16d5970.js",
+  "application.js.map": "/packs/js/application-9b1d8a6c2fe6c16d5970.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-9b1d8a6c2fe6c16d5970.js"
+      ],
+      "js.map": [
+        "/packs/js/application-9b1d8a6c2fe6c16d5970.js.map"
+      ]
+    },
+    "hello_react": {
+      "js": [
+        "/packs/js/hello_react-f636c2cd62527a56f6d2.js"
+      ],
+      "js.map": [
+        "/packs/js/hello_react-f636c2cd62527a56f6d2.js.map"
+      ]
+    },
+    "server_rendering": {
+      "js": [
+        "/packs/js/server_rendering-9a8716470aeae58d153a.js"
+      ],
+      "js.map": [
+        "/packs/js/server_rendering-9a8716470aeae58d153a.js.map"
+      ]
+    }
+  },
+  "hello_react.js": "/packs/js/hello_react-f636c2cd62527a56f6d2.js",
+  "hello_react.js.map": "/packs/js/hello_react-f636c2cd62527a56f6d2.js.map",
+  "media/assets/img/landing-bg.jpg": "/packs/media/assets/img/landing-bg-df8fd3efcd662b64b44de07f351c838b.jpg",
+  "server_rendering.js": "/packs/js/server_rendering-9a8716470aeae58d153a.js",
+  "server_rendering.js.map": "/packs/js/server_rendering-9a8716470aeae58d153a.js.map"
+}

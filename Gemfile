@@ -75,3 +75,7 @@ gem 'rubocop'
 
 # Environment variables
 gem 'dotenv-rails', groups: [:development, :test]
+
+# Frontend
+gem 'bootstrap'
+gem 'jquery-rails'
