@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+    before_action :active_nav
+    def active_nav
+        @active = "user"
+    end
     def new
         @user = User.new
     end
