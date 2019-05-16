@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_match: one
+  id_polla: one
+  result_team_1: 1
+  result_team_2: 1
+  result: MyString
+  integer: MyString
+
+two:
+  id_match: two
+  id_polla: two
+  result_team_1: 1
+  result_team_2: 1
+  result: MyString
+  integer: MyString

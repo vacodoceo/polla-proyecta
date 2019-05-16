@@ -80,3 +80,6 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'bootstrap'
 gem 'jquery-rails'
 gem "font-awesome-rails"
+
+# KHipu
+gem 'khipu-api-client', '~> 2.0', '>= 2.0.1'

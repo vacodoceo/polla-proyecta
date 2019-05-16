@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team_1_name: MyString
+  team_2_name: MyString
+  team_1_result: 1
+  team_2_result: 1
+  edited: 1
+
+two:
+  team_1_name: MyString
+  team_2_name: MyString
+  team_1_result: 1
+  team_2_result: 1
+  edited: 1

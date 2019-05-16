@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_user: one
+  valid: 1
+  score: 1
+  id_transaction: one
+
+two:
+  id_user: two
+  valid: 1
+  score: 1
+  id_transaction: two
