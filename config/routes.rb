@@ -3,21 +3,21 @@ Rails.application.routes.draw do
   get 'transactions/show'
   get 'transactions/new'
   get 'transactions/edit'
-  get 'pollas/index'
-  get 'pollas/show'
-  get 'pollas/new'
-  get 'pollas/edit'
-  get 'matches/index'
+  get 'pollas/index' =>'pollas#index'
+  get 'pollas/show' => 'pollas#show'
+  get 'pollas/new' => 'pollas#create'
+  get 'pollas/edit' => 'pollas#update'
+  get 'matches/index' => 'matches#index'
   get 'matches/show'
-  get 'matches/new'
-  get 'matches/edit'
-  get 'bets/index'
+  get 'matches/new' => 'matches#create'
+  get 'matches/edit' => 'matches#update'
+  get 'bets/index' => 'bets#index'
   get 'bets/show'
-  get 'bets/new'
-  get 'bets/edit'
-  get 'sessions/create'
+  get 'bets/new' => 'bets#create'
+  get 'bets/edit' => 'bets#update'
   get 'sessions/destroy'
   get 'home/show'
+  get 'register', to: 'users#new', as: 'register'
 
   #Google Auth
   get 'auth/:provider/callback', to: 'sessions#create'
@@ -25,9 +25,10 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'login', to: 'sessions#new', as: 'login'
 
-  resources :sessions, only: [:create, :new, :destroy]
+  resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
   resource :user
+  resources :pollas
 
   root to: "home#show"
   
