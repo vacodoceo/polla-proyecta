@@ -22,9 +22,9 @@ class PollasController < ApplicationController
   # POST /pollas
   # POST /pollas.json
   def create
-    @variable = polla_params[:partido_1_result_1]
+    @variable = polla_params['partido_1_result_1']
     @polla = Polla.new(polla_params)
-
+    @polla.id_user = current_user.uid
     respond_to do |format|
       if @polla.save
         format.html { redirect_to @polla, notice: 'polla was successfully created.' }
