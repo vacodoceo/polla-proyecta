@@ -3,18 +3,6 @@ Rails.application.routes.draw do
   get 'transactions/show'
   get 'transactions/new'
   get 'transactions/edit'
-  get 'pollas/index' =>'pollas#index'
-  get 'pollas/show' => 'pollas#show'
-  get 'pollas/new' => 'pollas#create'
-  get 'pollas/edit' => 'pollas#update'
-  get 'matches/index' => 'matches#index'
-  get 'matches/show'
-  get 'matches/new' => 'matches#create'
-  get 'matches/edit' => 'matches#update'
-  get 'bets/index' => 'bets#index'
-  get 'bets/show'
-  get 'bets/new' => 'bets#create'
-  get 'bets/edit' => 'bets#update'
   get 'sessions/destroy'
   get 'home/show'
   get 'register', to: 'users#new', as: 'register'
@@ -29,6 +17,9 @@ Rails.application.routes.draw do
   resource :home, only: [:show]
   resource :user
   resources :pollas
+  resources :matches
+  resources :bets
+  resources :transactions
 
   root to: "home#show"
   
