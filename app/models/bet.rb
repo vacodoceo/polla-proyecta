@@ -1,4 +1,4 @@
 class Bet < ApplicationRecord
   has_many :matches
-  belongs_to :id_polla
+  belongs_to :polla
 end
