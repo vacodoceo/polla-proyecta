@@ -54,37 +54,44 @@
 .list-group-item:first-child {
   padding: 6px 20px 6px 20px;
 }
-.match-marker {
-  display: flex;
 
-  div {
-    // display: flex;
-    width: 50%;
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
-  }
-  div:first-child {
-    border-right: 1px solid rgba(0, 0, 0, 0.125);
-    justify-content: flex-end;
+// .match-marker:nth-child(2) {
+//   padding-top: 2px;
+// }
+
+.match-marker {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px 0 0;
+  height: 49px;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+
+  .input-group {
+    width: 120px;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 0.25rem;
   }
   input {
-    width: 40px;
-  }
-  span:first-child {
-    left: -21px;
-    border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0;
+    height: 100%;
+    border: 1px solid;
   }
   span {
-    position: absolute;
-    top: -12px;
-    right:-21px;
-    height: 55px;
-    width: 55/3*4px;
-    border-bottom-right-radius: 0.25rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.125);
+    height: 48px;
+    width: 64px;
   }
 }
+
+.match-marker:nth-child(3) {
+  span {
+    border-bottom-left-radius: 0.25rem;
+  }
+}
+
 
 /*
  * Globals

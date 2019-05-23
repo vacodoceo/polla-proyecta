@@ -1,7 +1,13 @@
 <ul class="list-group list-group-match">
     <li class="list-group-item active"><%= COUNTRIES_NAME[c1] + " v/s " + COUNTRIES_NAME[c2] %></li>
     <li class="list-group-item match-marker">
-        <div><%= flag_icon(c1) %><%= COUNTRIES_CODE[c1] %><input id="number" type="number" value="0" min="0"></div>
-        <div><input id="number" type="number" value="0" min="0"><%= COUNTRIES_CODE[c2] %><%= flag_icon(c2) %></div>
+        <%= flag_icon(c1) %>
+        <%= COUNTRIES_CODE[c1] %>
+        <input id="number" type="number" value="0" min="0" max="9">
+    </li>
+    <li class="list-group-item match-marker">
+        <%= flag_icon(c2) %>
+        <%= COUNTRIES_CODE[c1] %>
+        <input id="number" type="number" value="0" min="0" max="9">
     </li>
 </ul>
