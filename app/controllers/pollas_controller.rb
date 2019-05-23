@@ -8,11 +8,14 @@ class PollasController < ApplicationController
   # GET /pollas/1
   # GET /pollas/1.json
   def show
+    @pollas = Polla.where(:user_id => current_user.id)
   end
 
   # GET /pollas/new
   def new
     @polla = Polla.new
+    #@variable = polla_params["partidos"]["apuestas"]
+    #@variable_2 = polla_params["partidos"]["apuestas"]
   end
 
   # GET /pollas/1/edit
@@ -22,8 +25,19 @@ class PollasController < ApplicationController
   # POST /pollas
   # POST /pollas.json
   def create
-    @variable = polla_params[:partido_1_result_1]
-    @polla = Polla.new(polla_params)
+    @polla = current_user.pollas.create(polla_params)
+    @polla.valid_polla = 0
+    @polla.score = 0
+
+    (0..params["partidos"]["apuestas"].length-1).step(2) do |n|
+      @bet = Bet.new
+      @bet.polla_id = @polla.id
+      @bet.result_team_1 = params["partidos"]["apuestas"][n]
+      @bet.result_team_2 = params["partidos"]["apuestas"][n+1]
+      @bet.match_id = n/2 +1
+      @bet.save!
+
+    end
 
     respond_to do |format|
       if @polla.save
@@ -68,6 +82,6 @@ class PollasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def polla_params
-      params.permit(:partido_1_result_1, :partido_1_result_2)
+      params.permit(:partidos)
     end
 end

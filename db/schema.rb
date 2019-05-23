@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_17_061104) do
+ActiveRecord::Schema.define(version: 2019_05_21_011913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 2019_05_17_061104) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "match_id"
+    t.bigint "polla_id"
     t.index ["match_id"], name: "index_bets_on_match_id"
+    t.index ["polla_id"], name: "index_bets_on_polla_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -38,17 +40,17 @@ ActiveRecord::Schema.define(version: 2019_05_17_061104) do
   end
 
   create_table "pollas", force: :cascade do |t|
-    t.integer "id_user"
     t.integer "valid_polla"
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "transaction_id"
+    t.bigint "user_id"
     t.index ["transaction_id"], name: "index_pollas_on_transaction_id"
+    t.index ["user_id"], name: "index_pollas_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "id_user"
     t.integer "amount"
     t.string "bank"
     t.integer "bank_account_number"
@@ -56,6 +58,8 @@ ActiveRecord::Schema.define(version: 2019_05_17_061104) do
     t.string "payment_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,5 +75,8 @@ ActiveRecord::Schema.define(version: 2019_05_17_061104) do
   end
 
   add_foreign_key "bets", "matches"
+  add_foreign_key "bets", "pollas"
   add_foreign_key "pollas", "transactions"
+  add_foreign_key "pollas", "users"
+  add_foreign_key "transactions", "users"
 end

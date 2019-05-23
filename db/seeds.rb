@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.destroy_all()
 Match.destroy_all()
 Match.create([{team_1_name: 'Brasil', team_2_name: 'Bolivia', team_1_result: -1, team_2_result: -1, edited: 0, date: '2019-06-14 21:30:00',created_at: '2019-05-17 00:58:00', updated_at: '2019-05-17 00:58:00'}])
 Match.create([{team_1_name: 'Venezuela', team_2_name: 'Perú', team_1_result: -1, team_2_result: -1, edited: 0, date: '2019-06-15 16:00:00',created_at: '2019-05-17 00:58:00', updated_at: '2019-05-17 00:58:00'}])

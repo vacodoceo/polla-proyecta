@@ -1,4 +1,4 @@
 class Transaction < ApplicationRecord
-  belongs_to :id_user
+  belongs_to :user
   has_many :pollas
 end
