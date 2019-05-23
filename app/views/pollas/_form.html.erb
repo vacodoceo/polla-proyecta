@@ -11,30 +11,12 @@
       </div>
     <% end %>
 
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <%= render 'marker', c1: 'jp', c2: 'cl'%>
-        </div>
-        <div class="col">
-          <%= render 'marker', c1: 'cl', c2: 'jp'%>
-        </div>
-      </div>
+    <div class="container container-matches">
+        <% GROUP_A.each do |m| %>
+          <%= render 'marker', c1:m.team_1_name, c2:m.team_2_name %>
+        <% end %>
     </div>
 
-    <br/>
-    <br/>
-
-    <div class="field">
-      <%= form.label :Chile %>
-      <%= form.text_field :partido_1_result_1, id: :partido_1_result_1 %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Japon %>
-      <%= form.text_field :partido_1_result_2, id: :partido_1_result_2 %>
-    </div>
-  
   
     <div class="actions">
       <%= form.submit %>
