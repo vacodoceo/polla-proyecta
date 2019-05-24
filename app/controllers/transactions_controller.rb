@@ -61,6 +61,58 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def crear_pago_polla #recibe polla y current_user
+    api = Khipu::PaymentsApi.new()
+    @transaction = current_user.transactions.create()
+    amount = 1
+    response = api.payments_post('Pago polla' + polla.name, 'CLP', amount, { #CAMBIAR A 1000
+        transaction_id: @transaction.id,
+        expires_date: DateTime.new(2019, 6, 13),
+        send_email: true,
+        payer_name: current_user.name,
+        payer_email: current_user.email,
+        return_url: pollas_path,
+        cancel_url: root_path,
+        #notify_url: 'http://mi-ecomerce.com/backend/notify',
+        notify_api_version: '1.3'
+    })
+    puts 'response: '+ response 
+    @transaction.payment_id = response.payment_id
+    @transaction.amount = amount
+    @transaction.polla_id = polla.id
+    @transaction.payment_url = response.payment_url
+    #@transaction.transfer_url = response.transfer_url
+    #@transaction.app_url = response.app_url
+    redirect_to payment_url
+  end
+  
+  def bancos_posibles
+    banks = Khipu::BanksApi.new()
+    response_2 = banks.banks_get()
+    puts 'bancos' + bancos
+    return response_2
+  end
+  #-----------------------------------------------
+  
+  def revisar_estado_pago #RECIBE LA transaccion
+    api    = Khipu::PaymentsApi.new()
+    status = api.payments_id_get(transaction.payment_id)
+    if status == 'done'
+      transaction.polla.valid = 1
+    end
+    puts 'status:' + status
+  end
+  
+  def confirmar_pago #recibe la polla y la transaccion
+    notification_token = transaction.notification_token  # Parámetro notification_token
+    amount = 1
+    client = Khipu::PaymentsApi.new()
+    response = client.payments_get(notification_token)
+    if response.status == 'done'
+      polla.valid = 1
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_21_011913) do
+ActiveRecord::Schema.define(version: 2019_05_24_023445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,9 +44,8 @@ ActiveRecord::Schema.define(version: 2019_05_21_011913) do
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "transaction_id"
     t.bigint "user_id"
-    t.index ["transaction_id"], name: "index_pollas_on_transaction_id"
+    t.string "name"
     t.index ["user_id"], name: "index_pollas_on_user_id"
   end
 
@@ -59,6 +58,8 @@ ActiveRecord::Schema.define(version: 2019_05_21_011913) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "polla_id"
+    t.index ["polla_id"], name: "index_transactions_on_polla_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -72,11 +73,14 @@ ActiveRecord::Schema.define(version: 2019_05_21_011913) do
     t.datetime "updated_at", null: false
     t.string "email"
     t.string "phone_number"
+    t.string "password"
+    t.boolean "is_admin"
+    t.boolean "is_mod"
   end
 
   add_foreign_key "bets", "matches"
   add_foreign_key "bets", "pollas"
-  add_foreign_key "pollas", "transactions"
   add_foreign_key "pollas", "users"
+  add_foreign_key "transactions", "pollas"
   add_foreign_key "transactions", "users"
 end

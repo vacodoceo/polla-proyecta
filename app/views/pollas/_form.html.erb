@@ -10,6 +10,13 @@
         </ul>
       </div>
     <% end %>
+    <div class
+
+    <div class="container">
+      <div class="row">
+        Nombre polla: <input type="textbox" name="name"><br>
+      </div>
+    </div>
 
     <div class="container">
       <div class="row">
@@ -25,15 +32,10 @@
     <br/>
     <br/>
 
-    <div class="field">
-      <%= form.label :Chile %>
-      <%= form.text_field :partido_1_result_1, id: :partido_1_result_1 %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Japon %>
-      <%= form.text_field :partido_1_result_2, id: :partido_1_result_2 %>
-    </div>
+    Japón: <input type="textbox" name="partidos[apuestas][]"><br>
+    Chile: <input type="textbox" name="partidos[apuestas][]"><br>
+    Ecuador: <input type="textbox" name="partidos[apuestas][]"><br>
+    Perú: <input type="textbox" name="partidos[apuestas][]"><br>
   
   
     <div class="actions">

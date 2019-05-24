@@ -1,3 +1,4 @@
+require 'khipu-api-client'
 class PollasController < ApplicationController
   before_action :set_polla, only: [:show, :edit, :update, :destroy]
 
@@ -20,6 +21,10 @@ class PollasController < ApplicationController
 
   # GET /pollas/1/edit
   def edit
+  end
+
+  def pagar
+
   end
 
   # POST /pollas
@@ -82,6 +87,6 @@ class PollasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def polla_params
-      params.permit(:partidos)
+      params.permit(:name, :partidos)
     end
 end
