@@ -1,0 +1,5 @@
+<div class="container container-matches" id="<%= group %>" >
+    <% GROUPS[group].each do |m| %>
+        <%= render 'layouts/marker', c1:m.team_1_name, c2:m.team_2_name %>
+    <% end %>
+</div>

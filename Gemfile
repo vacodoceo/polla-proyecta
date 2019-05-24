@@ -79,6 +79,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 # Frontend
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem "font-awesome-rails"
 gem 'flag-icons-rails'
 
