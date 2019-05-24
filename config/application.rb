@@ -10,6 +10,9 @@ if ['development', 'test'].include? ENV['RAILS_ENV']
   Dotenv::Railtie.load
 end
 
+GOOGLE_SECRET = ENV['GOOGLE_SECRET']
+GOOGLE_ID = ENV['GOOGLE_ID']
+
 module Myapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
