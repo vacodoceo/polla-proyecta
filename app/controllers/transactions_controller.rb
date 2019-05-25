@@ -52,6 +52,16 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def validar_pagos
+    @transactions = Transaction.where(:charged => 0)
+    if @transactions
+      @transactions.each do |trans|
+        trans.revisar_estado_pago
+      end
+    end
+    redirect_to root_path
+  end
+
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
@@ -60,44 +70,6 @@ class TransactionsController < ApplicationController
       format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def crear_pago_polla(polla, user) #recibe polla y current_user
-    receiver_id = ENV['RECEIVER_ID']
-    secret_key = ENV['RECEIVER_SECRET']
-
-    Khipu.configure do |c|
-      c.secret = secret_key
-      c.receiver_id = receiver_id
-      c.platform = 'demo-client'
-      c.platform_version = '2.0'
-      # c.debugging = true
-    end
-
-    api = Khipu::PaymentsApi.new()
-    @transaction = current_user.transactions.create()
-    amount = 1
-    response = api.payments_post('Pago polla' + polla.name, 'CLP', amount, { #CAMBIAR A 1000
-        transaction_id: @transaction.id,
-        expires_date: DateTime.new(2019, 6, 13),
-        send_email: true,
-        payer_name: user.name,
-        payer_email: user.email,
-        return_url: pollas_path,
-        cancel_url: root_path,
-        #notify_url: 'http://mi-ecomerce.com/backend/notify',
-        notify_api_version: '1.3'
-    })
-    puts 'response: '+ response 
-    polla.paying = 1
-    @transaction.payment_id = response.payment_id
-    @transaction.amount = amount
-    @transaction.polla_id = polla.id
-    @transaction.payment_url = response.payment_url
-    #@transaction.transfer_url = response.transfer_url
-    #@transaction.app_url = response.app_url
-    @transaction.save
-    redirect_to response.payment_url
   end
   
   def bancos_posibles
@@ -119,7 +91,7 @@ class TransactionsController < ApplicationController
   end
   #-----------------------------------------------
   
-  def revisar_estado_pago(transaction) #RECIBE LA transaccion
+  def revisar_estado_pago #RECIBE LA transaccion
     receiver_id = ENV['RECEIVER_ID']
     secret_key = ENV['RECEIVER_SECRET']
 
@@ -134,30 +106,31 @@ class TransactionsController < ApplicationController
     api    = Khipu::PaymentsApi.new()
     status = api.payments_id_get(transaction.payment_id)
     if status == 'done'
-      transaction.polla.valid = 1
+      transaction.polla.valid_polla = 1
     end
+    transaction.charged = 1
     puts 'status:' + status
   end
   
-  def confirmar_pago(polla, transaction) #recibe la polla y la transaccion
-    receiver_id = ENV['RECEIVER_ID']
-    secret_key = ENV['RECEIVER_SECRET']
+ # def confirmar_pago(polla, transaction) #recibe la polla y la transaccion
+  #  receiver_id = ENV['RECEIVER_ID']
+   # secret_key = ENV['RECEIVER_SECRET']
 
-    Khipu.configure do |c|
-      c.secret = secret_key
-      c.receiver_id = receiver_id
-      c.platform = 'demo-client'
-      c.platform_version = '2.0'
+    #Khipu.configure do |c|
+     # c.secret = secret_key
+      #c.receiver_id = receiver_id
+      #c.platform = 'demo-client'
+      #c.platform_version = '2.0'
       # c.debugging = true
-    end
-    notification_token = transaction.notification_token  # Parámetro notification_token
-    amount = 1
-    client = Khipu::PaymentsApi.new()
-    response = client.payments_get(notification_token)
-    if response.status == 'done'
-      polla.valid = 1
-    end
-  end
+   # end
+    #notification_token = transaction.notification_token  # Parámetro notification_token
+    #amount = 1
+    #client = Khipu::PaymentsApi.new()
+    #response = client.payments_get(notification_token)
+    #if response.status == 'done'
+     # polla.valid_polla = 1
+    #end
+ # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

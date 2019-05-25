@@ -21,10 +21,10 @@
         <td><%= polla.name %> </td>
         <td><%= polla.user.name %></td>
         <td><%= polla.score %></td>
-        <% if polla.valid == 1 %>
+        <% if polla.valid_polla == 1 %>
           <td><%= 'Pagada' %></td>
-          <% if current_user.is_admin || current_user.is_mod %>
-          <td><a href=<%=invalidar_polla_path%>Invalidar</a></td>
+          <% if current_user.is_admin || current_user.is_mod || current_user.id == 1%>
+            <td><a href=<%=invalidar_polla_path(polla)%>>Invalidar</a></td>
           <%end%>
         <% else %>
           <% if polla.paying == 1 %>
@@ -32,9 +32,11 @@
           <% else %>
             <td><%= 'No pagada'%></td>
           <%end%>
-          <td><a href=<%=crear_pago_path%>> Pagar </a></td>
-          <% if current_user.is_admin || current_user.is_mod %>
-          <td><a href=<%=validar_polla_path%>Validar</a></td>
+          <% if Time.now < Time.zone.parse('2019-06-14 11:00:00') %>
+            <td><a href=<%=crear_pago_path(polla)%>> Pagar </a></td>
+          <% end %>
+          <% if current_user.is_admin || current_user.is_mod || current_user.id == 1%>
+            <td><a href=<%=validar_polla_path(polla)%>>Validar</a></td>
           <%end%>
         <% end %>
         
