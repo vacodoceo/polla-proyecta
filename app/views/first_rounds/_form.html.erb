@@ -1,0 +1,32 @@
+<%= form_with(model: first_round, local: true) do |form| %>
+  <% if first_round.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(first_round.errors.count, "error") %> prohibited this first_round from being saved:</h2>
+
+      <ul>
+      <% first_round.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :country_name %>
+    <%= form.text_field :country_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :position %>
+    <%= form.number_field :position %>
+  </div>
+
+  <div class="field">
+    <%= form.label :group %>
+    <%= form.text_field :group %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

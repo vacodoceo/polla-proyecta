@@ -1,3 +1,4 @@
+require 'khipu-api-client'
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
@@ -61,7 +62,18 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def crear_pago_polla #recibe polla y current_user
+  def crear_pago_polla(polla, user) #recibe polla y current_user
+    receiver_id = ENV['RECEIVER_ID']
+    secret_key = ENV['RECEIVER_SECRET']
+
+    Khipu.configure do |c|
+      c.secret = secret_key
+      c.receiver_id = receiver_id
+      c.platform = 'demo-client'
+      c.platform_version = '2.0'
+      # c.debugging = true
+    end
+
     api = Khipu::PaymentsApi.new()
     @transaction = current_user.transactions.create()
     amount = 1
@@ -69,24 +81,37 @@ class TransactionsController < ApplicationController
         transaction_id: @transaction.id,
         expires_date: DateTime.new(2019, 6, 13),
         send_email: true,
-        payer_name: current_user.name,
-        payer_email: current_user.email,
+        payer_name: user.name,
+        payer_email: user.email,
         return_url: pollas_path,
         cancel_url: root_path,
         #notify_url: 'http://mi-ecomerce.com/backend/notify',
         notify_api_version: '1.3'
     })
     puts 'response: '+ response 
+    polla.paying = 1
     @transaction.payment_id = response.payment_id
     @transaction.amount = amount
     @transaction.polla_id = polla.id
     @transaction.payment_url = response.payment_url
     #@transaction.transfer_url = response.transfer_url
     #@transaction.app_url = response.app_url
-    redirect_to payment_url
+    @transaction.save
+    redirect_to response.payment_url
   end
   
   def bancos_posibles
+    receiver_id = ENV['RECEIVER_ID']
+    secret_key = ENV['RECEIVER_SECRET']
+
+    Khipu.configure do |c|
+      c.secret = secret_key
+      c.receiver_id = receiver_id
+      c.platform = 'demo-client'
+      c.platform_version = '2.0'
+      # c.debugging = true
+    end
+
     banks = Khipu::BanksApi.new()
     response_2 = banks.banks_get()
     puts 'bancos' + bancos
@@ -94,7 +119,18 @@ class TransactionsController < ApplicationController
   end
   #-----------------------------------------------
   
-  def revisar_estado_pago #RECIBE LA transaccion
+  def revisar_estado_pago(transaction) #RECIBE LA transaccion
+    receiver_id = ENV['RECEIVER_ID']
+    secret_key = ENV['RECEIVER_SECRET']
+
+    Khipu.configure do |c|
+      c.secret = secret_key
+      c.receiver_id = receiver_id
+      c.platform = 'demo-client'
+      c.platform_version = '2.0'
+      # c.debugging = true
+    end
+
     api    = Khipu::PaymentsApi.new()
     status = api.payments_id_get(transaction.payment_id)
     if status == 'done'
@@ -103,7 +139,17 @@ class TransactionsController < ApplicationController
     puts 'status:' + status
   end
   
-  def confirmar_pago #recibe la polla y la transaccion
+  def confirmar_pago(polla, transaction) #recibe la polla y la transaccion
+    receiver_id = ENV['RECEIVER_ID']
+    secret_key = ENV['RECEIVER_SECRET']
+
+    Khipu.configure do |c|
+      c.secret = secret_key
+      c.receiver_id = receiver_id
+      c.platform = 'demo-client'
+      c.platform_version = '2.0'
+      # c.debugging = true
+    end
     notification_token = transaction.notification_token  # Parámetro notification_token
     amount = 1
     client = Khipu::PaymentsApi.new()

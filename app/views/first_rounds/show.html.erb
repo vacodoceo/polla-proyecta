@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Country name:</strong>
+  <%= @first_round.country_name %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @first_round.position %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @first_round.group %>
+</p>
+
+<%= link_to 'Edit', edit_first_round_path(@first_round) %> |
+<%= link_to 'Back', first_rounds_path %>

@@ -9,6 +9,7 @@
       <th>Nombre</th>
       <th>Usuario</th>
       <th>Puntaje</th>
+      <th>Estado</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +21,24 @@
         <td><%= polla.name %> </td>
         <td><%= polla.user.name %></td>
         <td><%= polla.score %></td>
+        <% if polla.valid == 1 %>
+          <td><%= 'Pagada' %></td>
+          <% if current_user.is_admin || current_user.is_mod %>
+          <td><a href=<%=invalidar_polla_path%>Invalidar</a></td>
+          <%end%>
+        <% else %>
+          <% if polla.paying == 1 %>
+            <td><%= 'Pago en proceso' %> </td>
+          <% else %>
+            <td><%= 'No pagada'%></td>
+          <%end%>
+          <td><a href=<%=crear_pago_path%>> Pagar </a></td>
+          <% if current_user.is_admin || current_user.is_mod %>
+          <td><a href=<%=validar_polla_path%>Validar</a></td>
+          <%end%>
+        <% end %>
+        
+        
     </tr>
     <% end %>
     </tbody>

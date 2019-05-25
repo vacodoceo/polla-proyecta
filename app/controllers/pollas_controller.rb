@@ -3,7 +3,7 @@ class PollasController < ApplicationController
   before_action :set_polla, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pollas = Polla.all
+    @pollas = Polla.where(:user_id => current_user.id)
   end
 
   # GET /pollas/1
@@ -23,9 +23,14 @@ class PollasController < ApplicationController
   def edit
   end
 
-  def pagar
-
+  def validar_polla(polla)
+    polla.valid = 1
   end
+
+  def invalidar_polla(polla)
+    polla.valid = 0
+  end
+
 
   # POST /pollas
   # POST /pollas.json

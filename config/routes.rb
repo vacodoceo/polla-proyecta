@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :first_rounds
   get 'transactions/index'
   get 'transactions/show'
   get 'transactions/new'
@@ -9,13 +10,14 @@ Rails.application.routes.draw do
   get 'crear_pago', to: 'transactions#crear_pago_polla', as:'crear_pago' 
   get 'bancos_posibles', to: 'transactions#bancos_posibles', as:'bancos_posibles'
   get 'estado_pago', to: 'transactions#revisar_estado_pago', as: 'revisar_pago' 
+  get 'validar_polla', to: 'pollas#validar_polla', as: 'validar_polla'
+  get 'invalidar_polla', to: 'pollas#invalidar_polla', as: 'invalidar_polla'
 
   #Google Auth
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'login', to: 'sessions#create', as: 'login'
-  get 'pagar_polla', to: 'pollas#pagar_polla', as: 'pagar_polla'
 
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]

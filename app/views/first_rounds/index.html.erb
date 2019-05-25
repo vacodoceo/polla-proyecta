@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>First Rounds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Country name</th>
+      <th>Position</th>
+      <th>Group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @first_rounds.each do |first_round| %>
+      <tr>
+        <td><%= first_round.country_name %></td>
+        <td><%= first_round.position %></td>
+        <td><%= first_round.group %></td>
+        <td><%= link_to 'Show', first_round %></td>
+        <td><%= link_to 'Edit', edit_first_round_path(first_round) %></td>
+        <td><%= link_to 'Destroy', first_round, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New First Round', new_first_round_path %>
