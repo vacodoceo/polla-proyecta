@@ -9,12 +9,6 @@ $(document).on("turbolinks:load", function(){
             if ($(this).is("#group-phase")){
                 $('#quarter-finals').removeClass("disabled");
             }
-            if ($(this).is("#quarter-finals")){
-                $('#semifinals').removeClass("disabled");
-            }
-            if ($(this).is("#semifinals")){
-                $('#finals').removeClass("disabled");
-            }
         }
     })
 });
