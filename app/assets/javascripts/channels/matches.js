@@ -39,13 +39,14 @@ function handleGroups(){
 }
 
 function addCountry(match, c1, c2){
+    console.log(c1 + " " + c2 + " " + match);
     let c1_name = $('#'+c1+' .country-name').text();
-    $('#'+match.toString()+' .groups li:nth-child(1) span:first-child').removeClass();
-    $('#'+match.toString()+' .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+c1);
-    $('#'+match.toString()+' .groups li:nth-child(1)').attr('country', c1);
-    $('#'+match.toString()+' .groups li:nth-child(1) span:nth-child(2)').html(c1_name);
+    $('.list-group#'+match.toString()+' .groups li:nth-child(1) span:first-child').removeClass();
+    $('.list-group#'+match.toString()+' .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+c1);
+    $('.list-group#'+match.toString()+' .groups li:nth-child(1)').attr('country', c1);
+    $('.list-group#'+match.toString()+' .groups li:nth-child(1) span:nth-child(2)').html(c1_name);
     if (match == 1 || match == 4){
-        $('#'+match.toString()+' .groups li:nth-child(2) .select-country').children().each(function(i) {
+        $('.list-group#'+match.toString()+' .groups li:nth-child(2) .select-country').children().each(function(i) {
             if (i == 1){
                 $(this).parent().parent().children('span').removeClass();
                 $(this).parent().parent().children('span').addClass('flag-icon flag-icon-'+c2[0]);
@@ -58,20 +59,20 @@ function addCountry(match, c1, c2){
     else {
         let c2_name = $('#'+c2+' .country-name').text();
         $('#'+match.toString()+' .groups li:nth-child(2) span:first-child').removeClass();
-        $('#'+match.toString()+' .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+c2);
-        $('#'+match.toString()+' .groups li:nth-child(2)').attr('country', c2);
-        $('#'+match.toString()+' .groups li:nth-child(2) span:nth-child(2)').html(c2_name);
+        $('.list-group#'+match.toString()+' .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+c2);
+        $('.list-group#'+match.toString()+' .groups li:nth-child(2)').attr('country', c2);
+        $('.list-group#'+match.toString()+' .groups li:nth-child(2) span:nth-child(2)').html(c2_name);
     }
 }
 
 function handleCountrySelect(match){
-    $('#'+match.toString()+ ' .select-country').change(function() {
-        $('#'+match.toString()+' .groups li:nth-child(2) span:first-child').removeClass();
-        $('#'+match.toString()+' .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+$(this).val());
-        $('#'+match.toString()+' .groups li:nth-child(2)').attr('country', $(this).val());
+    $('.list-group#'+match.toString()+ ' .select-country').change(function() {
+        $('.list-group#'+match.toString()+' .groups li:nth-child(2) span:first-child').removeClass();
+        $('.list-group#'+match.toString()+' .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+$(this).val());
+        $('.list-group#'+match.toString()+' .groups li:nth-child(2)').attr('country', $(this).val());
         other_match = (match == 1) ? 4 : 1;
-        $('#'+other_match.toString()+' .groups li:nth-child(2) .select-country option').css({ 'display': ''});
-        $('#'+other_match.toString()+' .groups li:nth-child(2) .select-country .'+$(this).val()).hide();
+        $('.list-group#'+other_match.toString()+' .groups li:nth-child(2) .select-country option').css({ 'display': ''});
+        $('.list-group#'+other_match.toString()+' .groups li:nth-child(2) .select-country .'+$(this).val()).hide();
         checkWinners();
         }
     )
