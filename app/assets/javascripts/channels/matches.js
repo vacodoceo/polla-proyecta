@@ -45,8 +45,11 @@ function addCountry(match, c1, c2){
     $('#'+match.toString()+' .groups li:nth-child(1)').attr('country', c1);
     $('#'+match.toString()+' .groups li:nth-child(1) span:nth-child(2)').html(c1_name);
     if (match == 1 || match == 4){
-        console.log(match + " " + c1 + " " + c2);
         $('#'+match.toString()+' .groups li:nth-child(2) .select-country').children().each(function(i) {
+            if (i == 1){
+                $(this).parent().parent().children('span').removeClass();
+                $(this).parent().parent().children('span').addClass('flag-icon flag-icon-'+c2[0]);
+            }
             $(this).attr('value', c2[i]);
             $(this).addClass(c2[i]);
             $(this).html($('#'+c2[i]+' .country-name').text());

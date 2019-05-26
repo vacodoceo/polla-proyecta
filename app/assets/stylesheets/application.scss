@@ -61,6 +61,11 @@
  * Groups display 
  */
 
+.list-group-group-phase, .list-group-match {
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 0.3em;
+}
+
  .groups {
    padding: 0 !important;
    margin: 0 !important;
@@ -107,14 +112,14 @@ select.select-country {
   flex-wrap: wrap;
   display: none;
   justify-content: center;
-  align-content: center; 
-  height: 35em;
+  align-content: flex-start; 
+  height: 33em;
 
   .between-matches {
     width: 200px;
     height: 67px;
     margin-top: 25px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.5);
     display: flex;
     align-items: flex-end;
   }
@@ -130,6 +135,7 @@ select.select-country {
 }
 
 #instructions-page {
+  padding-top: 2em;
   display: flex;
 }
 
@@ -169,11 +175,6 @@ select.select-country {
   }
 }
 
-.list-group-item:last-child {
-  .flag-icon{
-    border-bottom-left-radius: 0.25rem;
-  }
-}
 
 /* 
  * Pagination 
@@ -207,7 +208,7 @@ select.select-country {
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: rgba(0, 0, 0, .7)
 }
 
 /* Custom default button */
@@ -228,15 +229,16 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-image: image-url('fondo_polla.jpg');
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 body {
   display: -ms-flexbox;
   display: flex;
-  color: #fff;
-  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  color: rgb(34, 34, 34);
+  text-shadow: 0 .05rem .1rem rgba(255, 255, 255, 0.5);
 }
 
 .cover-container {
@@ -249,7 +251,7 @@ body {
  * Header
  */
 .masthead {
-  margin-bottom: 2rem;
+  margin-bottom: 0 !important;
 }
 
 .masthead-brand {
@@ -259,14 +261,14 @@ body {
 .nav-masthead .nav-link {
   padding: .25rem 0;
   font-weight: 700;
-  color: rgba(255, 255, 255, .5);
+  color: rgba(34, 34, 34, .7);
   background-color: transparent;
   border-bottom: .25rem solid transparent;
 }
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
+  border-bottom-color: rgba(34, 34, 34, .4);
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -274,8 +276,8 @@ body {
 }
 
 .nav-masthead .active {
-  color: #fff;
-  border-bottom-color: #fff;
+  color: rgb(34, 34, 34);
+  border-bottom-color: rgb(34, 34, 34);
 }
 
 @media (min-width: 48em) {
@@ -287,6 +289,11 @@ body {
   }
 }
 
+img {
+  width: 55%;
+  margin: auto;
+  padding: em;
+}
 
 /*
  * Cover
@@ -304,7 +311,8 @@ body {
  * Footer
  */
 .mastfoot {
-  color: rgba(255, 255, 255, .5);
+  color: rgb(0, 0, 0);
+  
 }
 
 /*
