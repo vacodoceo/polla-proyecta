@@ -1,12 +1,12 @@
 <ul class="list-group list-group-match">
     <li class="list-group-item active"><%= TITLES[id] %></li>
     <li class="list-group-item country">
-        <%= flag_icon(:cl) %>
-        <span></span>
+        <span class="flag-icon flag-icon-<%= c1 %>"></span>
+        <span><%= COUNTRIES_NAME[c1] %></span>
         <input id="number" type="number" value="0" min="0" max="9">
     </li>
     <li class="list-group-item country">
-        <%= flag_icon(:cl) %>
+        <span class="flag-icon"></span>
         <span></span>
         <input id="number" type="number" value="0" min="0" max="9">
     </li>
