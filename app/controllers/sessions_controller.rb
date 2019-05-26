@@ -1,22 +1,27 @@
 class SessionsController < ApplicationController
   before_action :active_nav
+  #before_action :set_session, only [:edit, :update, :destroy]
+
   def active_nav
     @active = "user"
   end
-  def create
+
+  def new
+  end
+
+  def edit
+  end
+
+
+
+  def create_google
     user = User.from_omniauth(request.env["omniauth.auth"])
     session[:user_id] = user.id
     redirect_to root_path
   end
 
-  def create_normal
-    puts "parametros"
-    puts params
+  def create
     user = User.find_by_email(params['email'])
-    puts "user"
-    puts user.name
-    puts user.email
-    puts user.password
     if user.present?
       if user.password == params['password']
         session[:user_id] = user.id
@@ -32,7 +37,13 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def update
+  end
+
 private
+  def set_session
+  end
+
   def session_params
     params.permit(:email, :password)
   end

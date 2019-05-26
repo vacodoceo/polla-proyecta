@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'ranking', to: 'home#ranking', as:'ranking'
   get 'create_user', to: 'users#create', as: 'create_user'
   #Google Auth
-  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/:provider/callback', to: 'sessions#create_google'
   get 'auth/failure', to: redirect('/')
   #get 'signout', to: 'sessions#destroy', as: 'signout'
   #get 'login', to: 'sessions#create', as: 'login'
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :sessions
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'login', to: 'sessions#new', as: 'login'
-  get 'create_normal_session', to: 'sessions#create_normal', as: 'create_normal_session'
+  post 'sessions/new', to: 'sessions#create'
 
   resource :home, only: [:show]
   resources :users

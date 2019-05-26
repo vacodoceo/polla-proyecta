@@ -11,7 +11,7 @@
       </div>
     <% end %>
     <h1 class="h2 mb-3 font-weight-normal">Regístrate</h1>
-    <!-- <%#<label for="inputEmail" class="sr-only">Correo electrónico</label>
+    <label for="inputEmail" class="sr-only">Correo electrónico</label>
     <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required>
     <label for="inputPassword" class="sr-only">Contraseña</label>
     <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
@@ -20,13 +20,8 @@
     <label for="inputLastName" class="sr-only">Apellido</label>
     <input type="LastName" id="inputLastName" name="last_name" class="form-control" placeholder="Last name" required>
     <label for="inputPhoneNumber" class="sr-only">Teléfono</label>
-    <input type="PhoneNumber" id="inputPhoneNumber" name="phone_number" class="form-control" placeholder="Phone Number" required>  #%>-->
+    <input type="PhoneNumber" id="inputPhoneNumber" name="phone_number" class="form-control" placeholder="Phone Number" required> 
     
-    Email: <input type="email" name="email"><br>
-    Password: <input type="password" name="password"><br>
-    Name: <input type="first_name" name="first_name"><br>
-    LastName: <input type="last_name" name="last_name"><br>
-    PhoneNumber: <input type="phone_number" name="phone_number"><br>
 
     <div class="checkbox mb-3">
       <label>
@@ -34,9 +29,8 @@
       </label>
     </div>
     <div class="actions">
-      <%= form.submit %>
+      <button id="register-btn" href= form.submit class="btn btn-lg btn-primary btn-block">Crear cuenta</button>
     </div>
-    <a id="register-btn" class="btn btn-lg btn-primary btn-block" type="submit" href=<%=create_user_path%>>Crear cuenta</a>
     <br/>
     <p>¿Ya tienes una cuenta?</p>
     <a class="btn btn-lg btn-light btn-block" href="<%= login_path %>">Inicia sesión</a>
