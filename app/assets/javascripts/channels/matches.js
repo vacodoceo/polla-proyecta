@@ -8,6 +8,8 @@ $(document).on("turbolinks:load", function(){
     handleCountrySelect(1);
     handleCountrySelect(4);
 
+    handleWinner();
+
     $("input[type='number']").inputSpinner();
 
     
@@ -59,4 +61,23 @@ function handleCountrySelect(group){
         $('#'+other_group.toString()+' li:nth-child(3) .select-country .'+$(this).val()).hide();
         }
     )    
+}
+
+function handleWinner(){
+    $('input#number').on("change", function () {
+        let country1 = $(this).parent().parent().children('li:nth-child(2)'); 
+        let country2 = $(this).parent().parent().children('li:nth-child(3)'); 
+        if (country1.children('input#number').val() > country2.children('input#number').val()){
+            country1.addClass('list-group-item-success');
+            country2.removeClass('list-group-item-success');
+        }
+        else if (country1.children('input#number').val() < country2.children('input#number').val()){
+            country2.addClass('list-group-item-success');
+            country1.removeClass('list-group-item-success');
+        }
+        else {
+            country1.removeClass('list-group-item-success');
+            country2.removeClass('list-group-item-success');
+        }
+    })
 }
