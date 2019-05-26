@@ -1,1 +1,27 @@
-Hola cabros
+<h2>Usuarios</h2>
+<hr>
+<div class="row">
+<div class="col-ld-8">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Nº Teléfono</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %> </td>
+        <td><%= user.email %></td>
+        <td><%= user.phone_number %></td>
+        <td><%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

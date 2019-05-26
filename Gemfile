@@ -84,3 +84,6 @@ gem 'flag-icons-rails'
 
 # Khipu
 gem 'khipu-api-client', '~> 2.0', '>= 2.0.1'
+
+#Encriptar
+gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'

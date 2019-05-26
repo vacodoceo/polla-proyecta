@@ -26,9 +26,11 @@ class SessionsController < ApplicationController
       if user.password == params['password']
         session[:user_id] = user.id
         redirect_to root_path
+      else
+        redirect_to login_path, notice: 'Email o contraseña incorrectos, por favor intente nuevamente'
       end
     else
-      redirect_to root_path
+      redirect_to login_path, notice: 'Email o contraseña incorrectos, por favor intente nuevamente'
     end
   end
 

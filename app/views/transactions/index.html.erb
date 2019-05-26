@@ -1,2 +1,29 @@
-<h1>Transactions#index</h1>
-<p>Find me in app/views/transactions/index.html.erb</p>
+<h2>Transacciones</h2>
+<hr>
+<div class="row">
+<div class="col-ld-8">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Payment URL</th>
+      <th>Id polla</th>
+      <th>User</th>
+      <th>Cobrada</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+    <tbody>
+    <% @transactions.each do |trans| %>
+      <tr>
+        <td><%= trans.id %></td>
+        <td><%= trans.payment_url %> </td>
+        <td><%= trans.polla_id %></td>
+        <td><%= trans.user.name %></td>
+        <td><%= trans.charged %></td>
+        <td><%= link_to 'Eliminar', trans, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

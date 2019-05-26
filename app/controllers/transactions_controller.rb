@@ -5,7 +5,11 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    if current_user && (current_user.is_admin || current_user.id == 1)
+      @transactions = Transaction.all
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /transactions/1
@@ -64,17 +68,19 @@ class TransactionsController < ApplicationController
         c.platform = 'demo-client'
         c.platform_version = '2.0'
         # c.debugging = true
-      api    = Khipu::PaymentsApi.new()
+      end
 
+      api    = Khipu::PaymentsApi.new()
       @transactions.each do |trans|
-        status = api.payments_id_get(trans.payment_id)
-        @polla =  trans.polla
-        if status == 'done'
-          @polla.valid_polla = 1
-        end
-        trans.charged = 1
-        trans.save
-        @polla.save
+          cosas = trans.payment_url.split("/")
+          status = api.payments_id_get(cosas[-1])
+          @polla =  Polla.find(trans.polla_id)
+          if status.status == 'done'
+            @polla.valid_polla = 1
+            trans.charged = 1
+            trans.save
+            @polla.save
+          end
       end
     end
     redirect_to root_path
@@ -103,9 +109,8 @@ class TransactionsController < ApplicationController
     end
 
     banks = Khipu::BanksApi.new()
-    response_2 = banks.banks_get()
+    @bancos = banks.banks_get()
     puts 'bancos' + bancos
-    return response_2
   end
   #-----------------------------------------------
   

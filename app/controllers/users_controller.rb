@@ -6,7 +6,11 @@ class UsersController < ApplicationController
     end
 
     def index
+      if current_user && (current_user.is_admin || current_user.id == 1)
         @users = User.all
+      else
+        redirect_to root_path
+      end
     end
 
     def new

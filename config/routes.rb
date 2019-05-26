@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'estado_pago/:id', to: 'transactions#revisar_estado_pago', as: 'revisar_pago' 
   get 'validar_polla/:id', to: 'pollas#validar_polla', as: 'validar_polla'
   get 'invalidar_polla/:id', to: 'pollas#invalidar_polla', as: 'invalidar_polla'
+  get 'pollas_totales', to: 'pollas#pollas_totales', as: "pollas_totales"
   get 'validar_pagos', to: 'transactions#validar_pagos', as: 'validar_pagos'
   get 'ranking', to: 'home#ranking', as:'ranking'
   get 'create_user', to: 'users#create', as: 'create_user'

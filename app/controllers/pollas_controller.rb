@@ -6,6 +6,14 @@ class PollasController < ApplicationController
     @pollas = Polla.where(:user_id => current_user.id)
   end
 
+  def pollas_totales
+    if current_user && (current_user.is_admin || current_user.is_mod || current_user.id == 1)
+      @pollas = Polla.all
+    else
+      redirect_to root_path
+    end
+  end
+
   # GET /pollas/1
   # GET /pollas/1.json
   def show
@@ -59,8 +67,8 @@ class PollasController < ApplicationController
           send_email: true,
           payer_name: current_user.name,
           payer_email: current_user.email,
-          return_url: pollas_path,
-          cancel_url: root_path,
+          return_url: 'localhost:3000/pollas',
+          cancel_url: 'localhost:3000',
           #notify_url: 'http://mi-ecomerce.com/backend/notify',
           notify_api_version: '1.3'
       })
@@ -71,6 +79,7 @@ class PollasController < ApplicationController
       @transaction.amount = amount
       @transaction.polla_id = @polla.id
       @transaction.payment_url = response.payment_url
+      @transaction.charged = 0
       #@transaction.transfer_url = response.transfer_url
       #@transaction.app_url = response.app_url
       @polla.save
