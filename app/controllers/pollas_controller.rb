@@ -1,8 +1,17 @@
+require 'khipu-api-client'
 class PollasController < ApplicationController
-  before_action :set_polla, only: [:show, :edit, :update, :destroy]
+  before_action :set_polla, only: [:show, :edit, :update, :destroy, :validar_polla, :invalidar_polla, :crear_pago_polla]
 
   def index
-    @pollas = Polla.all
+    @pollas = Polla.where(:user_id => current_user.id)
+  end
+
+  def pollas_totales
+    if current_user && (current_user.is_admin || current_user.is_mod || current_user.id == 1)
+      @pollas = Polla.all
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /pollas/1
@@ -22,12 +31,70 @@ class PollasController < ApplicationController
   def edit
   end
 
+  def validar_polla
+    @polla.valid_polla = 1
+    @polla.save
+    redirect_to pollas_path
+  end
+
+  def invalidar_polla
+    @polla.valid_polla = 0
+    @polla.save
+    redirect_to pollas_path
+  end
+
+  def crear_pago_polla#recibe polla y current_user
+    if Time.now > Time.zone.parse('2019-06-14 11:00:00')
+      redirect_to root_path
+    else
+      receiver_id = ENV['RECEIVER_ID']
+      secret_key = ENV['RECEIVER_SECRET']
+
+      Khipu.configure do |c|
+        c.secret = secret_key
+        c.receiver_id = receiver_id
+        c.platform = 'demo-client'
+        c.platform_version = '2.0'
+        # c.debugging = true
+      end
+
+      api = Khipu::PaymentsApi.new()
+      @transaction = current_user.transactions.create()
+      amount = 2000
+      response = api.payments_post('Pago polla' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
+          transaction_id: @transaction.id,
+          expires_date: DateTime.new(2019, 6, 14),
+          send_email: true,
+          payer_name: current_user.name,
+          payer_email: current_user.email,
+          return_url: 'localhost:3000/pollas',
+          cancel_url: 'localhost:3000',
+          #notify_url: 'http://mi-ecomerce.com/backend/notify',
+          notify_api_version: '1.3'
+      })
+      puts 'response: '
+      puts response 
+      @polla.paying = 1
+      @transaction.payment_id = response.payment_id
+      @transaction.amount = amount
+      @transaction.polla_id = @polla.id
+      @transaction.payment_url = response.payment_url
+      @transaction.charged = 0
+      #@transaction.transfer_url = response.transfer_url
+      #@transaction.app_url = response.app_url
+      @polla.save
+      @transaction.save
+      redirect_to response.payment_url
+    end
+  end
+
   # POST /pollas
   # POST /pollas.json
   def create
     @polla = current_user.pollas.create(polla_params)
     @polla.valid_polla = 0
     @polla.score = 0
+    @polla.paying = 0
 
     (0..params["partidos"]["apuestas"].length-1).step(2) do |n|
       @bet = Bet.new
@@ -36,12 +103,11 @@ class PollasController < ApplicationController
       @bet.result_team_2 = params["partidos"]["apuestas"][n+1]
       @bet.match_id = n/2 +1
       @bet.save!
-
     end
 
     respond_to do |format|
       if @polla.save
-        format.html { redirect_to @polla, notice: 'polla was successfully created.' }
+        format.html { redirect_to pollas_path}
         format.json { render :show, status: :created, location: @polla }
       else
         format.html { render :new }
@@ -55,7 +121,7 @@ class PollasController < ApplicationController
   def update
     respond_to do |format|
       if @polla.update(polla_params)
-        format.html { redirect_to @polla, notice: 'polla was successfully updated.' }
+        format.html { redirect_to pollas_path}
         format.json { render :show, status: :ok, location: @polla }
       else
         format.html { render :edit }
@@ -69,7 +135,7 @@ class PollasController < ApplicationController
   def destroy
     @polla.destroy
     respond_to do |format|
-      format.html { redirect_to pollas_url, notice: 'polla was successfully destroyed.' }
+      format.html { redirect_to root_path}
       format.json { head :no_content }
     end
   end
@@ -82,6 +148,6 @@ class PollasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def polla_params
-      params.permit(:partidos)
+      params.permit(:name, :partidos)
     end
 end

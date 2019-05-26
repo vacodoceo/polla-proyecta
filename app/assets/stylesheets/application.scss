@@ -147,7 +147,7 @@ select.select-country {
 }
 
 #instructions-page {
-  padding-top: 2em;
+  padding: 2em;
   display: flex;
 }
 
@@ -358,5 +358,9 @@ img {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+  .btn-social {
+    color: #fff !important;
   }
   

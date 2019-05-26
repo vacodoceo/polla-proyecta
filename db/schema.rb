@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_23_050532) do
+ActiveRecord::Schema.define(version: 2019_05_25_063226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2019_05_23_050532) do
     t.bigint "polla_id"
     t.index ["match_id"], name: "index_bets_on_match_id"
     t.index ["polla_id"], name: "index_bets_on_polla_id"
+  end
+
+  create_table "first_rounds", force: :cascade do |t|
+    t.string "country_name"
+    t.integer "position"
+    t.string "group"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "polla_id"
+    t.index ["polla_id"], name: "index_first_rounds_on_polla_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -45,9 +55,9 @@ ActiveRecord::Schema.define(version: 2019_05_23_050532) do
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "transaction_id"
     t.bigint "user_id"
-    t.index ["transaction_id"], name: "index_pollas_on_transaction_id"
+    t.string "name"
+    t.integer "paying"
     t.index ["user_id"], name: "index_pollas_on_user_id"
   end
 
@@ -60,6 +70,9 @@ ActiveRecord::Schema.define(version: 2019_05_23_050532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "polla_id"
+    t.integer "charged"
+    t.index ["polla_id"], name: "index_transactions_on_polla_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -73,11 +86,15 @@ ActiveRecord::Schema.define(version: 2019_05_23_050532) do
     t.datetime "updated_at", null: false
     t.string "email"
     t.string "phone_number"
+    t.string "password"
+    t.boolean "is_admin"
+    t.boolean "is_mod"
   end
 
   add_foreign_key "bets", "matches"
   add_foreign_key "bets", "pollas"
-  add_foreign_key "pollas", "transactions"
+  add_foreign_key "first_rounds", "pollas"
   add_foreign_key "pollas", "users"
+  add_foreign_key "transactions", "pollas"
   add_foreign_key "transactions", "users"
 end

@@ -1,10 +1,15 @@
+require 'khipu-api-client'
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_transaction, only: [:show, :edit, :update, :destroy, :revisar_estado_pago]
 
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    if current_user && (current_user.is_admin || current_user.id == 1)
+      @transactions = Transaction.all
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /transactions/1
@@ -51,6 +56,36 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def validar_pagos
+    @transactions = Transaction.where(:charged => 0)
+    if @transactions
+      receiver_id = ENV['RECEIVER_ID']
+      secret_key = ENV['RECEIVER_SECRET']
+
+      Khipu.configure do |c|
+        c.secret = secret_key
+        c.receiver_id = receiver_id
+        c.platform = 'demo-client'
+        c.platform_version = '2.0'
+        # c.debugging = true
+      end
+
+      api    = Khipu::PaymentsApi.new()
+      @transactions.each do |trans|
+          cosas = trans.payment_url.split("/")
+          status = api.payments_id_get(cosas[-1])
+          @polla =  Polla.find(trans.polla_id)
+          if status.status == 'done'
+            @polla.valid_polla = 1
+            trans.charged = 1
+            trans.save
+            @polla.save
+          end
+      end
+    end
+    redirect_to root_path
+  end
+
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
@@ -60,6 +95,68 @@ class TransactionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def bancos_posibles
+    receiver_id = ENV['RECEIVER_ID']
+    secret_key = ENV['RECEIVER_SECRET']
+
+    Khipu.configure do |c|
+      c.secret = secret_key
+      c.receiver_id = receiver_id
+      c.platform = 'demo-client'
+      c.platform_version = '2.0'
+      # c.debugging = true
+    end
+
+    banks = Khipu::BanksApi.new()
+    @bancos = banks.banks_get()
+    puts 'bancos' + bancos
+  end
+  #-----------------------------------------------
+  
+  def revisar_estado_pago #RECIBE LA transaccion
+    receiver_id = ENV['RECEIVER_ID']
+    secret_key = ENV['RECEIVER_SECRET']
+
+    Khipu.configure do |c|
+      c.secret = secret_key
+      c.receiver_id = receiver_id
+      c.platform = 'demo-client'
+      c.platform_version = '2.0'
+      # c.debugging = true
+    end
+
+    api    = Khipu::PaymentsApi.new()
+    status = api.payments_id_get(transaction.payment_id)
+    @polla =  @transaction.polla
+    if status == 'done'
+      @polla.valid_polla = 1
+    end
+    @transaction.charged = 1
+    @transaction.save
+    @polla.save
+    puts 'status:' + status
+  end
+  
+ # def confirmar_pago(polla, transaction) #recibe la polla y la transaccion
+  #  receiver_id = ENV['RECEIVER_ID']
+   # secret_key = ENV['RECEIVER_SECRET']
+
+    #Khipu.configure do |c|
+     # c.secret = secret_key
+      #c.receiver_id = receiver_id
+      #c.platform = 'demo-client'
+      #c.platform_version = '2.0'
+      # c.debugging = true
+   # end
+    #notification_token = transaction.notification_token  # Parámetro notification_token
+    #amount = 1
+    #client = Khipu::PaymentsApi.new()
+    #response = client.payments_get(notification_token)
+    #if response.status == 'done'
+     # polla.valid_polla = 1
+    #end
+ # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

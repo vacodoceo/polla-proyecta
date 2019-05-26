@@ -1,0 +1,2 @@
+class FirstRound < ApplicationRecord
+end

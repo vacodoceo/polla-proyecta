@@ -1,4 +1,4 @@
-<h2>Pollas</h2>
+<h2>Ranking</h2>
 <hr>
 <div class="row">
 <div class="col-ld-8">
@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>Nombre</th>
       <th>Usuario</th>
       <th>Puntaje</th>
       <th colspan="3"></th>
@@ -15,9 +16,12 @@
     <tbody>
     <% @pollas.each do |polla| %>
       <tr>
+
         <td><%= polla.id %></td>
+        <td><%= polla.name %> </td>
         <td><%= polla.user.name %></td>
         <td><%= polla.score %></td>
+        
     </tr>
     <% end %>
     </tbody>

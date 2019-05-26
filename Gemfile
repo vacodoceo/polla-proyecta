@@ -87,3 +87,6 @@ gem 'flag-icons-rails'
 gem 'khipu-api-client', '~> 2.0', '>= 2.0.1'
 
 gem 'dotenv-rails'
+
+#Encriptar
+gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'

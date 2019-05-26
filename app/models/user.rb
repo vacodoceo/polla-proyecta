@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
         user.save!
       end
     end
+    puts "AQUI CREANDO UN USER"
     has_many :pollas
     has_many :transactions
   end
