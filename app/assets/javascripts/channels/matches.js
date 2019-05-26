@@ -58,7 +58,7 @@ function addCountry(match, c1, c2){
     }
     else {
         let c2_name = $('#'+c2+' .country-name').text();
-        $('#'+match.toString()+' .groups li:nth-child(2) span:first-child').removeClass();
+        $('.list-group#'+match.toString()+' .groups li:nth-child(2) span:first-child').removeClass();
         $('.list-group#'+match.toString()+' .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+c2);
         $('.list-group#'+match.toString()+' .groups li:nth-child(2)').attr('country', c2);
         $('.list-group#'+match.toString()+' .groups li:nth-child(2) span:nth-child(2)').html(c2_name);
