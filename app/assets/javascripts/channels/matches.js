@@ -39,18 +39,18 @@ function handleGroups(){
 }
 
 function addCountry(match, c1, c2){
-    // console.log(match + " " + c1 + " " + c2);
     let c1_name = $('#'+c1+' .country-name').text();
     $('#'+match.toString()+' .groups li:nth-child(1) span:first-child').removeClass();
     $('#'+match.toString()+' .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+c1);
     $('#'+match.toString()+' .groups li:nth-child(1)').attr('country', c1);
     $('#'+match.toString()+' .groups li:nth-child(1) span:nth-child(2)').html(c1_name);
     if (match == 1 || match == 4){
-        $('#'+match.toString()+' .groups li:nth-child(3) .select-country')
-            .find('option')
-            .remove()
-            .end()
-            .append('<option value="'+c2[0]+'">'+$('#'+c2[0]+' .country-name').text()+'</option>');
+        console.log(match + " " + c1 + " " + c2);
+        $('#'+match.toString()+' .groups li:nth-child(2) .select-country').children().each(function(i) {
+            $(this).attr('value', c2[i]);
+            $(this).addClass(c2[i]);
+            $(this).html($('#'+c2[i]+' .country-name').text());
+        })
     }
     else {
         let c2_name = $('#'+c2+' .country-name').text();
