@@ -90,6 +90,13 @@
  * Bet display 
  */
 
+.button-winner {
+  width: 0;
+  height: 0;
+  padding: 10px;
+  margin: 14px;
+}
+
 select.select-country {
   border: 0;
   background-color: rgba(255, 255, 255, 0);
