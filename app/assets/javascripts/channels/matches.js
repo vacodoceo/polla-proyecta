@@ -145,6 +145,7 @@ function checkWinners(){
     }
     if (!open_semifinals){
         $('#semifinals').addClass('disabled')
+        $('#finals').addClass('disabled')
     }
     else {
         let c1_name = $('#'+quarter_finals[1]+' .country-name').text();
@@ -181,35 +182,33 @@ function checkWinners(){
                 }
             })
             if (!success){
+                $('#finals').addClass('disabled')
                 open_finals = 0;
                 break;
             };
         }
-        if (!finals){
-            $('#semifinals').addClass('disabled')
-        }
-        else {
-        let c5_name = $('#'+semifinals[1]+' .country-name').text();
-        let c6_name = $('#'+semifinals[2]+' .country-name').text();
-        let c7_name = $('#'+semifinals[3]+' .country-name').text();
-        let c8_name = $('#'+semifinals[4]+' .country-name').text();
-        $('#finals').removeClass('disabled')
-        $('#7 .groups li:nth-child(1) span:first-child').removeClass();
-        $('#7 .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+semifinals[2]);
-        $('#7 .groups li:nth-child(1)').attr('country', semifinals[2]);
-        $('#7 .groups li:nth-child(1) span:nth-child(2)').html(c6_name);
-        $('#7 .groups li:nth-child(2) span:first-child').removeClass();
-        $('#7 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+semifinals[4]);
-        $('#7 .groups li:nth-child(2)').attr('country', semifinals[4]);
-        $('#7 .groups li:nth-child(2) span:nth-child(2)').html(c8_name);
-        $('#8 .groups li:nth-child(1) span:first-child').removeClass();
-        $('#8 .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+semifinals[1]);
-        $('#8 .groups li:nth-child(1)').attr('country', semifinals[1]);
-        $('#8 .groups li:nth-child(1) span:nth-child(2)').html(c5_name);
-        $('#8 .groups li:nth-child(2) span:first-child').removeClass();
-        $('#8 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+semifinals[3]);
-        $('#8 .groups li:nth-child(2)').attr('country', semifinals[3]);
-        $('#8 .groups li:nth-child(2) span:nth-child(2)').html(c7_name);
+        if (open_finals) {
+            let c5_name = $('#'+semifinals[1]+' .country-name').text();
+            let c6_name = $('#'+semifinals[2]+' .country-name').text();
+            let c7_name = $('#'+semifinals[3]+' .country-name').text();
+            let c8_name = $('#'+semifinals[4]+' .country-name').text();
+            $('#finals').removeClass('disabled')
+            $('#7 .groups li:nth-child(1) span:first-child').removeClass();
+            $('#7 .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+semifinals[2]);
+            $('#7 .groups li:nth-child(1)').attr('country', semifinals[2]);
+            $('#7 .groups li:nth-child(1) span:nth-child(2)').html(c6_name);
+            $('#7 .groups li:nth-child(2) span:first-child').removeClass();
+            $('#7 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+semifinals[4]);
+            $('#7 .groups li:nth-child(2)').attr('country', semifinals[4]);
+            $('#7 .groups li:nth-child(2) span:nth-child(2)').html(c8_name);
+            $('#8 .groups li:nth-child(1) span:first-child').removeClass();
+            $('#8 .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+semifinals[1]);
+            $('#8 .groups li:nth-child(1)').attr('country', semifinals[1]);
+            $('#8 .groups li:nth-child(1) span:nth-child(2)').html(c5_name);
+            $('#8 .groups li:nth-child(2) span:first-child').removeClass();
+            $('#8 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+semifinals[3]);
+            $('#8 .groups li:nth-child(2)').attr('country', semifinals[3]);
+            $('#8 .groups li:nth-child(2) span:nth-child(2)').html(c7_name);
         }
     }
 }
