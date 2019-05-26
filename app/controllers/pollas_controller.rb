@@ -1,6 +1,6 @@
 require 'khipu-api-client'
 class PollasController < ApplicationController
-  before_action :set_polla, only: [:validar_polla, :invalidar_polla, :crear_pago_polla]
+  before_action :set_polla, only: [:show, :edit, :update, :destroy, :validar_polla, :invalidar_polla, :crear_pago_polla]
 
   def index
     @pollas = Polla.where(:user_id => current_user.id)
@@ -25,10 +25,14 @@ class PollasController < ApplicationController
 
   def validar_polla
     @polla.valid_polla = 1
+    @polla.save
+    redirect_to pollas_path
   end
 
   def invalidar_polla
     @polla.valid_polla = 0
+    @polla.save
+    redirect_to pollas_path
   end
 
   def crear_pago_polla#recibe polla y current_user
@@ -48,9 +52,8 @@ class PollasController < ApplicationController
 
       api = Khipu::PaymentsApi.new()
       @transaction = current_user.transactions.create()
-      amount = 1
-      #response = api.payments_post('Pago polla' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
-      response = api.payments_post('Pago polla', 'CLP', amount, { #CAMBIAR A 1000
+      amount = 2000
+      response = api.payments_post('Pago polla' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
           transaction_id: @transaction.id,
           expires_date: DateTime.new(2019, 6, 14),
           send_email: true,
@@ -63,13 +66,14 @@ class PollasController < ApplicationController
       })
       puts 'response: '
       puts response 
-      #polla.paying = 1
+      @polla.paying = 1
       @transaction.payment_id = response.payment_id
       @transaction.amount = amount
-      #@transaction.polla_id = polla.id
+      @transaction.polla_id = @polla.id
       @transaction.payment_url = response.payment_url
       #@transaction.transfer_url = response.transfer_url
       #@transaction.app_url = response.app_url
+      @polla.save
       @transaction.save
       redirect_to response.payment_url
     end
@@ -90,7 +94,6 @@ class PollasController < ApplicationController
       @bet.result_team_2 = params["partidos"]["apuestas"][n+1]
       @bet.match_id = n/2 +1
       @bet.save!
-
     end
 
     respond_to do |format|

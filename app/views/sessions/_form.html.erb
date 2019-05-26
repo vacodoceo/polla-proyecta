@@ -1,0 +1,33 @@
+<%= form_with(model: session, local: true) do |form| %>
+    <% if session.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(session.errors.count, "error") %> prohibited this polla from being saved:</h2>
+  
+        <ul>
+        <% session.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <h1 class="h2 mb-3 font-weight-normal">Inicia sesion</h1>
+    <!--<%#<label for="inputEmail" class="sr-only">Correo electrónico</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+    <label for="inputPassword" class="sr-only">Contraseña</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>#%> -->
+    
+    Email: <input type="email" name="email"><br>
+    Password: <input type="password" name="password"><br>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+    <a class="btn btn-lg btn-primary btn-block" type="submit" href=<%= create_normal_session_path%>>Iniciar sesión</a>
+    <br/>
+    <%= render 'layouts/external-accounts' %>
+<% end %>

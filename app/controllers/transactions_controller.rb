@@ -1,6 +1,6 @@
 require 'khipu-api-client'
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_transaction, only: [:show, :edit, :update, :destroy, :revisar_estado_pago]
 
   # GET /transactions
   # GET /transactions.json
@@ -55,8 +55,26 @@ class TransactionsController < ApplicationController
   def validar_pagos
     @transactions = Transaction.where(:charged => 0)
     if @transactions
+      receiver_id = ENV['RECEIVER_ID']
+      secret_key = ENV['RECEIVER_SECRET']
+
+      Khipu.configure do |c|
+        c.secret = secret_key
+        c.receiver_id = receiver_id
+        c.platform = 'demo-client'
+        c.platform_version = '2.0'
+        # c.debugging = true
+      api    = Khipu::PaymentsApi.new()
+
       @transactions.each do |trans|
-        trans.revisar_estado_pago
+        status = api.payments_id_get(trans.payment_id)
+        @polla =  trans.polla
+        if status == 'done'
+          @polla.valid_polla = 1
+        end
+        trans.charged = 1
+        trans.save
+        @polla.save
       end
     end
     redirect_to root_path
@@ -105,10 +123,13 @@ class TransactionsController < ApplicationController
 
     api    = Khipu::PaymentsApi.new()
     status = api.payments_id_get(transaction.payment_id)
+    @polla =  @transaction.polla
     if status == 'done'
-      transaction.polla.valid_polla = 1
+      @polla.valid_polla = 1
     end
-    transaction.charged = 1
+    @transaction.charged = 1
+    @transaction.save
+    @polla.save
     puts 'status:' + status
   end
   
