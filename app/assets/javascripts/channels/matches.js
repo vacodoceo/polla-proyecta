@@ -1,4 +1,35 @@
+let groups = { 'A': [], 'B':[], 'C':[] };
+
 $(document).on("turbolinks:load", function(){
     $(".sortable").sortable();
+
+    handleGroups();
+
     $("input[type='number']").inputSpinner();
+
+    
 });
+
+function handleGroups(){
+    $(".sortable").on( "sortupdate", function( event, ui ) {
+        groups = { 'A': [], 'B':[], 'C':[] };
+        for (i=0; i<Object.keys(groups).length; i++){
+            for (j=0; j<4; j++){
+                let group = Object.keys(groups)[i];
+                groups[group].push($('#'+group+' .sortable li:nth-child('+(j+1)+')').attr('id'));
+            }
+        }
+
+        addCountry(1, groups['A'][0], [groups['B'][2], groups['C'][2]]);
+        addCountry(2, groups['B'][0], [groups['C'][0]]);
+        addCountry(3, groups['A'][1], [groups['B'][1]]);
+        addCountry(4, groups['C'][0], [groups['A'][2], groups['B'][2]]);
+    } );
+}
+
+function addCountry(group, c1, c2_array){
+    let c1_name = $('#'+c1+' .country-name').text();
+    $('#'+group.toString()+' li:nth-child(2) span:first-child').removeClass();
+    $('#'+group.toString()+' li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+c1);
+    $('#'+group.toString()+' li:nth-child(2) span:nth-child(2)').html(c1_name);
+}

@@ -1,4 +1,4 @@
-<ul class="list-group list-group-group-phase">
+<ul class="list-group list-group-group-phase" id=<%= group %>>
     <li class="list-group-item active">Grupo <%= group %></li>
     <li class="list-group-item groups">
         <ul class="list-group groups standings">
@@ -8,8 +8,8 @@
             <li class="list-group-item groups standing">4°</li>
         </ul>        
         <ul class="list-group sortable groups">
-            <% GROUPS[group].each do |c| %>
-                <li class="list-group-item country">
+            <% GROUPS[group].each_with_index do |c, index| %>
+                <li class="list-group-item country" id='<%= c %>'>
                     <%= flag_icon(c) %>
                     <div class="country-name"><%= COUNTRIES_NAME[c] %></div>
                 </li>
