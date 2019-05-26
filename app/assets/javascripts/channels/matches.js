@@ -113,15 +113,22 @@ function handleWinner(){
 
     $('.button-winner').click(function () {
         if (!$(this).hasClass('disabled')){
-            $(this).removeClass('btn-outline-success');
-            $(this).addClass('btn-success');
             let my_pos = (parseInt($(this).attr('id'))).toString();
-            let other_pos = (3 - parseInt($(this).attr('id'))).toString();
-            $(this).parent().parent().children('li:nth-child('+other_pos+')').children().removeClass('btn-success');
-            $(this).parent().parent().children('li:nth-child('+other_pos+')').children().addClass('btn-outline-success');
+            if ($(this).hasClass('btn-success')){
+                $(this).addClass('btn-outline-success');
+                $(this).removeClass('btn-success');
+                $(this).parent().parent().parent().children('ul:nth-child(2)').children('li:nth-child('+my_pos+')').removeClass('list-group-item-success');
+            }
+            else {
+                $(this).removeClass('btn-outline-success');
+                $(this).addClass('btn-success');
+                let other_pos = (3 - parseInt($(this).attr('id'))).toString();
+                $(this).parent().parent().children('li:nth-child('+other_pos+')').children().removeClass('btn-success');
+                $(this).parent().parent().children('li:nth-child('+other_pos+')').children().addClass('btn-outline-success');
 
-            $(this).parent().parent().parent().children('ul:nth-child(2)').children('li:nth-child('+my_pos+')').addClass('list-group-item-success');
-            $(this).parent().parent().parent().children('ul:nth-child(2)').children('li:nth-child('+other_pos+')').removeClass('list-group-item-success');
+                $(this).parent().parent().parent().children('ul:nth-child(2)').children('li:nth-child('+my_pos+')').addClass('list-group-item-success');
+                $(this).parent().parent().parent().children('ul:nth-child(2)').children('li:nth-child('+other_pos+')').removeClass('list-group-item-success');
+            }
         }
         checkWinners();
     })
