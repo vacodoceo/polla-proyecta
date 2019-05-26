@@ -16,6 +16,7 @@
 @import "font-awesome";
 @import "bootstrap-social";
 @import "flag-icon";
+@import "jquery-ui/sortable";
 
 /*
  * Customs
@@ -88,6 +89,11 @@
 /* 
  * Bet display 
  */
+
+select.select-country {
+  border: 0;
+  background-color: #fff;
+} 
 
 .container-page {
   flex-wrap: wrap;

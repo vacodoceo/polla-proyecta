@@ -6,8 +6,16 @@
         <input id="number" type="number" value="0" min="0" max="9">
     </li>
     <li class="list-group-item country">
-        <span class="flag-icon"></span>
-        <span></span>
+        <% if id == 1 or id == 4 %>
+            <span class="flag-icon flag-icon-<%= c2[0] %>"></span>
+            <select class="select-country">
+                <option value="<%= c2[0] %>"><%= COUNTRIES_NAME[c2[0]] %></option>
+                <option value="<%= c2[1] %>"><%= COUNTRIES_NAME[c2[1]] %></option>
+            </select>
+        <% else %>
+            <span class="flag-icon flag-icon-<%= c2 %>"></span>
+            <span><%= COUNTRIES_NAME[c2] %></span>
+        <% end %>
         <input id="number" type="number" value="0" min="0" max="9">
     </li>
 </ul>
