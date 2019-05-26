@@ -95,6 +95,18 @@
  * Bet display 
  */
 
+
+.ui-sortable-handle {
+  :hover {
+    cursor: grab;
+  }
+}
+.ui-sortable-handle.ui-sortable-helper {
+  :hover {
+    cursor: grabbing;
+  }
+}
+
 .button-winner {
   width: 0;
   height: 0;
@@ -112,8 +124,8 @@ select.select-country {
   flex-wrap: wrap;
   display: none;
   justify-content: center;
-  align-content: flex-start; 
-  height: 33em;
+  align-content: center; 
+  height: 35em;
 
   .between-matches {
     width: 200px;
@@ -292,7 +304,7 @@ body {
 img {
   width: 55%;
   margin: auto;
-  padding: em;
+  padding: 2em;
 }
 
 /*
