@@ -143,6 +143,69 @@ function checkWinners(){
         $('#semifinals').addClass('disabled')
     }
     else {
+        let c1_name = $('#'+quarter_finals[1]+' .country-name').text();
+        let c2_name = $('#'+quarter_finals[2]+' .country-name').text();
+        let c3_name = $('#'+quarter_finals[3]+' .country-name').text();
+        let c4_name = $('#'+quarter_finals[4]+' .country-name').text();
         $('#semifinals').removeClass('disabled')
+        $('#5 .groups li:nth-child(1) span:first-child').removeClass();
+        $('#5 .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+quarter_finals[1]);
+        $('#5 .groups li:nth-child(1)').attr('country', quarter_finals[1]);
+        $('#5 .groups li:nth-child(1) span:nth-child(2)').html(c1_name);
+        $('#5 .groups li:nth-child(2) span:first-child').removeClass();
+        $('#5 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+quarter_finals[3]);
+        $('#5 .groups li:nth-child(2)').attr('country', quarter_finals[3]);
+        $('#5 .groups li:nth-child(2) span:nth-child(2)').html(c3_name);
+        $('#6 .groups li:nth-child(1) span:first-child').removeClass();
+        $('#6 .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+quarter_finals[2]);
+        $('#6 .groups li:nth-child(1)').attr('country', quarter_finals[2]);
+        $('#6 .groups li:nth-child(1) span:nth-child(2)').html(c2_name);
+        $('#6 .groups li:nth-child(2) span:first-child').removeClass();
+        $('#6 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+quarter_finals[4]);
+        $('#6 .groups li:nth-child(2)').attr('country', quarter_finals[4]);
+        $('#6 .groups li:nth-child(2) span:nth-child(2)').html(c4_name);
+        let open_finals = 1;
+        for (i=5; i<7; i++){
+            success = 0;
+            $('ul#'+i.toString()+' ul:nth-child(2)').children().each(function() {
+                if ($(this).hasClass('list-group-item-success')) {
+                    semifinals[1+(i-5)*2] = $(this).attr('country');
+                    success = 1;
+                }
+                else {
+                    semifinals[2+(i-5)*2] = $(this).attr('country');
+                }
+            })
+            if (!success){
+                open_finals = 0;
+                break;
+            };
+        }
+        if (!finals){
+            $('#semifinals').addClass('disabled')
+        }
+        else {
+        let c5_name = $('#'+semifinals[1]+' .country-name').text();
+        let c6_name = $('#'+semifinals[2]+' .country-name').text();
+        let c7_name = $('#'+semifinals[3]+' .country-name').text();
+        let c8_name = $('#'+semifinals[4]+' .country-name').text();
+        $('#finals').removeClass('disabled')
+        $('#7 .groups li:nth-child(1) span:first-child').removeClass();
+        $('#7 .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+semifinals[2]);
+        $('#7 .groups li:nth-child(1)').attr('country', semifinals[2]);
+        $('#7 .groups li:nth-child(1) span:nth-child(2)').html(c6_name);
+        $('#7 .groups li:nth-child(2) span:first-child').removeClass();
+        $('#7 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+semifinals[4]);
+        $('#7 .groups li:nth-child(2)').attr('country', semifinals[4]);
+        $('#7 .groups li:nth-child(2) span:nth-child(2)').html(c8_name);
+        $('#8 .groups li:nth-child(1) span:first-child').removeClass();
+        $('#8 .groups li:nth-child(1) span:first-child').addClass('flag-icon flag-icon-'+semifinals[1]);
+        $('#8 .groups li:nth-child(1)').attr('country', semifinals[1]);
+        $('#8 .groups li:nth-child(1) span:nth-child(2)').html(c5_name);
+        $('#8 .groups li:nth-child(2) span:first-child').removeClass();
+        $('#8 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+semifinals[3]);
+        $('#8 .groups li:nth-child(2)').attr('country', semifinals[3]);
+        $('#8 .groups li:nth-child(2) span:nth-child(2)').html(c7_name);
+        }
     }
 }

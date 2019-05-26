@@ -9,4 +9,8 @@ TITLES = {
           2 => "1B v/s 2C",
           3 => "2A v/s 2B",
           4 => "1C v/s 3A/B",
+          5 => "Semifinal 1",
+          6 => "Semifinal 2",
+          7 => "Tercer lugar",
+          8 => "Final"
 }

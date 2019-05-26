@@ -108,7 +108,8 @@ select.select-country {
   display: none;
   justify-content: center;
   align-content: center; 
-  height: 30em;
+  height: 35em;
+
   .between-matches {
     width: 200px;
     height: 67px;
@@ -124,6 +125,10 @@ select.select-country {
   }
 }
 
+.container-page#quarter-finals-page {
+  align-content: space-around;
+}
+
 #instructions-page {
   display: flex;
 }
@@ -133,7 +138,7 @@ select.select-country {
 }
 
 .list-group {
-  width: 280px;
+  width: 330px;
   margin: 2.5%;
 }
 
@@ -168,10 +173,6 @@ select.select-country {
   .flag-icon{
     border-bottom-left-radius: 0.25rem;
   }
-}
-
-#quarter-finals-page .list-group-match {
-  flex: 0 0 33.333333%;
 }
 
 /* 
