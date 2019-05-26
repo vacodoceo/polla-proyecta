@@ -23,7 +23,7 @@ function handleGroups(){
             }
         }
 
-        addCountry(1, groups['A'][0], [groups['B'][2], groups['C'][2]]);
+        addCountry(1, groups['A'][0], [groups['C'][2]], groups['B'][2]);
         addCountry(2, groups['B'][0], groups['C'][1]);
         addCountry(3, groups['A'][1], groups['B'][1]);
         addCountry(4, groups['C'][0], [groups['A'][2], groups['B'][2]]);
@@ -40,9 +40,7 @@ function addCountry(group, c1, c2){
             .find('option')
             .remove()
             .end()
-            .append('<option value="'+c2[0]+'">'+$('#'+c2[0]+' .country-name').text()+'</option>')
-            .append('<option value="'+c2[1]+'">'+$('#'+c2[1]+' .country-name').text()+'</option>')
-;
+            .append('<option value="'+c2[0]+'">'+$('#'+c2[0]+' .country-name').text()+'</option>');
     }
     else {
         let c2_name = $('#'+c2+' .country-name').text();
@@ -56,5 +54,9 @@ function handleCountrySelect(group){
     $('#'+group.toString()+ ' .select-country').change(function() {
         $('#'+group.toString()+' li:nth-child(3) span:first-child').removeClass();
         $('#'+group.toString()+' li:nth-child(3) span:first-child').addClass('flag-icon flag-icon-'+$(this).val());
-    });
+        other_group = (group == 1) ? 4 : 1;
+        $('#'+other_group.toString()+' li:nth-child(3) .select-country option').css({ 'display': ''});
+        $('#'+other_group.toString()+' li:nth-child(3) .select-country .'+$(this).val()).hide();
+        }
+    )    
 }
