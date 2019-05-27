@@ -22,16 +22,13 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params['email'])
-    if user.present?
-      if user.password == params['password']
+    if user && user.authenticate(params['password'])
         session[:user_id] = user.id
         redirect_to root_path
-      else
-        redirect_to login_path, notice: 'Email o contraseña incorrectos, por favor intente nuevamente'
-      end
     else
       redirect_to login_path, notice: 'Email o contraseña incorrectos, por favor intente nuevamente'
     end
+    
   end
 
   def destroy

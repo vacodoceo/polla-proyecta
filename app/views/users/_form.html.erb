@@ -1,4 +1,4 @@
-<%= form_with(model: user, local: true) do |form| %>
+<%= form_with(model: user, local: true, :html => {:class => "form-signin", :id => 'register-form'}) do |form| %>
     <% if user.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(user.errors.count, "error") %> prohibited this polla from being saved:</h2>
@@ -11,6 +11,7 @@
       </div>
     <% end %>
     <h1 class="h2 mb-3 font-weight-normal">Regístrate</h1>
+    <p id="notice"><%= notice %></p>
     <label for="inputEmail" class="sr-only">Correo electrónico</label>
     <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required>
     <label for="inputPassword" class="sr-only">Contraseña</label>

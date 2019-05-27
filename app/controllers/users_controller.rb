@@ -21,25 +21,18 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.create(user_params)
-        puts "params"
-        puts params
-        puts "user_params"
-        puts user_params
-        @user.name = params['first_name'] + ' ' + params['last_name']
-        #@user.oauth_token = '-1'
-        #@user.phone_number = params['phone_number']
-        #@user.password = params['password']
-        #@user.email = params['email']
-        respond_to do |format|
-          if @user.save
-            format.html { redirect_to login_path}
-          else
-            format.html { render :new }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
+      @user = User.create(user_params)
+      puts params
+      @user.name = params['first_name'] + ' ' + params['last_name']
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to login_path}
+        else
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
+    end
 
       def update
         respond_to do |format|
