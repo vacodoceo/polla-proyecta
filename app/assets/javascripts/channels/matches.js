@@ -153,6 +153,8 @@ function checkWinners(){
     if (!open_semifinals){
         $('#semifinals').addClass('disabled')
         $('#finals').addClass('disabled')
+        $('#finals-page .toggle-create').addClass('disabled');
+        $('#finals-page .toggle-create').attr('data-target', '');
     }
     else {
         let c1_name = $('#'+quarter_finals[1]+' .country-name').text();
@@ -216,6 +218,24 @@ function checkWinners(){
             $('#8 .groups li:nth-child(2) span:first-child').addClass('flag-icon flag-icon-'+semifinals[3]);
             $('#8 .groups li:nth-child(2)').attr('country', semifinals[3]);
             $('#8 .groups li:nth-child(2) span:nth-child(2)').html(c7_name);
+            let open_create = 1;
+            for (i=7; i<8; i++){
+                let success = 0;
+                $('ul#'+i.toString()+' ul:nth-child(2)').children().each(function() {
+                    if ($(this).hasClass('list-group-item-success')) {
+                        finals[i] = $(this).attr('country');
+                        success = 1;
+                    }
+                })
+                if (!success){
+                    open_create = 0;
+                    break;
+                };
+            }
+            if (open_create){
+                $('#finals-page .toggle-create').removeClass('disabled');
+                $('#finals-page .toggle-create').attr('data-target', '#pollaNameModal');
+            }
         }
     }
 }

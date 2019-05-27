@@ -187,6 +187,15 @@ select.select-country {
   }
 }
 
+.matches {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#finals-page {
+  flex-direction: column;
+}
+
 
 /* 
  * Pagination 
