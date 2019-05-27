@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_040841) do
+ActiveRecord::Schema.define(version: 2019_05_27_223248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 2019_05_27_040841) do
     t.datetime "updated_at", null: false
     t.bigint "match_id"
     t.bigint "polla_id"
+    t.string "country_1_name"
+    t.string "country_2_name"
+    t.string "stage"
     t.index ["match_id"], name: "index_bets_on_match_id"
     t.index ["polla_id"], name: "index_bets_on_polla_id"
   end
@@ -58,6 +61,20 @@ ActiveRecord::Schema.define(version: 2019_05_27_040841) do
     t.string "name"
     t.integer "paying"
     t.index ["user_id"], name: "index_pollas_on_user_id"
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.string "team_1"
+    t.string "team_2"
+    t.integer "result_team_1"
+    t.integer "result_team_2"
+    t.integer "result"
+    t.integer "position"
+    t.string "group"
+    t.string "stage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "edited"
   end
 
   create_table "transactions", force: :cascade do |t|

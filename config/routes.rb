@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :results
   resources :first_rounds
   get 'transactions/index'
   get 'transactions/show'

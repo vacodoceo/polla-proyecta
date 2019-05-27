@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
         user.email = auth.info.email
         user.oauth_token = auth.credentials.token
         user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.password_digest = 'kdsalkdaslñkdsalkdñalkdslaklñdsa'
         user.save!
       end
     end

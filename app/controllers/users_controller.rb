@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     end
 
     def index
-      if current_user && (current_user.is_admin || current_user.id == 1)
+      if current_user && (current_user.is_admin || current_user.id == 19)
         @users = User.all
       else
         redirect_to root_path
@@ -21,40 +21,52 @@ class UsersController < ApplicationController
     end
 
     def create
-      @user = User.create(user_params)
-      puts params
-      @user.name = params['first_name'] + ' ' + params['last_name']
-      respond_to do |format|
-        if @user.save
-          format.html { redirect_to login_path}
+      if params['password'] == params['password_confirmation']
+        if params['password'].length > 5
+          if params['phone_number'].start_with?('+569') && params['phone_number'].length == 12
+            @user = User.create(user_params)
+            puts params
+            @user.name = params['first_name'] + ' ' + params['last_name']
+            respond_to do |format|
+              if @user.save
+                format.html { redirect_to login_path}
+              else
+                format.html { render :new }
+                format.json { render json: @user.errors, status: :unprocessable_entity }
+              end
+            end
+          else
+            redirect_to register_path, notice: 'El formato del teléfono ingresado no es válido'
+          end
         else
-          format.html { render :new }
+          redirect_to register_path, notice: 'La contraseña debe tener al menos 6 caracteres'
+        end
+      else
+        redirect_to register_path, notice: 'Las contraseñas no coinciden'
+      end
+    end
+
+    def update
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to root_path}
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
     end
-
-      def update
-        respond_to do |format|
-          if @user.update(user_params)
-            format.html { redirect_to root_path}
-            format.json { render :show, status: :ok, location: @user }
-          else
-            format.html { render :edit }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
-        end
+  
+    # DELETE /pollas/1
+    # DELETE /pollas/1.json
+    def destroy
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to root_path}
+        format.json { head :no_content }
       end
-    
-      # DELETE /pollas/1
-      # DELETE /pollas/1.json
-      def destroy
-        @user.destroy
-        respond_to do |format|
-          format.html { redirect_to root_path}
-          format.json { head :no_content }
-        end
-      end
+    end
 
     private
     def set_user
