@@ -6,7 +6,12 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load
+if ['development', 'test'].include? ENV['RAILS_ENV'] 
+  Dotenv::Railtie.load
+end
+
+GOOGLE_SECRET = ENV['GOOGLE_SECRET']
+GOOGLE_ID = ENV['GOOGLE_ID']
 
 module Myapp
   class Application < Rails::Application

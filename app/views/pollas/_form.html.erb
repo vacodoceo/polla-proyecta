@@ -1,43 +1,42 @@
-<%= form_with(model: polla, local: true) do |form| %>
-    <% if polla.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(polla.errors.count, "error") %> prohibited this polla from being saved:</h2>
-  
-        <ul>
-        <% polla.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+<div>
+  <%= form_with(model: polla, local: true) do |form| %>
+      <% if polla.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(polla.errors.count, "error") %> prohibited this polla from being saved:</h2>
+    
+          <ul>
+          <% polla.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="container container-pagination">
+        <ul class="pagination pagination-lg justify-content-center">
+          <li class="page-item active" id="instructions"><a class="page-link">Instrucciones</a></li>
+          <li class="page-item" id="group-phase"><a class="page-link">Fase de Grupos</a></li>
+          <li class="page-item disabled" id="quarter-finals"><a class="page-link" aria-disabled="true">Cuartos de Final</a></li>
+          <li class="page-item disabled" id="semifinals"><a class="page-link" aria-disabled="true">Semifinales</a></li>
+          <li class="page-item disabled" id="finals"><a class="page-link" aria-disabled="true">Final</a></li>
         </ul>
+        <div class="container-page" id="instructions-page">
+        <h2>Instrucciones</h2>
+          <p>Lorem ipsum dolor sit amet, paulo expetendis nec ea, cu vel consul possim, has alii gloriatur te. Vim ad choro libris viderer. Pro quidam laboramus ei, salutandi inciderint reformidans eum no, oratio epicurei et pro. Vis ei graece tritani, esse sententiae persequeris ex has. Ubique maiorum cotidieque no cum, id ferri rationibus mel, facer mollis ut nec.</p>
+          <p>Utroque forensibus qui et, vim falli graecis constituam te. Suas nihil habemus at mel, at eam oratio dicant homero. Legimus adolescens usu ea, modus inani choro ut sea. Eum alienum eloquentiam definitiones te, ea has dolore ubique, te apeirian menandri sadipscing est. Audiam mandamus salutatus et vel, ius quod fuisset copiosae an.</p>
+        </div>
+        <%= render 'layouts/group-phase' %>
+        <%= render 'layouts/quarter-finals' %>
+        <%= render 'layouts/semifinals' %>
+        <%= render 'layouts/finals' %>
       </div>
+    <input type="hidden" id="first_round_a" name="first_round_a" value="[bo, br, pe, ve]">
+    <input type="hidden" id="first_round_b" name="first_round_b" value="[ar, co, py, qa]">
+    <input type="hidden" id="first_round_c" name="first_round_c" value="[cl, ec, jp, uy]">
+    <input type="hidden" id="quarter_final" name="quarter_final" value="">
+    <input type="hidden" id="semifinal" name="semifinal" value="">
+    <input type="hidden" id="third_place" name="third_place" value="">
+    <input type="hidden" id="final" name="final" value="">
     <% end %>
-    <div class="container">
-      <div class="row">
-        Nombre polla: <input type="textbox" name="name"><br>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <%= render 'marker', c1: 'jp', c2: 'cl'%>
-        </div>
-        <div class="col">
-          <%= render 'marker', c1: 'cl', c2: 'jp'%>
-        </div>
-      </div>
-    </div>
-
-    <br/>
-    <br/>
-
-    Japón: <input type="textbox" name="partidos[apuestas][]"><br>
-    Chile: <input type="textbox" name="partidos[apuestas][]"><br>
-    Ecuador: <input type="textbox" name="partidos[apuestas][]"><br>
-    Perú: <input type="textbox" name="partidos[apuestas][]"><br>
-  
-  
-    <div class="actions">
-      <%= form.submit %>
-    </div>
-  <% end %>
+</div>
   

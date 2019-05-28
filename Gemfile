@@ -39,6 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
 end
 
 group :development do
@@ -74,11 +75,11 @@ gem 'bcrypt'
 gem 'rubocop'
 
 # Environment variables
-gem 'dotenv-rails', groups: [:development, :test]
 
 # Frontend
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem "font-awesome-rails"
 gem 'flag-icons-rails'
 
@@ -87,6 +88,8 @@ gem 'khipu-api-client', '~> 2.0', '>= 2.0.1'
 gem 'signer', '~> 1.4.2'
 
 gem 'savon', '~> 2.11.1'
+
+gem 'dotenv-rails'
 
 #Encriptar
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'

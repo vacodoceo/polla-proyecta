@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Myapp</title>
+    <title>Polla Proyecta</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
   </head>
 
   <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
-          <h3 class="masthead-brand">11chupaloent11</h3>
+          <a href="<%= root_path %>"><h3 class="masthead-brand">Polla Proyecta</h3></a>
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link <%= @active == 'home' ? 'active' : ''%>" href="<%= root_path %>">Inicio</a>
-            <a class="nav-link" href=<%= ranking_path%>>Ranking</a>
+            <a class="nav-link <%= @active == 'ranking' ? 'active' : ''%>" href=<%= ranking_path%>>Ranking</a>
             <% if current_user %>
               <a class="nav-link"" id="dropdownMenuButton" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Menú▼
+                Hola, <%= current_user.name.split[0].capitalize %>▼
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href=<%= pollas_path %>>Mis pollas</a>
@@ -38,16 +37,14 @@
           </nav>
         </div>
       </header>
+      <%= image_tag("proyecta.png") %>
       <%= yield %>
       <footer class="mastfoot mt-auto">
         <div class="inner">
-          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+          <p>Polla for <a href="https://www.facebook.com/ProyectaUc/">Proyecta</a>, by <a href="mailto: ti@trabajosproyecta.cl">ti@trabajosproyecta.cl</a>.</p>
         </div>
       </footer>
     </div>
-    <script>
-        $("input[type='number']").inputSpinner();
-    </script>
   </body>
   
 </html>

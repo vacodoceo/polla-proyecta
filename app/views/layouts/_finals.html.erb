@@ -1,0 +1,39 @@
+<div class="container container-page" id="finals-page">
+    <div class="matches">
+        <%= render 'layouts/scoreboard', id:7, c1:'br', c2:'co' %>
+        <%= render 'layouts/scoreboard', id:8, c1:'br', c2:'co' %>
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary toggle-create disabled" data-toggle="modal" data-target="">
+    Crear Polla
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="pollaNameModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ya casi estamos...</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Dale un nombre a tu polla</label>
+                        <input type="text" class="form-control" id="pollaName" name="pollaName" placeholder="Nombre de la polla">
+                        <small class="form-text text-muted">Con este nombre figurará en el ranking y podrás identificarla más fácilmente.</small>
+                    </div>
+                    <%# <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Polla pública</label>
+                        <small class="form-text text-muted">Aparecerá en el ranking con tu nombre y el de tu polla</small>
+                    </div> %>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Crear Polla">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,14 +14,18 @@
 
 @import "bootstrap";
 @import "font-awesome";
-@import "bootstrap-social.css";
+@import "bootstrap-social";
 @import "flag-icon";
+@import "jquery-ui/sortable";
 
 /*
  * Customs
  */
 
-/*  Sign In / Register */
+/* 
+ * Sign In / Register 
+ */
+
 .fa-facebook {
   padding-top: 2px;
 }
@@ -36,7 +40,10 @@
   margin-bottom: 5px;
 }
 
-/* Navbar */
+/* 
+ *Navbar 
+ */
+
 #dropdownMenuButton {
   border-bottom: 0;
 }
@@ -50,16 +57,110 @@
   text-shadow: 0 0;
 }
 
-/* Bet display */
-.list-group-item:first-child {
+/* 
+ * Groups display 
+ */
+
+.list-group-group-phase, .list-group-match {
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 0.3em;
+}
+
+ .groups {
+   padding: 0 !important;
+   margin: 0 !important;
+   border: 0;
+   display: flex;
+   .flag-icon {
+     border-left: 1px solid rgba(0, 0, 0, 0.125);
+   }
+ }
+
+.standings {
+  width: 49px !important;
+}
+
+.standing {
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.country-name {
+  width: -webkit-fill-available;
+}
+
+/* 
+ * Bet display 
+ */
+
+
+.ui-sortable-handle {
+  :hover {
+    cursor: grab;
+  }
+}
+.ui-sortable-handle.ui-sortable-helper {
+  :hover {
+    cursor: grabbing;
+  }
+}
+
+.button-winner {
+  width: 0;
+  height: 0;
+  padding: 10px;
+  margin: 14px;
+}
+
+select.select-country {
+  border: 0;
+  background-color: rgba(255, 255, 255, 0);
+  text-align-last:center;
+} 
+
+.container-page {
+  flex-wrap: wrap;
+  display: none;
+  justify-content: center;
+  align-content: center; 
+  height: 35em;
+
+  .between-matches {
+    width: 200px;
+    height: 67px;
+    margin-top: 25px;
+    border-bottom: 1px solid rgba(34, 34, 34, 0.5);
+    display: flex;
+    align-items: flex-end;
+  }
+  .container {
+    flex-wrap: nowrap;
+    display: flex;   
+    align-items: flex-start; 
+  }
+}
+
+.container-page#quarter-finals-page {
+  align-content: space-around;
+}
+
+#instructions-page {
+  padding: 2em;
+  display: flex;
+}
+
+.list-group-item.active{
   padding: 6px 20px 6px 20px;
 }
 
-// .match-marker:nth-child(2) {
-//   padding-top: 2px;
-// }
+.list-group {
+  width: 330px;
+  margin: 2.5%;
+}
 
-.match-marker {
+.country {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -79,29 +180,56 @@
     height: 100%;
     border: 1px solid;
   }
-  span {
+  .flag-icon {
     border-right: 1px solid rgba(0, 0, 0, 0.125);
     height: 48px;
-    width: 64px;
+    min-width: 64px;
   }
 }
 
-.match-marker:nth-child(3) {
-  span {
-    border-bottom-left-radius: 0.25rem;
-  }
+.matches {
+  display: flex;
+  justify-content: space-evenly;
 }
 
+#finals-page {
+  flex-direction: column;
+}
+
+
+/* 
+ * Pagination 
+ */ 
+
+.pagination {
+  text-shadow: 0 0;
+  color: #007bff;
+  text-decoration: none;
+  :hover {
+    cursor: pointer;
+  }
+  .active:hover {
+    color: #fff;
+  }
+}
+.page-item.disabled:hover {
+  cursor: default;
+}
 
 /*
  * Globals
  */
 
+.container {
+  min-width: 55em;
+}
+
+
 /* Links */
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: rgba(0, 0, 0, .7)
 }
 
 /* Custom default button */
@@ -122,27 +250,29 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-image: image-url('fondo_polla.jpg');
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 body {
   display: -ms-flexbox;
   display: flex;
-  color: #fff;
-  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  color: rgb(34, 34, 34);
+  text-shadow: 0 .05rem .1rem rgba(255, 255, 255, 0.5);
 }
 
 .cover-container {
-  max-width: 42em;
+  width: 70em !important;
 }
+
 
 
 /*
  * Header
  */
 .masthead {
-  margin-bottom: 2rem;
+  margin-bottom: 0 !important;
 }
 
 .masthead-brand {
@@ -152,14 +282,14 @@ body {
 .nav-masthead .nav-link {
   padding: .25rem 0;
   font-weight: 700;
-  color: rgba(255, 255, 255, .5);
+  color: rgba(34, 34, 34, .7);
   background-color: transparent;
   border-bottom: .25rem solid transparent;
 }
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
+  border-bottom-color: rgba(34, 34, 34, .4);
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -167,8 +297,8 @@ body {
 }
 
 .nav-masthead .active {
-  color: #fff;
-  border-bottom-color: #fff;
+  color: rgb(34, 34, 34);
+  border-bottom-color: rgb(34, 34, 34);
 }
 
 @media (min-width: 48em) {
@@ -180,6 +310,11 @@ body {
   }
 }
 
+img {
+  width: 55%;
+  margin: auto;
+  padding: 2em;
+}
 
 /*
  * Cover
@@ -197,7 +332,8 @@ body {
  * Footer
  */
 .mastfoot {
-  color: rgba(255, 255, 255, .5);
+  color: rgb(0, 0, 0);
+  
 }
 
 /*
@@ -231,5 +367,9 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+  .btn-social {
+    color: #fff !important;
   }
   

@@ -1,0 +1,12 @@
+<div class="container container-page" id="quarter-finals-page">
+    <div class="container matches">
+        <%= render 'layouts/scoreboard', id:1, c1:'bo', c2:['jp', 'py'] %>
+        <span class="between-matches">Los ganadores jugarán en contra en la próxima ronda</span>
+        <%= render 'layouts/scoreboard', id:3, c1:'br', c2:'co'%>
+    </div>
+    <div class="container matches">
+        <%= render 'layouts/scoreboard', id:2, c1:'ar', c2:'ec' %>
+        <span class="between-matches">Los ganadores jugarán en contra en la próxima ronda</span>
+        <%= render 'layouts/scoreboard', id:4, c1:'cl', c2:['pe', 'py'] %>
+    </div>
+</div>
