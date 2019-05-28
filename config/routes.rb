@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :results
   resources :first_rounds
   get 'transactions/index'
   get 'transactions/show'
@@ -21,6 +22,19 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   #get 'signout', to: 'sessions#destroy', as: 'signout'
   #get 'login', to: 'sessions#create', as: 'login'
+
+  get 'recover_password', to: 'sessions#recover', as: 'recover_password'
+  post 'recover_password', to: 'sessions#recover_password'
+  get 'new_password/:id', to: 'sessions#new_password', as: 'new_password'
+  post 'new_password/:id', to: 'session#change_password'
+  #Webpay
+  #post '/webpay/webpay_final_url', :to => 'webpay#webpay_final_url', as: => :webpay_result
+  #post '/webpay/webpay_return_url', :to => 'webpay#webpay_return_url', as: => :webpay_return_url
+  #get '/webpay/success', :to => 'webpay#webpay_success', as: => :webpay_success
+  #get '/webpay/error', :to => 'webpay#webpay_error', as: => :webpay_error
+  #get '/webpay/nullify', :to => 'webpay#webpay_nullify', as: => :webpay_nullify
+
+
 
   resources :sessions
   get 'signout', to: 'sessions#destroy', as: 'signout'

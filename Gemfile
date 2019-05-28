@@ -83,8 +83,11 @@ gem 'jquery-ui-rails'
 gem "font-awesome-rails"
 gem 'flag-icons-rails'
 
-# Khipu
+# Pagos
 gem 'khipu-api-client', '~> 2.0', '>= 2.0.1'
+gem 'signer', '~> 1.4.2'
+
+gem 'savon', '~> 2.11.1'
 
 gem 'dotenv-rails'
 
