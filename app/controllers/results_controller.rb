@@ -29,7 +29,7 @@ class ResultsController < ApplicationController
     respond_to do |format|
       if @result.save
         if @result.stage == 'groups'
-          @bets =  First_rounds.where("polla.valid_polla = ? AND group = ?", 1, params['group']))
+          @bets =  First_rounds.where("polla.valid_polla = ? AND group = ?", 1, params['group'])
           @bets.each do |bet|
             if params['team_1'] == bet.country_name && bet.position == params['position']
               bet.polla.score += 10
