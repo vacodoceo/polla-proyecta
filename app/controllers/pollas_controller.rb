@@ -7,7 +7,7 @@ class PollasController < ApplicationController
   end
 
   def pollas_totales
-    if current_user && (current_user.is_admin || current_user.is_mod || current_user.id == 1)
+    if current_user && (current_user.is_admin || current_user.is_mod || current_user.id == 19)
       @pollas = Polla.all
     else
       redirect_to root_path

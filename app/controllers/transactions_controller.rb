@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    if current_user && (current_user.is_admin || current_user.id == 1)
+    if current_user && (current_user.is_admin || current_user.id == 19)
       @transactions = Transaction.all
     else
       redirect_to root_path

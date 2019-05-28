@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   def show
     @acitve = "home"
     @pollas = Polla.where(:valid_polla => 1)
-    @pozo = [80000, @pollas.length*2000].max #corregir
+    @pozo = [30000, @pollas.length*200].max #corregir
   end
   def ranking
     @active = "ranking"
