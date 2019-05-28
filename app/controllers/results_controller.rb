@@ -34,7 +34,7 @@ class ResultsController < ApplicationController
             if params['team_1'] == bet.country_name && bet.position == params['position']
               bet.polla.score += 10
             end
-
+          end
         else
           @bets =  Bet.where("polla.valid_polla = ? AND stage = ?", 1, params['stage'])
           @bets.each do |bet|
