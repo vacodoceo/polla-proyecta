@@ -82,8 +82,11 @@ gem 'jquery-rails'
 gem "font-awesome-rails"
 gem 'flag-icons-rails'
 
-# Khipu
+# Pagos
 gem 'khipu-api-client', '~> 2.0', '>= 2.0.1'
+gem 'signer', '~> 1.4.2'
+
+gem 'savon', '~> 2.11.1'
 
 #Encriptar
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'

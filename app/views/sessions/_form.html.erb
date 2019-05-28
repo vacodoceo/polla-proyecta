@@ -16,8 +16,11 @@
       <button href= form.submit class="btn btn-lg btn-primary btn-block">Iniciar sesion</button>
     </div>
     <br/>
-    <p> ¿No tienes cuenta </p>
+    <p> ¿No tienes cuenta? </p>
     <a class="btn btn-lg btn-light btn-block" href=<%=register_path%>>Regístrate </a>
+    <br/>
+    <p> ¿Olvidaste tu contraseña? </p>
+    <a class="btn btn-lg btn-light btn-block" href=<%=recover_password_path%>>Recuperar contraseña </a>
     <hr />
 
     <%= render 'layouts/external-accounts' %>

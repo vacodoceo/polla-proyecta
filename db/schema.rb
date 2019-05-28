@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_223248) do
+ActiveRecord::Schema.define(version: 2019_05_27_231805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,8 +79,6 @@ ActiveRecord::Schema.define(version: 2019_05_27_223248) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "amount"
-    t.string "bank"
-    t.integer "bank_account_number"
     t.integer "payment_id"
     t.string "payment_url"
     t.datetime "created_at", null: false
@@ -88,6 +86,13 @@ ActiveRecord::Schema.define(version: 2019_05_27_223248) do
     t.bigint "user_id"
     t.bigint "polla_id"
     t.integer "charged"
+    t.string "description"
+    t.date "pay_date"
+    t.integer "payment_method_id"
+    t.string "tbk_transaction_id"
+    t.string "tbk_token"
+    t.string "state"
+    t.string "webpay_data"
     t.index ["polla_id"], name: "index_transactions_on_polla_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end

@@ -44,6 +44,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    akami (1.3.1)
+      gyoku (>= 0.4.0)
+      nokogiri
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -102,8 +105,13 @@ GEM
       railties (>= 3.2, < 6.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gyoku (1.3.1)
+      builder (>= 2.1.2)
     hashie (3.6.0)
     htmlentities (4.3.4)
+    httpi (2.4.4)
+      rack
+      socksify
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -144,6 +152,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
+    nori (2.6.0)
     oauth2 (1.4.1)
       faraday (>= 0.8, < 0.16.0)
       jwt (>= 1.0, < 3.0)
@@ -234,9 +243,20 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    savon (2.11.2)
+      akami (~> 1.2)
+      builder (>= 2.1.2)
+      gyoku (~> 1.2)
+      httpi (~> 2.3)
+      nokogiri (>= 1.4.0)
+      nori (~> 2.4)
+      wasabi (~> 3.4)
     selenium-webdriver (3.142.0)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
+    signer (1.4.3)
+      nokogiri (>= 1.5.1)
+    socksify (1.7.1)
     solargraph (0.32.1)
       backport (~> 1.0)
       bundler (>= 1.17.2)
@@ -274,6 +294,9 @@ GEM
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.5.0)
+    wasabi (3.5.0)
+      httpi (~> 2.0)
+      nokogiri (>= 1.4.2)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -311,7 +334,9 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rubocop
   sass-rails (~> 5.0)
+  savon (~> 2.11.1)
   selenium-webdriver
+  signer (~> 1.4.2)
   solargraph
   spring
   spring-watcher-listen (~> 2.0.0)
