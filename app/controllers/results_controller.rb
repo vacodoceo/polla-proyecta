@@ -25,44 +25,39 @@ class ResultsController < ApplicationController
   # POST /results.json
   def create
     @result = Result.new(result_params)
-
     respond_to do |format|
-      if @result.save
-        if @result.stage == 'groups'
-          @bets =  First_rounds.where("polla.valid_polla = ? AND group = ?", 1, params['group']))
-          @bets.each do |bet|
-            if params['team_1'] == bet.country_name && bet.position == params['position']
-              bet.polla.score += 10
-
+      @result.save
+      if @result.stage == 'groups'
+        @bets =  First_rounds.where("polla.valid_polla = ? AND group = ?", 1, params['group'])
+        @bets.each do |bet|
+          if params['team_1'] == bet.country_name && bet.position == params['position']
+            bet.polla.score += 10
           end
-        else
-          @bets =  Bet.where("polla.valid_polla = ? AND stage = ?", 1, params['stage']))
-          @bets.each do |bet|
+        end
+      else
+        @bets =  Bet.where("polla.valid_polla = ? AND stage = ?", 1, params['stage'])
+        @bets.each do |bet|
           if params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name
             if params['result_team_1'] == bet.result_team_1 && params['result_team_2'] == bet.result_team_2
               bet.polla.score += 5 
-            elif params['result_team_1'] > params['result_team_2'] && bet.result_team_1 > bet.result_team_2
+            elsif params['result_team_1'] > params['result_team_2'] && bet.result_team_1 > bet.result_team_2
               bet.polla.score += 2
-            elif params['result_team_1'] < params['result_team_2'] && bet.result_team_1 < bet.result_team_2
+            elsif params['result_team_1'] < params['result_team_2'] && bet.result_team_1 < bet.result_team_2
               bet.polla.score += 2
             end 
-          elif params['team_2'] == bet.country_2_name && params['team_1'] == bet.country_1_name
+          elsif params['team_2'] == bet.country_2_name && params['team_1'] == bet.country_1_name
             if params['result_team_2'] == bet.result_team_2 && params['result_team_1'] == bet.result_team_1
               bet.polla.score += 5 
-            elif params['result_team_2'] > params['result_team_1'] && bet.result_team_2 > bet.result_team_1
+            elsif params['result_team_2'] > params['result_team_1'] && bet.result_team_2 > bet.result_team_1
               bet.polla.score += 2
-            elif params['result_team_2'] < params['result_team_1'] && bet.result_team_2 < bet.result_team_1
+            elsif params['result_team_2'] < params['result_team_1'] && bet.result_team_2 < bet.result_team_1
               bet.polla.score += 2
             end 
           end
         end
-        format.html { redirect_to results_path, notice: 'Result was successfully created.' }
-        format.json { render :show, status: :created, location: @result }
-      else
-        format.html { render :new }
-        format.json { render json: @result.errors, status: :unprocessable_entity }
       end
     end
+    redirect_to results_path, notice: 'Resultado agregado correctamente'
   end
 
   # PATCH/PUT /results/1
@@ -90,13 +85,13 @@ class ResultsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_result
-      @result = Result.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_result
+    @result = Result.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def result_params
-      params.fetch(:result, {})
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def result_params
+    params.fetch(:result, {})
+  end
 end

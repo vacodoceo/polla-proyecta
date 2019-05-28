@@ -3,4 +3,5 @@ class Polla < ApplicationRecord
   #has_one :transaction
   has_one :owner, foreign_key: "transaction_id", class_name: "Transaction"
   has_many :bets
+  has_many :first_rounds
 end

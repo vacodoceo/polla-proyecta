@@ -10,20 +10,32 @@
       </ul>
     </div>
   <% end %>
-  <h1 class="h2 mb-3 font-weight-normal">Regístrate</h1>
+  <h1 class="h2 mb-3 font-weight-normal">Ingresar resultado</h1>
   <p id="notice"><%= notice %></p>
-  <label for="inputEmail" class="sr-only">Correo electrónico</label>
-  <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required>
-  <label for="inputPassword" class="sr-only">Contraseña</label>
-  <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-  <label for="inputPassword_confirmation" class="sr-only">Contraseña</label>
-  <input type="password" id="inputPassword_confirmation" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
-  <label for="inputFirstName" class="sr-only">Nombre</label>
-  <input type="firstName" id="inputFirstName" name="first_name" class="form-control" placeholder="First name" required>
-  <label for="inputLastName" class="sr-only">Apellido</label>
-  <input type="LastName" id="inputLastName" name="last_name" class="form-control" placeholder="Last name" required>
-  <label for="inputPhoneNumber" class="sr-only">Teléfono</label>
-  <input type="PhoneNumber" id="inputPhoneNumber" name="phone_number" class="form-control" placeholder="Phone, ex: +56912345678" required> 
+  <label for="inputTeam1" class="sr-only">Equipo 1</label>
+  <input type="team1" id="inputTeam1" name="team_1" class="form-control" placeholder="Equipo 1" required>
+  
+  <label for="inputTeam2" class="sr-only">Equipo 2</label>
+  <input type="team2" id="inputTeam2" name="team_2" class="form-control" placeholder="Equipo 2" required>
+  
+  <label for="inputResultTeam1" class="sr-only">Goles equipo 1</label>
+  <input type="result_team1" id="inputResultTeam1" name="result_team_1" class="form-control" placeholder="Goles equipo 1" required>
+  
+  <label for="inputResultTeam2" class="sr-only">Goles equipo 2</label>
+  <input type="result_team2" id="inputResultTeam2" name="result_team_2" class="form-control" placeholder="Goles equipo 2" required>
+  
+  <label for="inputResult" class="sr-only">Ganador (1 para equipo 1, 2 para equipo 2)</label>
+  <input type="result" id="inputResult" name="result" class="form-control" placeholder="Ganador (1 o 2)" required>
+  
+  <label for="inputStage" class="sr-only">Etapa (groups, quarter, semis, third_place, final)</label>
+  <input type="stage" id="inputStage" name="stage" class="form-control" placeholder="Etapa (groups, quarter, semis, third_place, final)" required>
+  
+  <label for="inputPosition" class="sr-only">Posición equipo (solo fase de grupos)</label>
+  <input type="position" id="inputPosition" name="position" class="form-control" placeholder="Posición equipo (1, 2 ,3 o 4)" required>
+  
+  <label for="inputGroup" class="sr-only">Grupo del equipo (solo fase de grupos)</label>
+  <input type="group" id="inputGroup" name="group" class="form-control" placeholder="Grupo del equipo (a, b o c)" required>
+  
   
   <br>
   <div class="actions">

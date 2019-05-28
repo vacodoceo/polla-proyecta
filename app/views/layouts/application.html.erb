@@ -24,11 +24,12 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href=<%= pollas_path %>>Mis pollas</a>
                 <a class="dropdown-item" href="<%= signout_path %>">Cerrar sesión</a>
-                <% if current_user.is_admin || current_user.is_mod || current_user.id == 19%>
+                <% if current_user.is_admin || current_user.is_mod || current_user.id == 2%>
                   <a class="dropdown-item" href=<%=validar_pagos_path%>>Validar Pagos</a>
                   <a class="dropdown-item" href=<%=transactions_path%>>Ver Transacciones</a>
                   <a class="dropdown-item" href=<%=pollas_totales_path%>>Ver Pollas</a>
                   <a class="dropdown-item" href=<%=users_path%>>Ver Usuarios</a>
+                  <a class="dropdown-item" href=<%=new_result_path%>>Ingresar resultados</a>
                 <%end%>
               </div>
             <% else %>
