@@ -30,11 +30,13 @@
         <%= render 'layouts/semifinals' %>
         <%= render 'layouts/finals' %>
       </div>
-
-
-      <%# <div class="actions"> %>
-        <%# <%= form.submit %>
-      <%# </div> %>
+    <input type="hidden" id="first_round_a" name="first_round_a" value="[bo, br, pe, ve]">
+    <input type="hidden" id="first_round_b" name="first_round_b" value="[ar, co, py, qa]">
+    <input type="hidden" id="first_round_c" name="first_round_c" value="[cl, ec, jp, uy]">
+    <input type="hidden" id="quarter_final" name="quarter_final" value="">
+    <input type="hidden" id="semifinal" name="semifinal" value="">
+    <input type="hidden" id="third_place" name="third_place" value="">
+    <input type="hidden" id="final" name="final" value="">
     <% end %>
 </div>
   

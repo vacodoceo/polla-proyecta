@@ -1,7 +1,7 @@
 let groups = { 'A': [], 'B':[], 'C':[] };
 let quarter_finals = {};
-let semifinals = {}
-let finals = {} 
+let semifinals = {};
+let finals = {};
 
 $(document).on("turbolinks:load", function(){
     $(".sortable").sortable();
@@ -233,10 +233,60 @@ function checkWinners(){
                 };
             }
             if (open_create){
+                // Give bet params
+
+                for (i=0; i<Object.keys(groups).length; i++){
+                    for (j=0; j<4; j++){
+                        let group = Object.keys(groups)[i];
+                        groups[group].push($('#'+group+' .sortable li:nth-child('+(j+1)+')').attr('id'));
+                    }
+                }
+
+                let input_quarter_final = [];
+                let input_semifinal = [];
+                let input_final = [];
+                let input_third_place = [];
+
+                ['1', '3', '2', '4'].forEach(i => {
+                    input_quarter_final.push($('.list-group-match#'+i+' .country:nth-child(1)').attr('country'));                
+                    input_quarter_final.push($('.list-group-match#'+i+' .country:nth-child(2)').attr('country'));
+                    input_quarter_final.push($('.list-group-match#'+i+' .country:nth-child(1) input').val());
+                    input_quarter_final.push($('.list-group-match#'+i+' .country:nth-child(2) input').val());
+                    input_quarter_final.push(($('.list-group-match#'+i+' .country:nth-child(1)').hasClass('list-group-item-success')) ? '1' : '2');
+                });
+
+                ['5', '6'].forEach(i => {
+                    input_semifinal.push($('.list-group-match#'+i+' .country:nth-child(1)').attr('country'));                
+                    input_semifinal.push($('.list-group-match#'+i+' .country:nth-child(2)').attr('country'));
+                    input_semifinal.push($('.list-group-match#'+i+' .country:nth-child(1) input').val());
+                    input_semifinal.push($('.list-group-match#'+i+' .country:nth-child(2) input').val());
+                    input_semifinal.push(($('.list-group-match#'+i+' .country:nth-child(1)').hasClass('list-group-item-success')) ? '1' : '2');
+                });
+
+                input_third_place.push($('.list-group-match#7 .country:nth-child(1)').attr('country'));                
+                input_third_place.push($('.list-group-match#7 .country:nth-child(2)').attr('country'));
+                input_third_place.push($('.list-group-match#7 .country:nth-child(1) input').val());
+                input_third_place.push($('.list-group-match#7 .country:nth-child(2) input').val());
+                input_third_place.push(($('.list-group-match#7 .country:nth-child(1)').hasClass('list-group-item-success')) ? '1' : '2');
+
+                input_final.push($('.list-group-match#8 .country:nth-child(1)').attr('country'));                
+                input_final.push($('.list-group-match#8 .country:nth-child(2)').attr('country'));
+                input_final.push($('.list-group-match#8 .country:nth-child(1) input').val());
+                input_final.push($('.list-group-match#8 .country:nth-child(2) input').val());
+                input_final.push(($('.list-group-match#8 .country:nth-child(1)').hasClass('list-group-item-success')) ? '1' : '2');
+
+                $('input#first_round_a').val(groups['A'].toString());
+                $('input#first_round_b').val(groups['B'].toString());
+                $('input#first_round_c').val(groups['C'].toString());
+                $('input#quarter_final').val(input_quarter_final.toString());
+                $('input#semifinal').val(input_semifinal.toString());
+                $('input#third_place').val(input_third_place.toString());
+                $('input#final').val(input_final.toString());
+
+
                 $('#finals-page .toggle-create').removeClass('disabled');
                 $('#finals-page .toggle-create').attr('data-target', '#pollaNameModal');
             }
         }
     }
-    console.log(finals);
 }
