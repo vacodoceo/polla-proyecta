@@ -36,7 +36,7 @@ class ResultsController < ApplicationController
             end
           end
         else
-          @bets =  Bet.where("polla.valid_polla = ? AND stage = ?", 1, params['stage']))
+          @bets =  Bet.where("polla.valid_polla = ? AND stage = ?", 1, params['stage'])
           @bets.each do |bet|
           if params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name
             if params['result_team_1'] == bet.result_team_1 && params['result_team_2'] == bet.result_team_2
