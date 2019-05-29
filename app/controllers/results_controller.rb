@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
   before_action :set_result, only: [:show, :edit, :update, :destroy]
+  before_action :verify_mod
 
   # GET /results
   # GET /results.json
@@ -28,7 +29,7 @@ class ResultsController < ApplicationController
     respond_to do |format|
       @result.save
       if @result.stage == 'groups'
-        @bets =  First_rounds.where("polla.valid_polla = ? AND group = ?", 1, params['group'])
+        @bets =  FirstRound.where("polla.valid_polla = ? AND group = ?", 1, params['group'])
         @bets.each do |bet|
           if params['team_1'] == bet.country_name && bet.position == params['position']
             bet.polla.score += 10
@@ -92,6 +93,12 @@ class ResultsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def result_params
-    params.fetch(:result, {})
+    params.permit(:team_1, :team_2, :result_team_1, :result_team_2, :result, :stage, :position, :group)
+  end
+
+  def verify_mod
+    if !current_user || !current_user.is_mod || !current_user.is_admin
+      redirect_to root_path
+    end
   end
 end

@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
       end
     end
     has_secure_password
-    has_many :pollas
+    has_many :pollas, dependent: :delete_all
     has_many :transactions
     validates_uniqueness_of :email
   end

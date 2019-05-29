@@ -1,6 +1,6 @@
 class FirstRoundsController < ApplicationController
   before_action :set_first_round, only: [:show, :edit, :update, :destroy]
-
+  before_action :verify_admin
   # GET /first_rounds
   # GET /first_rounds.json
   def index
@@ -70,5 +70,11 @@ class FirstRoundsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def first_round_params
       params.require(:first_round).permit(:country_name, :position, :group)
+    end
+
+    def verify_admin
+      if !current_user || !current_user.is_admin
+        redirect_to root_path
+      end
     end
 end

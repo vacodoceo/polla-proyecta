@@ -32,7 +32,7 @@
           <% else %>
             <td><%= 'No pagada'%></td>
           <%end%>
-          <% if Time.now < Time.zone.parse('2019-06-14 15:30:00') and polla.paying != 1%>
+          <% if Time.now < Time.zone.parse('2019-06-14 15:30:00')%>
             <td><a href=<%=crear_pago_path(polla)%>> Pagar </a></td>
           <% end %>
           <% if current_user.is_admin || current_user.is_mod || current_user.id == 2%>

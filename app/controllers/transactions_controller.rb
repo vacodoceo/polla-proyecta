@@ -56,35 +56,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def validar_pagos
-    @transactions = Transaction.where(:charged => 0)
-    if @transactions
-      receiver_id = ENV['RECEIVER_ID']
-      secret_key = ENV['RECEIVER_SECRET']
-
-      Khipu.configure do |c|
-        c.secret = secret_key
-        c.receiver_id = receiver_id
-        c.platform = 'demo-client'
-        c.platform_version = '2.0'
-        # c.debugging = true
-      end
-
-      api    = Khipu::PaymentsApi.new()
-      @transactions.each do |trans|
-          cosas = trans.payment_url.split("/")
-          status = api.payments_id_get(cosas[-1])
-          @polla =  Polla.find(trans.polla_id)
-          if status.status == 'done'
-            @polla.valid_polla = 1
-            trans.charged = 1
-            trans.save
-            @polla.save
-          end
-      end
-    end
-    redirect_to root_path
-  end
 
   # DELETE /transactions/1
   # DELETE /transactions/1.json

@@ -1,13 +1,15 @@
 require 'khipu-api-client'
 class PollasController < ApplicationController
   before_action :set_polla, only: [:show, :edit, :update, :destroy, :validar_polla, :invalidar_polla, :crear_pago_polla]
-
+  before_action :validar_pagos, only: [:index]
+  before_action :verify_user
+  before_action :verify_mod, only: [:pollas_totales]
   def index
     @pollas = Polla.where(:user_id => current_user.id)
   end
 
   def pollas_totales
-    if current_user && (current_user.is_admin || current_user.is_mod || current_user.id == 1)
+    if current_user && (current_user.is_admin || current_user.is_mod || current_user.id == 2)
       @pollas = Polla.all
     else
       redirect_to root_path
@@ -95,7 +97,7 @@ class PollasController < ApplicationController
     @polla.valid_polla = 0
     @polla.score = 0
     @polla.paying = 0
-    @polla.name = params['name']
+    @polla.name = params['pollaName']
     first_round_a = params['first_round_a'].split(",")
     first_round_b = params['first_round_b'].split(",")
     first_round_c = params['first_round_c'].split(",")
@@ -225,5 +227,47 @@ class PollasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def polla_params
       params.permit(:name, :partidos)
+    end
+
+    def validar_pagos
+      @transactions = Transaction.where(:charged => 0)
+      if @transactions
+        receiver_id = ENV['RECEIVER_ID']
+        secret_key = ENV['RECEIVER_SECRET']
+  
+        Khipu.configure do |c|
+          c.secret = secret_key
+          c.receiver_id = receiver_id
+          c.platform = 'demo-client'
+          c.platform_version = '2.0'
+          # c.debugging = true
+        end
+  
+        api    = Khipu::PaymentsApi.new()
+        @transactions.each do |trans|
+            cosas = trans.payment_url.split("/")
+            status = api.payments_id_get(cosas[-1])
+            @polla =  Polla.find(trans.polla_id)
+            if status.status == 'done'
+              @polla.valid_polla = 1
+              trans.charged = 1
+              trans.save
+              @polla.save
+            end
+        end
+      end
+      #redirect_to pollas_path
+    end
+
+    def verify_mod
+      if !current_user || !current_user.is_mod || !current_user.is_admin
+        redirect_to root_path
+      end
+    end
+
+    def verify_user
+      if !current_user
+        redirect_to login_path, notice: 'Debes estar logeado para poder acceder a las funciones de la página'
+      end
     end
 end
