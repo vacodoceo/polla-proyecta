@@ -260,7 +260,7 @@ class PollasController < ApplicationController
     end
 
     def verify_mod
-      if !current_user || !current_user.is_mod || !current_user.is_admin
+      if !current_user && !current_user.is_mod && !current_user.is_admin
         redirect_to root_path
       end
     end
