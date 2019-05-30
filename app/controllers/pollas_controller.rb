@@ -267,7 +267,8 @@ class PollasController < ApplicationController
 
     def verify_user
       if !current_user
-        redirect_to login_path, notice: 'Debes estar logeado para poder acceder a las funciones de la página'
+        flash[:danger] = "¡Debes iniciar sesión para acceder ahí!"
+        redirect_to login_path
       end
     end
 end

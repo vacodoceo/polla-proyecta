@@ -38,7 +38,14 @@
           </nav>
         </div>
       </header>
-      <%= image_tag("proyecta.png") %>
+      <div class="alert-content">
+        <% flash.each do |key, value| %>
+          <div class="<%= flash_class(key) %>">
+            <%= value %>
+          </div>
+        <% end %>
+      </div>
+      <%# <%= image_tag("proyecta.png")  %>
       <%= yield %>
       <footer class="mastfoot mt-auto">
         <div class="inner">
