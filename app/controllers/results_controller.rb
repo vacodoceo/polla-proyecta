@@ -29,31 +29,32 @@ class ResultsController < ApplicationController
     respond_to do |format|
       if @result.save
         if @result.stage == 'groups'
-          @bets =  First_rounds.where("polla.valid_polla = ? AND group = ?", 1, params['group']))
+          @bets =  First_rounds.where("polla.valid_polla = ? AND group = ?", 1, params['group'])
           @bets.each do |bet|
             if params['team_1'] == bet.country_name && bet.position == params['position']
               bet.polla.score += 10
-
+            end
           end
         else
-          @bets =  Bet.where("polla.valid_polla = ? AND stage = ?", 1, params['stage']))
+          @bets =  Bet.where("polla.valid_polla = ? AND stage = ?", 1, params['stage'])
           @bets.each do |bet|
-          if params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name
-            if params['result_team_1'] == bet.result_team_1 && params['result_team_2'] == bet.result_team_2
-              bet.polla.score += 5 
-            elif params['result_team_1'] > params['result_team_2'] && bet.result_team_1 > bet.result_team_2
-              bet.polla.score += 2
-            elif params['result_team_1'] < params['result_team_2'] && bet.result_team_1 < bet.result_team_2
-              bet.polla.score += 2
-            end 
-          elif params['team_2'] == bet.country_2_name && params['team_1'] == bet.country_1_name
-            if params['result_team_2'] == bet.result_team_2 && params['result_team_1'] == bet.result_team_1
-              bet.polla.score += 5 
-            elif params['result_team_2'] > params['result_team_1'] && bet.result_team_2 > bet.result_team_1
-              bet.polla.score += 2
-            elif params['result_team_2'] < params['result_team_1'] && bet.result_team_2 < bet.result_team_1
-              bet.polla.score += 2
-            end 
+            if params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name
+              if params['result_team_1'] == bet.result_team_1 && params['result_team_2'] == bet.result_team_2
+                bet.polla.score += 5 
+              elif params['result_team_1'] > params['result_team_2'] && bet.result_team_1 > bet.result_team_2
+                bet.polla.score += 2
+              elif params['result_team_1'] < params['result_team_2'] && bet.result_team_1 < bet.result_team_2
+                bet.polla.score += 2
+              end 
+            elif params['team_2'] == bet.country_2_name && params['team_1'] == bet.country_1_name
+              if params['result_team_2'] == bet.result_team_2 && params['result_team_1'] == bet.result_team_1
+                bet.polla.score += 5 
+              elif params['result_team_2'] > params['result_team_1'] && bet.result_team_2 > bet.result_team_1
+                bet.polla.score += 2
+              elif params['result_team_2'] < params['result_team_1'] && bet.result_team_2 < bet.result_team_1
+                bet.polla.score += 2
+              end 
+            end
           end
         end
         format.html { redirect_to results_path, notice: 'Result was successfully created.' }
