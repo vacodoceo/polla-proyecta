@@ -1,28 +1,28 @@
-<h2>Ranking</h2>
-<hr>
-<div class="row">
-<div class="col-ld-8">
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Usuario</th>
-      <th>Puntaje</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-    <tbody>
-    <% @pollas.each do |polla| %>
+<main role="main" class="inner cover">
+  <h2>Ranking</h2>
+  <hr>
+  <table class="table table-striped table-bordered table-hover table-light">
+    <thead>
       <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Usuario</th>
+        <th>Puntaje</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-        <td><%= polla.id %></td>
-        <td><%= polla.name %> </td>
-        <td><%= polla.user.name %></td>
-        <td><%= polla.score %></td>
-        
-    </tr>
-    <% end %>
-    </tbody>
-</table>
+      <tbody>
+      <% @pollas.each do |polla| %>
+        <tr>
+
+          <td><%= polla.id %></td>
+          <td><%= polla.name %> </td>
+          <td><%= polla.user.name %></td>
+          <td><%= polla.score %></td>
+          
+      </tr>
+      <% end %>
+      </tbody>
+  </table>
+</main>

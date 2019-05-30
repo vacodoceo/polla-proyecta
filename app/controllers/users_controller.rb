@@ -1,16 +1,13 @@
 class UsersController < ApplicationController
     before_action :active_nav
     before_action :set_user, only: [:edit, :update, :destroy]
+    before_action :verify_admin, only: [:index, :destroy]
     def active_nav
         @active = "user"
     end
 
     def index
-      if current_user && (current_user.is_admin || current_user.id == 19)
-        @users = User.all
-      else
-        redirect_to root_path
-      end
+      @users = User.all
     end
 
     def new
@@ -18,6 +15,10 @@ class UsersController < ApplicationController
     end
 
     def edit
+      @user = User.find(params[:id])
+      if current_user.id != @user.id
+        redirect_to root_path
+      end
     end
 
     def create
@@ -61,6 +62,11 @@ class UsersController < ApplicationController
     # DELETE /pollas/1
     # DELETE /pollas/1.json
     def destroy
+      @transactions = Transaction.where(:user_id => @user.id)
+      @transactions.each do |trans|
+        trans.user_id = 1
+        trans.save
+      end
       @user.destroy
       respond_to do |format|
         format.html { redirect_to root_path}
@@ -76,4 +82,17 @@ class UsersController < ApplicationController
     def user_params
         params.permit(:password, :email, :phone_number)
     end
+
+    def verify_user
+      if !current_user
+        redirect_to login_path, notice: 'Debes estar logeado para poder acceder a las funciones de la página'
+      end
+    end
+
+    def verify_admin
+      if !current_user || !current_user.is_admin
+        redirect_to root_path
+      end
+    end
+
 end

@@ -142,6 +142,25 @@ select.select-country {
   }
 }
 
+.container-pagination {
+  padding: 0;
+}
+
+.card.bg-light{
+  background-color: rgba(250, 250, 250, 0.7) !important;
+  border-radius: 1rem;
+
+  .card-header {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    
+    li {
+      width: 20%;
+    }
+  }
+}
+
 .container-page#quarter-finals-page {
   align-content: space-around;
 }
@@ -271,8 +290,21 @@ body {
 /*
  * Header
  */
+
+.inner.navbar {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  > * {
+    width: 33%;
+  }
+  .badge-primary {
+    text-shadow: 0 0;
+  }
+}
+
 .masthead {
-  margin-bottom: 0 !important;
+  margin-bottom: auto;
 }
 
 .masthead-brand {
@@ -345,31 +377,52 @@ img {
     padding: 15px;
     margin: auto;
   }
-  .form-signin .checkbox {
-    font-weight: 400;
-  }
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-  }
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
-  .btn-social {
-    color: #fff !important;
+.btn-social {
+  color: #fff !important;
+}
+
+.btn-light, .btn-secondary {
+  border: 1px solid #495057;
+}
+
+.alert {
+  margin: auto;
+  width: 50%;
+}
+
+.alert-content {
+  display: flex;
+  justify-items: center;
+}
+
+.table {
+  border-radius: 1rem;
+
+  th:first-child{
+    border-top-left-radius: 1rem;
   }
-  
+}
