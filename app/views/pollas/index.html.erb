@@ -1,51 +1,51 @@
-<h2>Pollas</h2>
-<hr>
-<div class="row">
-<div class="col-ld-8">
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Usuario</th>
-      <th>Puntaje</th>
-      <th>Estado</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-    <tbody>
-    <% @pollas.each do |polla| %>
+<main role="main" class="inner cover">
+  <h1>Tus pollas</h2>
+  <hr>
+  <table class="table table-striped table-bordered table-hover table-light">
+    <thead>
       <tr>
-        <td><%= polla.id %></td>
-        <td><%= polla.name %> </td>
-        <td><%= polla.user.name %></td>
-        <td><%= polla.score %></td>
-        <% if polla.valid_polla == 1 %>
-          <td><%= 'Pagada' %></td>
-          <% if current_user.is_admin || current_user.is_mod || current_user.id == 2%>
-            <td><a href=<%=invalidar_polla_path(polla)%>>Invalidar</a></td>
-          <%end%>
-        <% else %>
-          <% if polla.paying == 1 %>
-            <td><%= 'Pago en proceso' %> </td>
-          <% else %>
-            <td><%= 'No pagada'%></td>
-          <%end%>
-          <% if Time.now < Time.zone.parse('2019-06-14 15:30:00')%>
-            <td><a href=<%=crear_pago_path(polla)%>> Pagar </a></td>
-          <% end %>
-          <% if current_user.is_admin || current_user.is_mod || current_user.id == 2%>
-            <td><a href=<%=validar_polla_path(polla)%>>Validar</a></td>
-          <%end%>
-        <% end %>
-        <% if current_user.id == polla.user.id %>
-          <td><%= link_to 'Eliminar', polla, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Usuario</th>
+        <th>Puntaje</th>
+        <th>Estado</th>
+        <th colspan="2">Acciones</th>
+      </tr>
+    </thead>
 
-        
-        
-    </tr>
-    <% end %>
-    </tbody>
-</table>
+      <tbody>
+      <% @pollas.each do |polla| %>
+        <tr>
+          <td><%= polla.id %></td>
+          <td><%= polla.name %> </td>
+          <td><%= polla.user.name %></td>
+          <td><%= polla.score %></td>
+          <% if polla.valid_polla == 1 %>
+            <td><%= 'Pagada' %></td>
+            <% if current_user.is_admin || current_user.is_mod || current_user.id == 2%>
+              <td><a href=<%=invalidar_polla_path(polla)%>>Invalidar</a></td>
+            <%end%>
+          <% else %>
+            <% if polla.paying == 1 %>
+              <td><%= 'Pago en proceso' %> </td>
+            <% else %>
+              <td><%= 'No pagada'%></td>
+            <%end%>
+            <% if Time.now < Time.zone.parse('2019-06-14 15:30:00')%>
+              <td><a href=<%=crear_pago_path(polla)%>> Pagar </a></td>
+            <% end %>
+            <% if current_user.is_admin || current_user.is_mod || current_user.id == 2%>
+              <td><a href=<%=validar_polla_path(polla)%>>Validar</a></td>
+            <%end%>
+          <% end %>
+          <% if current_user.id == polla.user.id %>
+            <td><%= link_to 'Eliminar', polla, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+
+          
+          
+      </tr>
+      <% end %>
+      </tbody>
+  </table>
+</main>
