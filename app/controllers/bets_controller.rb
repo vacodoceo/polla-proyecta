@@ -1,5 +1,6 @@
 class BetsController < ApplicationController
   before_action :set_bet, only: [:show, :edit, :update, :destroy]
+  before_action :verify_admin
 
   # GET /bets
   # GET /bets.json
@@ -70,5 +71,11 @@ class BetsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bet_params
       params.require(:bet).permit(:content, :comment_id, :integer, :user_id, :integer)
+    end
+
+    def verify_admin
+      if !current_user || !current_user.is_admin
+        redirect_to root_path
+      end
     end
 end

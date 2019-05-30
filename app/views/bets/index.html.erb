@@ -1,2 +1,34 @@
-<h1>Bets#index</h1>
-<p>Find me in app/views/bets/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Bets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Country 1 name</th>
+      <th>Country 2 name</th>
+      <th>Result 1</th>
+      <th>Result 2</th>
+      <th>Id polla</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bets.each do |first_round| %>
+      <tr>
+        <td><%= first_round.country_1_name %></td>
+        <td><%= first_round.country_2_name %></td>
+        <td><%= first_round.result_team_1 %></td>
+        <td><%= first_round.result_team_2 %></td>
+        <td><%= first_round.polla_id%></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New First Round', new_first_round_path %>
