@@ -25,8 +25,6 @@ class PollasController < ApplicationController
   # GET /pollas/new
   def new
     @polla = Polla.new
-    #@variable = polla_params["partidos"]["apuestas"]
-    #@variable_2 = polla_params["partidos"]["apuestas"]
   end
 
   # GET /pollas/1/edit

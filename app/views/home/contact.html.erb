@@ -1,0 +1,14 @@
+<%= form_with(local: true, :html => {:class => "form-signin"}) do |form| %>
+    <h1 class="h2 mb-3 font-weight-normal">Déjanos tu comentario, sugerencia, reclamo o solicitud</h1>
+    <label for="inputSubject" class="sr-only">Asunto</label>
+    <input type="subject" id="inputSubject" class="form-control" name="subject" placeholder="Asunto" required>
+    <label for="inputComment" class="sr-only">Comentario</label>
+    <input type="textarea" rows="10" cols="30" id="inputComment" class="form-control" name="comment" placeholder="Déjanos tu comentario, sugerencia, reclamo o solicitud" required>
+    <br>
+    
+    <div class="actions">
+      <button href= form.submit class="btn btn-lg btn-primary btn-block">Enviar</button>
+    </div>
+    <br/>
+
+<% end %>

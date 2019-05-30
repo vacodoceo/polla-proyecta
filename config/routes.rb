@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get 'transactions/edit'
   get 'sessions/destroy'
   get 'home/show'
+  get 'ranking', to: 'home#ranking', as:'ranking'
+  get 'contact', to: 'home#contact', as:'contact'
+  post 'contact', to: 'home#send_feedback'
+
   get 'register', to: 'users#new', as: 'register'
   get 'crear_pago/:id', to: 'pollas#crear_pago_polla', as:'crear_pago' 
   get 'bancos_posibles', to: 'transactions#bancos_posibles', as:'bancos_posibles'
@@ -15,7 +19,6 @@ Rails.application.routes.draw do
   get 'invalidar_polla/:id', to: 'pollas#invalidar_polla', as: 'invalidar_polla'
   get 'pollas_totales', to: 'pollas#pollas_totales', as: "pollas_totales"
   get 'validar_pagos', to: 'pollas#validar_pagos', as: 'validar_pagos'
-  get 'ranking', to: 'home#ranking', as:'ranking'
   get 'create_user', to: 'users#create', as: 'create_user'
   #Google Auth
   get 'auth/:provider/callback', to: 'sessions#create_google'
@@ -25,16 +28,14 @@ Rails.application.routes.draw do
 
   get 'recover_password', to: 'sessions#recover', as: 'recover_password'
   post 'recover_password', to: 'sessions#recover_password'
-  get 'new_password/:id', to: 'sessions#new_password', as: 'new_password'
-  post 'new_password/:id', to: 'session#change_password'
+  get 'new_password/:hash_id', to: 'sessions#new_password', as: 'new_password'
+  post 'new_password/:hash_id', to: 'sessions#change_password'
   #Webpay
   #post '/webpay/webpay_final_url', :to => 'webpay#webpay_final_url', as: => :webpay_result
   #post '/webpay/webpay_return_url', :to => 'webpay#webpay_return_url', as: => :webpay_return_url
   #get '/webpay/success', :to => 'webpay#webpay_success', as: => :webpay_success
   #get '/webpay/error', :to => 'webpay#webpay_error', as: => :webpay_error
   #get '/webpay/nullify', :to => 'webpay#webpay_nullify', as: => :webpay_nullify
-
-
 
   resources :sessions
   get 'signout', to: 'sessions#destroy', as: 'signout'

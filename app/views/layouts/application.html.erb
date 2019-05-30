@@ -17,6 +17,8 @@
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link <%= @active == 'home' ? 'active' : ''%>" href="<%= root_path %>">Inicio</a>
             <a class="nav-link <%= @active == 'ranking' ? 'active' : ''%>" href=<%= ranking_path%>>Ranking</a>
+            <a class="nav-link <%= @active == 'contact' ? 'active' : ''%>" href=<%= contact_path%>>Contáctate con nosotros</a>
+
             <% if current_user %>
               <a class="nav-link"" id="dropdownMenuButton" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hola, <%= current_user.name.split[0].capitalize %>▼
