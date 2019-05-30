@@ -125,7 +125,7 @@ select.select-country {
   display: none;
   justify-content: center;
   align-content: center; 
-  height: 35em;
+  min-height: 35em;
 
   .between-matches {
     width: 200px;
@@ -142,8 +142,9 @@ select.select-country {
   }
 }
 
-.container-pagination {
+.container.container-pagination {
   padding: 0;
+  min-width: 100%;
 }
 
 .card.bg-light{
@@ -237,6 +238,10 @@ select.select-country {
 }
 .page-item.disabled:hover {
   cursor: default;
+}
+
+.page-link {
+  padding: 0.75rem 0 !important;
 }
 
 /*
