@@ -6,6 +6,9 @@ $(document).on("turbolinks:load", function(){
             $(this).addClass("active");
             $('.container-page').hide();
             $('.container-page#'+id+"-page").css({"display": "flex"});
+            if ($(this).is("#instructions")){
+                $('#instructions-page').css({"display": "block"});
+            }
             if ($(this).is("#group-phase")){
                 $('#quarter-finals').removeClass("disabled");
             }

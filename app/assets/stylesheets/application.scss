@@ -166,8 +166,12 @@ select.select-country {
 }
 
 #instructions-page {
-  padding: 2em;
-  display: flex;
+  padding: 1em;
+  display: block;
+  text-align: left;
+  a {
+    color: #007bff;
+  }
 }
 
 .list-group-item.active{

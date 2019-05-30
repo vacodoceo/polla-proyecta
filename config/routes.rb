@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'pollas_totales', to: 'pollas#pollas_totales', as: "pollas_totales"
   get 'validar_pagos', to: 'pollas#validar_pagos', as: 'validar_pagos'
   get 'ranking', to: 'home#ranking', as:'ranking'
+  get 'faqs', to: 'home#faqs', as:'faqs'
+  get 'rules', to: 'home#rules', as:'rules'
   get 'create_user', to: 'users#create', as: 'create_user'
   #Google Auth
   get 'auth/:provider/callback', to: 'sessions#create_google'
