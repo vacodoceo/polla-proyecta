@@ -61,14 +61,16 @@ class PollasController < ApplicationController
       api = Khipu::PaymentsApi.new()
       @transaction = current_user.transactions.create()
       amount = 2000
-      response = api.payments_post('Pago polla' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
+      response = api.payments_post('Pago polla: ' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
           transaction_id: @transaction.id,
           expires_date: DateTime.new(2019, 6, 14),
           send_email: true,
           payer_name: current_user.name,
           payer_email: current_user.email,
-          return_url: 'localhost:3000/pollas',
-          cancel_url: 'localhost:3000',
+          #return_url: 'localhost:3000/pollas',
+          #cancel_url: 'localhost:3000',
+          return_url: 'polla.trabajosproyecta.cl/pollas'
+          cancel_url: 'polla.trabajosproyecta.cl'
           #notify_url: 'http://mi-ecomerce.com/backend/notify',
           notify_api_version: '1.3'
       })
