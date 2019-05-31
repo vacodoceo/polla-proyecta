@@ -4,7 +4,6 @@ class PollasController < ApplicationController
   before_action :validar_pagos, only: [:index]
   before_action :verify_user
   before_action :verify_mod, only: [:pollas_totales]
-  before_action :change_transaction, only: :destoy
   def index
     if current_user.credits > 0
       flash[:success] = "¡Tienes " + current_user.credits.to_s() + " pollacréditos, úsalos para pagar tus pollas automáticamente!"
@@ -281,9 +280,5 @@ class PollasController < ApplicationController
         flash[:danger] = "¡Debes iniciar sesión para acceder ahí!"
         redirect_to login_path
       end
-    end
-
-    def change_transaction
-      Transaction.where(:polla_id => @polla.id).update(polla_id: null)
     end
 end
