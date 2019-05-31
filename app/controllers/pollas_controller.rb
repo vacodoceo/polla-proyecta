@@ -52,7 +52,7 @@ class PollasController < ApplicationController
     if Time.now > Time.zone.parse('2019-06-14 15:30:00')
       redirect_to root_path
 
-    elsif current_user.credits
+    elsif current_user.credits > 0
       current_user.credits--
       @polla.valid_polla = 1
       @polla.save
