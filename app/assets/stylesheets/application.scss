@@ -125,7 +125,7 @@ select.select-country {
   display: none;
   justify-content: center;
   align-content: center; 
-  height: 35em;
+  min-height: 35em;
 
   .between-matches {
     width: 200px;
@@ -142,8 +142,9 @@ select.select-country {
   }
 }
 
-.container-pagination {
+.container.container-pagination {
   padding: 0;
+  min-width: 100%;
 }
 
 .card.bg-light{
@@ -166,8 +167,12 @@ select.select-country {
 }
 
 #instructions-page {
-  padding: 2em;
-  display: flex;
+  padding: 1em;
+  display: block;
+  text-align: left;
+  a {
+    color: #007bff;
+  }
 }
 
 .list-group-item.active{
@@ -235,6 +240,10 @@ select.select-country {
   cursor: default;
 }
 
+.page-link {
+  padding: 0.75rem 0 !important;
+}
+
 /*
  * Globals
  */
@@ -243,13 +252,6 @@ select.select-country {
   min-width: 55em;
 }
 
-
-/* Links */
-a,
-a:focus,
-a:hover {
-  color: rgba(0, 0, 0, .7)
-}
 
 /* Custom default button */
 .btn-secondary,
@@ -301,6 +303,12 @@ body {
   .badge-primary {
     text-shadow: 0 0;
   }
+
+  a,
+  a:focus,
+  a:hover {
+    color: rgba(0, 0, 0, .7)
+  }
 }
 
 .masthead {
@@ -342,11 +350,6 @@ body {
   }
 }
 
-img {
-  width: 55%;
-  margin: auto;
-  padding: 2em;
-}
 
 /*
  * Cover
@@ -424,5 +427,12 @@ img {
 
   th:first-child{
     border-top-left-radius: 1rem;
+  }
+}
+
+.text {
+  text-align: left;
+  h4 {
+    font-weight: bold;
   }
 }
