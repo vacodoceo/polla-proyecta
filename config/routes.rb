@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   #get '/webpay/error', :to => 'webpay#webpay_error', as: => :webpay_error
   #get '/webpay/nullify', :to => 'webpay#webpay_nullify', as: => :webpay_nullify
 
-
+  patch 'users/:id/credits', to: 'users#update_credits'
 
   resources :sessions
   get 'signout', to: 'sessions#destroy', as: 'signout'

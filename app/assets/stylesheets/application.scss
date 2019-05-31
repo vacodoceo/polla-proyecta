@@ -194,12 +194,6 @@ select.select-country {
   border: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
 
-  .input-group {
-    width: 120px;
-    height: 80%;
-    background-color: #fff;
-    border-radius: 0.25rem;
-  }
   input {
     height: 100%;
     border: 1px solid;
@@ -209,6 +203,13 @@ select.select-country {
     height: 48px;
     min-width: 64px;
   }
+}
+
+.input-group {
+  width: 120px;
+  height: 80%;
+  background-color: #fff;
+  border-radius: 0.25rem;
 }
 
 .matches {
@@ -286,8 +287,6 @@ body {
 .cover-container {
   width: 70em !important;
 }
-
-
 
 /*
  * Header
@@ -435,4 +434,15 @@ body {
   h4 {
     font-weight: bold;
   }
+}
+
+// # Users list
+
+.edit_user {
+  display: inline-flex;
+  justify-content: space-between
+}
+
+#input-number-cell {
+  padding: 0.35em 0;
 }
