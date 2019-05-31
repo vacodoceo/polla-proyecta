@@ -5,7 +5,9 @@ class PollasController < ApplicationController
   before_action :verify_user
   before_action :verify_mod, only: [:pollas_totales]
   def index
-    flash[:success] = "¡Tienes " + current_user.credits.to_s() + " pollacréditos, úsalos para pagar tus pollas automáticamente!"
+    if current_user.credits
+      flash[:success] = "¡Tienes " + current_user.credits.to_s() + " pollacréditos, úsalos para pagar tus pollas automáticamente!"
+    end
     @pollas = Polla.where(:user_id => current_user.id)
   end
 
