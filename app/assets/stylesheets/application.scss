@@ -253,13 +253,6 @@ select.select-country {
 }
 
 
-/* Links */
-a,
-a:focus,
-a:hover {
-  color: rgba(0, 0, 0, .7)
-}
-
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
@@ -310,6 +303,12 @@ body {
   .badge-primary {
     text-shadow: 0 0;
   }
+
+  a,
+  a:focus,
+  a:hover {
+    color: rgba(0, 0, 0, .7)
+  }
 }
 
 .masthead {
@@ -351,11 +350,6 @@ body {
   }
 }
 
-img {
-  width: 55%;
-  margin: auto;
-  padding: 2em;
-}
 
 /*
  * Cover
@@ -433,5 +427,12 @@ img {
 
   th:first-child{
     border-top-left-radius: 1rem;
+  }
+}
+
+.text {
+  text-align: left;
+  h4 {
+    font-weight: bold;
   }
 }
