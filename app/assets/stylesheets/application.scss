@@ -303,6 +303,10 @@ body {
     text-shadow: 0 0;
   }
 
+  .badge-primary {
+    color: #fff
+  }
+
   a,
   a:focus,
   a:hover {
@@ -348,7 +352,6 @@ body {
     float: right;
   }
 }
-
 
 /*
  * Cover
@@ -414,6 +417,7 @@ body {
 .alert {
   margin: auto;
   width: 50%;
+  margin-bottom: 5em
 }
 
 .alert-content {
