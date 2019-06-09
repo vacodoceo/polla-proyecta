@@ -163,7 +163,11 @@ select.select-country {
 }
 
 .container-page#quarter-finals-page {
-  align-content: space-around;
+  align-content: space-evenly;
+  div.alert {
+    margin: 0;
+    width: auto;
+  }
 }
 
 #instructions-page {
