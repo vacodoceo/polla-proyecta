@@ -5,6 +5,9 @@ class PollasController < ApplicationController
   before_action :verify_user
   before_action :verify_mod, only: [:pollas_totales]
   def index
+    if current_user.credits > 0
+      flash[:success] = "¡Tienes " + current_user.credits.to_s() + " pollacréditos, úsalos para pagar tus pollas automáticamente!"
+    end
     @pollas = Polla.where(:user_id => current_user.id)
   end
 
@@ -48,6 +51,13 @@ class PollasController < ApplicationController
   def crear_pago_polla#recibe polla y current_user
     if Time.now > Time.zone.parse('2019-06-14 15:30:00')
       redirect_to root_path
+
+    elsif current_user.credits > 0
+      current_user.credits--
+      @polla.valid_polla = 1
+      @polla.save
+      redirect_to pollas_path
+      
     else
       receiver_id = ENV['RECEIVER_ID']
       secret_key = ENV['RECEIVER_SECRET']
