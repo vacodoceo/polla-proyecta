@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
     def get_prize
       @pollas = Polla.where(:valid_polla => 1)
-      @pozo = [30000, @pollas.length*200].max #corregir
+      @pozo = [52500, @pollas.length*350].max #corregir
     end
 
     def current_user
