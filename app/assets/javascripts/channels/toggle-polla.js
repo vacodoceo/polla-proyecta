@@ -13,14 +13,15 @@ $(document).on("turbolinks:load", function(){
 })
 
 function build_polla(data){
+    console.log(data);
     $(".modal-title").html(data.name);
     container = $(".container-pagination");
     countries_name = data.countries_name;
     let first_round = handleBuggedData(data.first_round);
 
-    buildGroup('A', first_round.slice(0, 4))
-    buildGroup('B', first_round.slice(4, 8))
-    buildGroup('C', first_round.slice(8, 12))
+    buildGroup('C', first_round.slice(0, 4).reverse())
+    buildGroup('B', first_round.slice(4, 8).reverse())
+    buildGroup('A', first_round.slice(8, 12).reverse())
 
     for (i=1; i<9; i++){
         buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[i-1]);
@@ -55,11 +56,10 @@ function handleBuggedData(data){
             data_return.push(data[i+times*4*g]);
         }
     }
-    return data_return;
+    return data_return.reverse();
 }
 
 function buildMatch(element, match_info){
-    console.log(match_info, match_info.result);
     let countries = [
                       {
                         name: match_info.country_1_name,
