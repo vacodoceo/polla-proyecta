@@ -185,13 +185,9 @@ class PollasController < ApplicationController
 
     respond_to do |format|
       if @polla.save
-<<<<<<< Updated upstream
-=======
         flash[:success] = "¡Tu polla fue creada exitósamente!"
->>>>>>> Stashed changes
         format.html { redirect_to pollas_path}
         format.json { render :show, status: :created, location: @polla }
-      else
         format.html { render :new }
         format.json { render json: @polla.errors, status: :unprocessable_entity }
       end

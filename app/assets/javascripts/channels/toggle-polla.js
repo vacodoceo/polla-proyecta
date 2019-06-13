@@ -12,28 +12,34 @@ $(document).on("turbolinks:load", function(){
 })
 
 function build_polla(data){
-    console.log(data);
     $(".modal-title").html(data.name);
     container = $(".container-pagination");
     countries_name = data.countries_name;
-    build_group('A', data.first_round.slice(0, 4))
-    build_group('B', data.first_round.slice(4, 8))
-    build_group('C', data.first_round.slice(8, 12))
+    let first_round = handleBuggedData(data.first_round);
+
+    buildGroup('A', data.first_round.slice(0, 4))
+    buildGroup('B', data.first_round.slice(4, 8))
+    buildGroup('C', data.first_round.slice(8, 12))
 }
 
-function build_group(id, countries){
+function buildGroup(id, countries){
     let group = container.find("#"+id+" .list-group.groups:last-child");
     group.children().each(function(i){
-        group_assign($(this), countries[i].country_name);
+        groupAssign($(this), countries[i].country_name);
     })
 }
 
-function group_assign(element, country){
-    change_flag(element.find(".flag-icon"), country)
+function groupAssign(element, country){
+    changeFlag(element.find(".flag-icon"), country)
     element.find(".country-name").html(countries_name[country])
 }
 
-function change_flag(element, country){
+function changeFlag(element, country){
     element.removeClass();
     element.addClass("flag-icon flag-icon-"+country);
+}
+
+function handleBuggedData(data){
+    const times = (data.size() / 12) - 1;
+    console.log(times);
 }
