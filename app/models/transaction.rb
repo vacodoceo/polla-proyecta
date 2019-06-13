@@ -10,5 +10,5 @@ class Transaction < ApplicationRecord
     #log: true
   #)
   belongs_to :user
-  has_many :pollas
+  belongs_to :polla
 end

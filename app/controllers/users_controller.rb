@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
     def edit
       @user = User.find(params[:id])
-      if current_user.id != @user.id
+      if current_user.id != @user.id && !current_user.is_admin
         redirect_to root_path
       end
     end
@@ -57,6 +57,14 @@ class UsersController < ApplicationController
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
+    end
+
+    def update_credits
+      puts "================"
+      puts params
+      @user = User.find(params[:id])
+      @user.update(credits: params[:user][:credits])
+      redirect_to users_path
     end
   
     # DELETE /pollas/1

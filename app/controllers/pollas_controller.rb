@@ -48,6 +48,13 @@ class PollasController < ApplicationController
   def crear_pago_polla#recibe polla y current_user
     if Time.now > Time.zone.parse('2019-06-14 15:30:00')
       redirect_to root_path
+
+    elsif current_user.credits > 0
+      current_user.credits--
+      @polla.valid_polla = 1
+      @polla.save
+      redirect_to pollas_path
+      
     else
       receiver_id = ENV['RECEIVER_ID']
       secret_key = ENV['RECEIVER_SECRET']
@@ -69,8 +76,8 @@ class PollasController < ApplicationController
           send_email: true,
           payer_name: current_user.name,
           payer_email: current_user.email,
-          return_url: pollas_path,
-          cancel_url: root_path,
+          return_url: "http://polla.trabajosproyecta.cl/pollas",
+          cancel_url: "http://polla.trabajosproyecta.cl/",
           #notify_url: 'http://mi-ecomerce.com/backend/notify',
           notify_api_version: '1.3'
       })
@@ -185,7 +192,11 @@ class PollasController < ApplicationController
 
     respond_to do |format|
       if @polla.save
+<<<<<<< HEAD
         flash[:success] = "¡Tu polla fue creada exitósamente!"
+=======
+        flash[:success] = "¡Tu polla fue creada exitósamente!!"
+>>>>>>> master
         format.html { redirect_to pollas_path}
         format.json { render :show, status: :created, location: @polla }
         format.html { render :new }
@@ -260,7 +271,7 @@ class PollasController < ApplicationController
     end
 
     def verify_mod
-      if !current_user || !current_user.is_mod || !current_user.is_admin
+      if !current_user && !current_user.is_mod && !current_user.is_admin
         redirect_to root_path
       end
     end

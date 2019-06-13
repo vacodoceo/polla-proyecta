@@ -40,6 +40,6 @@ function changeFlag(element, country){
 }
 
 function handleBuggedData(data){
-    const times = (data.size() / 12) - 1;
+    const times = (data.length / 12) - 1;
     console.log(times);
 }
