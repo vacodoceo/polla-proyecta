@@ -382,7 +382,7 @@ body {
   padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
-  height: -webkit-fill-available;
+  min-height: -webkit-fill-available;
   margin-top: 0.5em;
 }
 .cover .btn-lg {
