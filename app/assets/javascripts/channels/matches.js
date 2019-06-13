@@ -13,9 +13,7 @@ $(document).on("turbolinks:load", function(){
 
     handleWinner();
 
-    $("input[type='number']").inputSpinner();
-
-    
+    $("input[type='number']").inputSpinner();    
 });
 
 function handleGroups(){
@@ -129,8 +127,8 @@ function handleWinner(){
                 $(this).parent().parent().parent().children('ul:nth-child(2)').children('li:nth-child('+my_pos+')').addClass('list-group-item-success');
                 $(this).parent().parent().parent().children('ul:nth-child(2)').children('li:nth-child('+other_pos+')').removeClass('list-group-item-success');
             }
+            checkWinners();
         }
-        checkWinners();
     })
 
 }
