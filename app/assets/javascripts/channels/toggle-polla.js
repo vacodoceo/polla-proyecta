@@ -85,9 +85,15 @@ function buildMatch(element, match_info){
         $(this).find("span:nth-child(2)").html(countries_name[countries[i].name])
         $(this).find("input").val(countries[i].score);
         $(this).removeClass('list-group-item-success');
-        console.log(countries[2], countries[i].name.charAt(1));
-        if (parseInt(countries[2]) == i+1 || countries[2].charAt(1) == countries[i].name.charAt(1)){
+        if (parseInt(countries[2]) == i+1){
             $(this).addClass('list-group-item-success');
         }
     })
+
+    if (countries[0].score > countries[1].score){
+        element.children().first().addClass('list-group-item-success');
+    }
+    else if (countries[1].score > countries[0].score){
+        element.children().last().addClass('list-group-item-success');
+    }
 }
