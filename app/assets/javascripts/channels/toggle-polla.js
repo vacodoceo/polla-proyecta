@@ -24,7 +24,15 @@ function build_polla(data){
     buildGroup('A', first_round.slice(8, 12).reverse())
 
     for (i=1; i<9; i++){
-        buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[9-i-1]);
+        if (i == 3){
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[3]);
+        }
+        else if (i == 4){
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[2]);
+        }
+        else{
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[9-i-1]);
+        }
     }
 
     $("input[type='number']").prop("disabled", true);
@@ -76,7 +84,7 @@ function buildMatch(element, match_info){
         changeFlag($(this).find(".flag-icon"), countries[i].name)
         $(this).find("span:nth-child(2)").html(countries_name[countries[i].name])
         $(this).find("input").val(countries[i].score);
-        if (parseInt(countries[2]) == i+1){
+        if (parseInt(countries[2]) == i+1 || countries[2][1] == countries[i].name[1]){
             $(this).addClass('list-group-item-success');
         }
     })
