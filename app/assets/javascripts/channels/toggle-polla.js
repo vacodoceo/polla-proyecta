@@ -24,7 +24,7 @@ function build_polla(data){
     buildGroup('A', first_round.slice(8, 12).reverse())
 
     for (i=1; i<9; i++){
-        buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[i-1]);
+        buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[9-i-1]);
     }
 
     $("input[type='number']").prop("disabled", true);
@@ -56,7 +56,7 @@ function handleBuggedData(data){
             data_return.push(data[i+times*4*g]);
         }
     }
-    return data_return.reverse();
+    return data_return;
 }
 
 function buildMatch(element, match_info){
