@@ -25,8 +25,6 @@ class PollasController < ApplicationController
   # GET /pollas/new
   def new
     @polla = Polla.new
-    #@variable = polla_params["partidos"]["apuestas"]
-    #@variable_2 = polla_params["partidos"]["apuestas"]
   end
 
   # GET /pollas/1/edit
@@ -70,7 +68,7 @@ class PollasController < ApplicationController
       api = Khipu::PaymentsApi.new()
       @transaction = current_user.transactions.create()
       amount = 2000
-      response = api.payments_post('Pago polla' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
+      response = api.payments_post('Pago polla: ' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
           transaction_id: @transaction.id,
           expires_date: DateTime.new(2019, 6, 14),
           send_email: true,
