@@ -36,8 +36,9 @@ class ResultsController < ApplicationController
         end
       end
       @bets.each do |bet|
-        if params['team_1'] == bet.country_name && bet.position == params['position']
+        if params['team_1'] == bet.country_name && bet.position == @result.position
           bet.polla.score += 10
+          bet.polla.save
         end
       end
     else
@@ -50,20 +51,26 @@ class ResultsController < ApplicationController
       end
       @bets.each do |bet|
         if params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name
-          if params['result_team_1'] == bet.result_team_1 && params['result_team_2'] == bet.result_team_2
+          if @result.result_team_1 == bet.result_team_1 && @result.result_team_2 == bet.result_team_2
             bet.polla.score += 5 
-          elsif params['result_team_1'] > params['result_team_2'] && bet.result_team_1 > bet.result_team_2
+            bet.polla.save
+          elsif @result.result_team_1  > @result.result_team_2 && bet.result_team_1 > bet.result_team_2
             bet.polla.score += 2
-          elsif params['result_team_1'] < params['result_team_2'] && bet.result_team_1 < bet.result_team_2
+            bet.polla.save
+          elsif @result.result_team_1  < @result.result_team_2 && bet.result_team_1 < bet.result_team_2
             bet.polla.score += 2
+            bet.polla.save
           end 
         elsif params['team_2'] == bet.country_2_name && params['team_1'] == bet.country_1_name
-          if params['result_team_2'] == bet.result_team_2 && params['result_team_1'] == bet.result_team_1
+          if @result.result_team_2 == bet.result_team_2 && @result.result_team_1  == bet.result_team_1
             bet.polla.score += 5 
-          elsif params['result_team_2'] > params['result_team_1'] && bet.result_team_2 > bet.result_team_1
+            bet.polla.save
+          elsif @result.result_team_2 > @result.result_team_1  && bet.result_team_2 > bet.result_team_1
             bet.polla.score += 2
-          elsif params['result_team_2'] < params['result_team_1'] && bet.result_team_2 < bet.result_team_1
+            bet.polla.save
+          elsif @result.result_team_2 < @result.result_team_1  && bet.result_team_2 < bet.result_team_1
             bet.polla.score += 2
+            bet.polla.save
           end 
         end
       end

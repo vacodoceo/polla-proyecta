@@ -67,10 +67,10 @@ class PollasController < ApplicationController
           send_email: true,
           payer_name: current_user.name,
           payer_email: current_user.email,
-          #return_url: 'localhost:3000/pollas',
-          #cancel_url: 'localhost:3000',
-          return_url: 'polla.trabajosproyecta.cl/pollas'
-          cancel_url: 'polla.trabajosproyecta.cl'
+          return_url: 'localhost:3000/pollas',
+          cancel_url: 'localhost:3000',
+          #return_url: 'polla.trabajosproyecta.cl/pollas'
+          #cancel_url: 'polla.trabajosproyecta.cl'
           #notify_url: 'http://mi-ecomerce.com/backend/notify',
           notify_api_version: '1.3'
       })

@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   end
   def ranking
     @active = "ranking"
-    @pollas = Polla.where(:valid_polla => 1).order(:score).limit(10)
+    @pollas = Polla.where(:valid_polla => 1).order(:score).reverse_order.limit(10)
   end
 
   def contact
