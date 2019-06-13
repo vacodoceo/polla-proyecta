@@ -59,11 +59,16 @@ group :test do
   gem 'chromedriver-helper'
 end
 
+group :production do
+  # Gcloud db
+  gem "appengine", "~> 0.4.1"
+end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Login
 gem "omniauth-google-oauth2", "~> 0.2.1"
+gem 'omniauth-facebook'
 
 # IDE tools
 gem 'solargraph'
@@ -85,9 +90,9 @@ gem 'flag-icons-rails'
 
 # Pagos
 gem 'khipu-api-client', '~> 2.0', '>= 2.0.1'
-gem 'signer', '~> 1.4.2'
+#gem 'signer', '~> 1.4.2'
 
-gem 'savon', '~> 2.11.1'
+#gem 'savon', '~> 2.11.1'
 
 gem 'dotenv-rails'
 

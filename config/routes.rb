@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get 'invalidar_polla/:id', to: 'pollas#invalidar_polla', as: 'invalidar_polla'
   get 'pollas_totales', to: 'pollas#pollas_totales', as: "pollas_totales"
   get 'validar_pagos', to: 'pollas#validar_pagos', as: 'validar_pagos'
+  get 'ranking', to: 'home#ranking', as:'ranking'
+  get 'faqs', to: 'home#faqs', as:'faqs'
+  get 'rules', to: 'home#rules', as:'rules'
   get 'create_user', to: 'users#create', as: 'create_user'
   #Google Auth
   get 'auth/:provider/callback', to: 'sessions#create_google'
@@ -36,6 +39,8 @@ Rails.application.routes.draw do
   #get '/webpay/success', :to => 'webpay#webpay_success', as: => :webpay_success
   #get '/webpay/error', :to => 'webpay#webpay_error', as: => :webpay_error
   #get '/webpay/nullify', :to => 'webpay#webpay_nullify', as: => :webpay_nullify
+
+  patch 'users/:id/credits', to: 'users#update_credits'
 
   resources :sessions
   get 'signout', to: 'sessions#destroy', as: 'signout'

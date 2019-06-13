@@ -19,7 +19,7 @@ class PollasController < ApplicationController
   # GET /pollas/1
   # GET /pollas/1.json
   def show
-    @pollas = Polla.where(:user_id => current_user.id)
+    render json: { name: @polla.name, first_round: @polla.first_rounds, matches: @polla.bets, countries_name: COUNTRIES_NAME }
   end
 
   # GET /pollas/new
@@ -46,6 +46,13 @@ class PollasController < ApplicationController
   def crear_pago_polla#recibe polla y current_user
     if Time.now > Time.zone.parse('2019-06-14 15:30:00')
       redirect_to root_path
+
+    elsif current_user.credits > 0
+      current_user.credits--
+      @polla.valid_polla = 1
+      @polla.save
+      redirect_to pollas_path
+      
     else
       receiver_id = ENV['RECEIVER_ID']
       secret_key = ENV['RECEIVER_SECRET']
@@ -67,10 +74,8 @@ class PollasController < ApplicationController
           send_email: true,
           payer_name: current_user.name,
           payer_email: current_user.email,
-          return_url: 'localhost:3000/pollas',
-          cancel_url: 'localhost:3000',
-          #return_url: 'polla.trabajosproyecta.cl/pollas'
-          #cancel_url: 'polla.trabajosproyecta.cl'
+          return_url: "http://polla.trabajosproyecta.cl/pollas",
+          cancel_url: "http://polla.trabajosproyecta.cl/",
           #notify_url: 'http://mi-ecomerce.com/backend/notify',
           notify_api_version: '1.3'
       })
@@ -185,9 +190,9 @@ class PollasController < ApplicationController
 
     respond_to do |format|
       if @polla.save
+        flash[:success] = "¡Tu polla fue creada exitósamente!"
         format.html { redirect_to pollas_path}
         format.json { render :show, status: :created, location: @polla }
-      else
         format.html { render :new }
         format.json { render json: @polla.errors, status: :unprocessable_entity }
       end
@@ -260,14 +265,15 @@ class PollasController < ApplicationController
     end
 
     def verify_mod
-      if !current_user || !current_user.is_mod || !current_user.is_admin
+      if !current_user && !current_user.is_mod && !current_user.is_admin
         redirect_to root_path
       end
     end
 
     def verify_user
       if !current_user
-        redirect_to login_path, notice: 'Debes estar logeado para poder acceder a las funciones de la página'
+        flash[:danger] = "¡Debes iniciar sesión para acceder ahí!"
+        redirect_to login_path
       end
     end
 end

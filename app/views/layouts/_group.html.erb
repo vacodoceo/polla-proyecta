@@ -7,7 +7,7 @@
             <li class="list-group-item groups standing">3°</li>
             <li class="list-group-item groups standing">4°</li>
         </ul>        
-        <ul class="list-group sortable groups">
+        <ul class="list-group <%= sortable %> groups">
             <% GROUPS[group].each_with_index do |c, index| %>
                 <li class="list-group-item country" id='<%= c %>'>
                     <%= flag_icon(c) %>

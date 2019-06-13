@@ -28,3 +28,5 @@
 
 # Ignore .env
 /.env
+
+/app.yaml

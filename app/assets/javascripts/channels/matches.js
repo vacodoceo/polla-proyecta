@@ -235,6 +235,7 @@ function checkWinners(){
             if (open_create){
                 // Give bet params
 
+                groups = { 'A': [], 'B':[], 'C':[] };
                 for (i=0; i<Object.keys(groups).length; i++){
                     for (j=0; j<4; j++){
                         let group = Object.keys(groups)[i];
