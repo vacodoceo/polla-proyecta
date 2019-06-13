@@ -24,11 +24,11 @@ function build_polla(data){
     buildGroup('A', first_round.slice(8, 12).reverse())
 
     for (i=1; i<9; i++){
-        if (9-i-1 == 3){
-            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[2]);
+        if (i == 3){
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[6]);
         }
-        else if (9-i-1 == 2){
-            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[3]);
+        else if (i == 2){
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[5]);
         }
         else{
             buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[9-i-1]);
