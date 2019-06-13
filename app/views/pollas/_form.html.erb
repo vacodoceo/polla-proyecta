@@ -1,18 +1,5 @@
 <div class="card bg-light">
   <%= form_with(model: polla, local: true) do |form| %>
-<<<<<<< HEAD
-      <% if polla.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(polla.errors.count, "error") %> prohibited this polla from being saved:</h2>
-    
-          <ul>
-          <% polla.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-=======
     <% if polla.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(polla.errors.count, "error") %> prohibited this polla from being saved:</h2>
@@ -25,7 +12,6 @@
       </div>
     <% end %>
 
->>>>>>> master
     <div class="container container-pagination">
       <ul class="pagination pagination-lg justify-content-center card-header">
         <li class="page-item active" id="instructions"><a class="page-link">Instrucciones</a></li>
@@ -35,17 +21,10 @@
         <li class="page-item disabled" id="finals"><a class="page-link" aria-disabled="true">Final</a></li>
       </ul>
       <%= render 'layouts/instructions' %>
-<<<<<<< HEAD
       <%= render 'layouts/group-phase', sortable: 'sortable' %>
       <%= render 'layouts/quarter-finals', info: 1 %>
       <%= render 'layouts/semifinals' %>
       <%= render 'layouts/finals', create: 1 %>
-=======
-      <%= render 'layouts/group-phase' %>
-      <%= render 'layouts/quarter-finals' %>
-      <%= render 'layouts/semifinals' %>
-      <%= render 'layouts/finals' %>
->>>>>>> master
     </div>
     <input type="hidden" id="first_round_a" name="first_round_a" value="[bo, br, pe, ve]">
     <input type="hidden" id="first_round_b" name="first_round_b" value="[ar, co, py, qa]">

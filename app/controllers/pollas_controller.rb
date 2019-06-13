@@ -192,11 +192,7 @@ class PollasController < ApplicationController
 
     respond_to do |format|
       if @polla.save
-<<<<<<< HEAD
         flash[:success] = "¡Tu polla fue creada exitósamente!"
-=======
-        flash[:success] = "¡Tu polla fue creada exitósamente!!"
->>>>>>> master
         format.html { redirect_to pollas_path}
         format.json { render :show, status: :created, location: @polla }
         format.html { render :new }

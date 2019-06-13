@@ -1,10 +1,6 @@
 <main role="main" class="inner cover">
   <% if current_user.credits > 0 %>
-<<<<<<< HEAD
-    <div class="alert alert-info" role="alert">¡Tienes <%=current_user.credits.to_s()%> pollacréditos, úsalos para pagar tus pollas automáticamente!"</div>
-=======
     <div class="alert alert-success" role="alert">¡Tienes <%=current_user.credits.to_s()%> pollacréditos, úsalos para pagar tus pollas automáticamente!"</div>
->>>>>>> master
   <% end %>
   <h1 class="display-4">Tus pollas</h1>
   <hr>
