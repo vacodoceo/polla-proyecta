@@ -183,7 +183,7 @@ class PollasController < ApplicationController
       @bet.country_2_name = final[n+1]
       @bet.result_team_1 = final[n+2]
       @bet.result_team_2 = final[n+3]
-      @bet.result = params['final'][n+4]
+      @bet.result = final[n+4]
       @bet.stage = 'final'
       @bet.save
     end
