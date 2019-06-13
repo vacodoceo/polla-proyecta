@@ -5,15 +5,11 @@ class PollasController < ApplicationController
   before_action :verify_user
   before_action :verify_mod, only: [:pollas_totales]
   def index
-    @pollas = Polla.where(:user_id => current_user.id)
+    @pollas = Polla.where(:user_id => current_user.id).order(:id);
   end
 
   def pollas_totales
-    if current_user && (current_user.is_admin || current_user.is_mod || current_user.id == 2)
-      @pollas = Polla.all
-    else
-      redirect_to root_path
-    end
+    @pollas = Polla.all.order(valid_polla: :desc);
   end
 
   # GET /pollas/1
