@@ -19,7 +19,7 @@ class PollasController < ApplicationController
   # GET /pollas/1
   # GET /pollas/1.json
   def show
-    @pollas = Polla.where(:user_id => current_user.id)
+    render json: { name: @polla.name, first_round: @polla.first_rounds, matches: @polla.bets, countries_name: COUNTRIES_NAME }
   end
 
   # GET /pollas/new
@@ -185,6 +185,10 @@ class PollasController < ApplicationController
 
     respond_to do |format|
       if @polla.save
+<<<<<<< Updated upstream
+=======
+        flash[:success] = "¡Tu polla fue creada exitósamente!"
+>>>>>>> Stashed changes
         format.html { redirect_to pollas_path}
         format.json { render :show, status: :created, location: @polla }
       else

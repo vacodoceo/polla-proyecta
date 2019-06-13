@@ -1,5 +1,5 @@
-<div class="container container-page" id="group-phase-page" >
+<div class="container container-page <%= display %>" id="group-phase-page">
     <% ['A', 'B', 'C'].each do |g| %>
-        <%= render 'layouts/group', group: g %>
+        <%= render 'layouts/group', group: g, sortable: sortable %>
     <% end %>
 </div>

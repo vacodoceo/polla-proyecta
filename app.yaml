@@ -1,0 +1,9 @@
+entrypoint: bundle exec rackup --port $PORT
+env: flex
+runtime: ruby
+
+env_variables:
+  SECRET_KEY_BASE: a8b632dae24ebc2be5c87e9393e83808a439207314ad8544babf8cb829da91e9242d9aef6afa9edd31d3911871e59a97d8fca112d2c8bdb932db72ef277cb059
+
+beta_settings:
+  cloud_sql_instances: bubbly-domain-219202:us-central1:polla-proyecta

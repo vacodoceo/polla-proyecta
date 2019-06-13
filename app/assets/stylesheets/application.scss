@@ -161,6 +161,8 @@ select.select-country {
   }
 }
 
+
+
 .container-page#quarter-finals-page {
   align-content: space-around;
 }
@@ -240,9 +242,24 @@ select.select-country {
  */
 
 .container {
-  min-width: 55em;
+  width: auto;
 }
 
+/*
+ * Modal Polla
+ */
+
+.modal-polla {
+  min-width: 55em; 
+
+  .modal-body {
+    padding: 0;
+
+    .page-item {
+      width: 25%;
+    }
+  }
+}
 
 /* Links */
 a,
@@ -259,6 +276,10 @@ a:hover {
   text-shadow: none; /* Prevent inheritance from `body` */
   background-color: #fff;
   border: .05rem solid #fff;
+}
+
+.flex-display {
+  display: flex;
 }
 
 
