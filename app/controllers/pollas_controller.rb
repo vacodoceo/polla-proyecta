@@ -5,9 +5,6 @@ class PollasController < ApplicationController
   before_action :verify_user
   before_action :verify_mod, only: [:pollas_totales]
   def index
-    if current_user.credits > 0
-      flash[:success] = "¡Tienes " + current_user.credits.to_s() + " pollacréditos, úsalos para pagar tus pollas automáticamente!"
-    end
     @pollas = Polla.where(:user_id => current_user.id)
   end
 
@@ -195,6 +192,7 @@ class PollasController < ApplicationController
 
     respond_to do |format|
       if @polla.save
+        flash[:success] = "¡Tu polla fue creada exitósamente!!"
         format.html { redirect_to pollas_path}
         format.json { render :show, status: :created, location: @polla }
       else

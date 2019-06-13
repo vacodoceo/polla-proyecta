@@ -11,7 +11,7 @@
 
   <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="masthead mb-auto">
+      <header class="masthead">
         <div class="inner navbar">
           <a href="<%= root_path %>"><h3 class="masthead-brand">Polla Proyecta</h3></a>
           <nav class="nav nav-masthead justify-content-center">
@@ -49,9 +49,8 @@
           </div>
         <% end %>
       </div>
-      <%# <%= image_tag("proyecta.png")  %>
       <%= yield %>
-      <footer class="mastfoot mt-auto">
+      <footer class="mastfoot">
         <div class="inner">
           <p>Polla for <a href="https://www.facebook.com/ProyectaUc/">Proyecta</a>, by <a href="mailto: ti@trabajosproyecta.cl">ti@trabajosproyecta.cl</a>.</p>
         </div>

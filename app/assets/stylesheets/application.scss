@@ -290,6 +290,7 @@ body {
 
 .cover-container {
   width: 70em !important;
+  justify-content: space-between;
 }
 
 /*
@@ -316,10 +317,6 @@ body {
   a:hover {
     color: rgba(0, 0, 0, .7)
   }
-}
-
-.masthead {
-  margin-bottom: auto;
 }
 
 .masthead-brand {
@@ -362,10 +359,17 @@ body {
  */
 .cover {
   padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: -webkit-fill-available;
+  margin-top: 0.5em;
 }
 .cover .btn-lg {
   padding: .75rem 1.25rem;
   font-weight: 700;
+}
+.cover#index {
+  justify-content: center;
 }
 
 
@@ -419,14 +423,8 @@ body {
 }
 
 .alert {
-  margin: auto;
-  width: 50%;
-  margin-bottom: 5em
-}
-
-.alert-content {
-  display: flex;
-  justify-items: center;
+  margin: 1em 0 1em 0;
+  width: auto;
 }
 
 .table {
