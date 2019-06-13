@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get 'recover_password', to: 'sessions#recover', as: 'recover_password'
   post 'recover_password', to: 'sessions#recover_password'
   get 'new_password/:hash_id', to: 'sessions#new_password', as: 'new_password'
-  post 'new_password/:hash_id', to: 'session#change_password'
+  post 'new_password/:hash_id', to: 'sessions#change_password'
   #Webpay
   #post '/webpay/webpay_final_url', :to => 'webpay#webpay_final_url', as: => :webpay_result
   #post '/webpay/webpay_return_url', :to => 'webpay#webpay_return_url', as: => :webpay_return_url
