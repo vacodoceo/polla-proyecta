@@ -17,4 +17,10 @@ class UserMailer < ApplicationMailer
         @link = 'polla.trabajosproyecta.cl/new_password/' + hash_id
         mail(to: @user.email, subject: 'Recuperación de contraseña Polla Proyecta')
     end
+
+    def feedback(params, email)
+        @comment = params['comment']
+        @email = email
+        mail(to: 'ti@trabajosproyecta.cl', subject: params['subject'])
+    end
 end

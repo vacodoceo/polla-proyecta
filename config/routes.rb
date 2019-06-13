@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get 'transactions/edit'
   get 'sessions/destroy'
   get 'home/show'
+  get 'ranking', to: 'home#ranking', as:'ranking'
+  get 'contact', to: 'home#contact', as:'contact'
+  post 'contact', to: 'home#send_feedback'
+
   get 'register', to: 'users#new', as: 'register'
   get 'crear_pago/:id', to: 'pollas#crear_pago_polla', as:'crear_pago' 
   get 'bancos_posibles', to: 'transactions#bancos_posibles', as:'bancos_posibles'
@@ -15,7 +19,6 @@ Rails.application.routes.draw do
   get 'invalidar_polla/:id', to: 'pollas#invalidar_polla', as: 'invalidar_polla'
   get 'pollas_totales', to: 'pollas#pollas_totales', as: "pollas_totales"
   get 'validar_pagos', to: 'pollas#validar_pagos', as: 'validar_pagos'
-  get 'ranking', to: 'home#ranking', as:'ranking'
   get 'faqs', to: 'home#faqs', as:'faqs'
   get 'rules', to: 'home#rules', as:'rules'
   get 'create_user', to: 'users#create', as: 'create_user'

@@ -12,7 +12,7 @@
         <th>Usuario</th>
         <th>Puntaje</th>
         <th>Estado</th>
-        <th colspan="2">Acciones</th>
+        <th colspan="4">Acciones</th>
       </tr>
     </thead>
 
@@ -25,14 +25,19 @@
           <td><%= polla.score %></td>
           <% if polla.valid_polla == 1 %>
             <td><%= 'Pagada' %></td>
+            <td><a class="toggle-polla" href="#pollaShow" data-target="#pollaShow" data-toggle="modal" id="polla-<%= polla.id %>">Ver Polla</a></td>
+
             <% if current_user.is_admin || current_user.is_mod || current_user.id == 2%>
               <td><a href=<%=invalidar_polla_path(polla)%>>Invalidar</a></td>
             <%end%>
           <% else %>
             <% if polla.paying == 1 %>
               <td><%= 'Pago en proceso' %> </td>
+              <td><a class="toggle-polla" href="#pollaShow" data-target="#pollaShow" data-toggle="modal" id="polla-<%= polla.id %>">Ver Polla</a></td>
+
             <% else %>
               <td><%= 'No pagada'%></td>
+              <td><a class="toggle-polla" href="#pollaShow" data-target="#pollaShow" data-toggle="modal" id="polla-<%= polla.id %>">Ver Polla</a></td>
             <%end%>
             <% if Time.now < Time.zone.parse('2019-06-14 15:30:00')%>
               <td><a href=<%=crear_pago_path(polla)%>> Pagar </a></td>
@@ -44,11 +49,36 @@
           <% if current_user.id == polla.user.id %>
             <td><%= link_to 'Eliminar', polla, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
-
-          
-          
       </tr>
       <% end %>
       </tbody>
   </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="pollaShow" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-polla">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <div class="container container-pagination">
+                  <ul class="pagination pagination-lg justify-content-center">
+                    <li class="page-item active" id="group-phase"><a class="page-link">Fase de Grupos</a></li>
+                    <li class="page-item" id="quarter-finals"><a class="page-link">Cuartos de Final</a></li>
+                    <li class="page-item" id="semifinals"><a class="page-link">Semifinales</a></li>
+                    <li class="page-item" id="finals"><a class="page-link">Final</a></li>
+                  </ul>
+                  <%= render 'layouts/group-phase', display: 'flex-display', sortable: '' %>
+                  <%= render 'layouts/quarter-finals', info: 0 %>
+                  <%= render 'layouts/semifinals' %>
+                  <%= render 'layouts/finals', create: 0 %>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </main>

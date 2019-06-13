@@ -21,10 +21,10 @@
         <li class="page-item disabled" id="finals"><a class="page-link" aria-disabled="true">Final</a></li>
       </ul>
       <%= render 'layouts/instructions' %>
-      <%= render 'layouts/group-phase' %>
-      <%= render 'layouts/quarter-finals' %>
+      <%= render 'layouts/group-phase', sortable: 'sortable' %>
+      <%= render 'layouts/quarter-finals', info: 1 %>
       <%= render 'layouts/semifinals' %>
-      <%= render 'layouts/finals' %>
+      <%= render 'layouts/finals', create: 1 %>
     </div>
     <input type="hidden" id="first_round_a" name="first_round_a" value="[bo, br, pe, ve]">
     <input type="hidden" id="first_round_b" name="first_round_b" value="[ar, co, py, qa]">

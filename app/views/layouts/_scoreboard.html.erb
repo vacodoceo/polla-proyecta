@@ -17,7 +17,7 @@
                 <span><%= COUNTRIES_NAME[c1] %></span>
                 <input id="number" type="number" value="0" min="0" max="9">
             </li>
-            <% if id == 1 or id == 4 %>
+            <% if (id == 1 or id == 4) and info == 1 %>
                 <li class="list-group-item country" country='<%= c2[0] %>'>
                 <span class="flag-icon flag-icon-<%= c2[0] %>"></span>
                 <select class="select-country">

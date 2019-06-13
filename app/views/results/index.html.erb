@@ -5,6 +5,16 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
+      <th>Equipo 1</th>
+      <th>Equipo 2</th>
+      <th>Goles Equipo 1</th>
+      <th>Goles Equipo 2</th>
+      <th>Ganador</th>
+      <th>Posicion</th>
+      <th>Grupo</th>
+      <th>Etapa</th>
+      <th>Editado</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +22,17 @@
   <tbody>
     <% @results.each do |result| %>
       <tr>
+        <td><%= result.id %></td>
+        <td><%= result.team_1 %> </td>
+        <td><%= result.team_2 %></td>
+        <td><%= result.result_team_1 %></td>
+        <td><%= result.result_team_2 %></td>
+        <td><%= result.result %></td>
+        <td><%= result.position %></td>
+        <td><%= result.group %></td>
+        <td><%= result.stage %></td>
+        <td><%= result.edited %></td>
+
         <td><%= link_to 'Show', result %></td>
         <td><%= link_to 'Edit', edit_result_path(result) %></td>
         <td><%= link_to 'Destroy', result, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -162,6 +162,8 @@ select.select-country {
   }
 }
 
+
+
 .container-page#quarter-finals-page {
   align-content: space-evenly;
   div.alert {
@@ -254,9 +256,24 @@ select.select-country {
  */
 
 .container {
-  min-width: 55em;
+  width: auto;
 }
 
+/*
+ * Modal Polla
+ */
+
+.modal-polla {
+  min-width: 55em; 
+
+  .modal-body {
+    padding: 0;
+
+    .page-item {
+      width: 25%;
+    }
+  }
+}
 
 /* Custom default button */
 .btn-secondary,
@@ -266,6 +283,10 @@ select.select-country {
   text-shadow: none; /* Prevent inheritance from `body` */
   background-color: #fff;
   border: .05rem solid #fff;
+}
+
+.flex-display {
+  display: flex;
 }
 
 
@@ -361,7 +382,7 @@ body {
   padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
-  height: -webkit-fill-available;
+  min-height: -webkit-fill-available;
   margin-top: 0.5em;
 }
 .cover .btn-lg {
