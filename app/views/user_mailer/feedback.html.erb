@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% if @email %>
+    <title> Comentario del usuario <%= @email %></title>
+<% else %>
+    <title> Comentario del usuario Anon</title>
+<% end %>
+</head>
+<body>
+    <h1> Estimado administrador</h1>
+
+    <p> Un usuario le envía la siguiente solicitud, sugerencia o reclamo </p>
+    <p> <%= @comment  %></p>
+</body>
+</html>

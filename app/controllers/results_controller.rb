@@ -26,35 +26,52 @@ class ResultsController < ApplicationController
   # POST /results.json
   def create
     @result = Result.new(result_params)
-    respond_to do |format|
-      @result.save
-      if @result.stage == 'groups'
-        @bets =  FirstRound.where("polla.valid_polla = ? AND group = ?", 1, params['group'])
-        @bets.each do |bet|
-          if params['team_1'] == bet.country_name && bet.position == params['position']
-            bet.polla.score += 10
-          end
+    @result.save
+    if @result.stage == 'groups'
+      @apuestas =  FirstRound.where(:group => params['group'])
+      @bets = []
+      @apuestas.each do |ap|
+        if ap.polla.valid_polla == 1
+          @bets << ap
         end
-      else
-        @bets =  Bet.where("polla.valid_polla = ? AND stage = ?", 1, params['stage'])
-        @bets.each do |bet|
-          if params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name
-            if params['result_team_1'] == bet.result_team_1 && params['result_team_2'] == bet.result_team_2
-              bet.polla.score += 5 
-            elsif params['result_team_1'] > params['result_team_2'] && bet.result_team_1 > bet.result_team_2
-              bet.polla.score += 2
-            elsif params['result_team_1'] < params['result_team_2'] && bet.result_team_1 < bet.result_team_2
-              bet.polla.score += 2
-            end 
-          elsif params['team_2'] == bet.country_2_name && params['team_1'] == bet.country_1_name
-            if params['result_team_2'] == bet.result_team_2 && params['result_team_1'] == bet.result_team_1
-              bet.polla.score += 5 
-            elsif params['result_team_2'] > params['result_team_1'] && bet.result_team_2 > bet.result_team_1
-              bet.polla.score += 2
-            elsif params['result_team_2'] < params['result_team_1'] && bet.result_team_2 < bet.result_team_1
-              bet.polla.score += 2
-            end 
-          end
+      end
+      @bets.each do |bet|
+        if params['team_1'] == bet.country_name && bet.position == @result.position
+          bet.polla.score += 10
+          bet.polla.save
+        end
+      end
+    else
+      @apuestas =  Bet.where(:stage => params['stage'])
+      @bets = []
+      @apuestas.each do |ap|
+        if ap.polla.valid_polla == 1
+          @bets << ap
+        end
+      end
+      @bets.each do |bet|
+        if params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name
+          if @result.result_team_1 == bet.result_team_1 && @result.result_team_2 == bet.result_team_2
+            bet.polla.score += 5 
+            bet.polla.save
+          elsif @result.result_team_1  > @result.result_team_2 && bet.result_team_1 > bet.result_team_2
+            bet.polla.score += 2
+            bet.polla.save
+          elsif @result.result_team_1  < @result.result_team_2 && bet.result_team_1 < bet.result_team_2
+            bet.polla.score += 2
+            bet.polla.save
+          end 
+        elsif params['team_2'] == bet.country_2_name && params['team_1'] == bet.country_1_name
+          if @result.result_team_2 == bet.result_team_2 && @result.result_team_1  == bet.result_team_1
+            bet.polla.score += 5 
+            bet.polla.save
+          elsif @result.result_team_2 > @result.result_team_1  && bet.result_team_2 > bet.result_team_1
+            bet.polla.score += 2
+            bet.polla.save
+          elsif @result.result_team_2 < @result.result_team_1  && bet.result_team_2 < bet.result_team_1
+            bet.polla.score += 2
+            bet.polla.save
+          end 
         end
       end
     end

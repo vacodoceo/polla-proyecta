@@ -20,9 +20,13 @@ class SessionsController < ApplicationController
 
   def change_password
     if params['password'] == params['confirm_password']
-      @user = User.find(params[:id])
-      puts @user.email
-      puts @user.name
+      i = 13
+      string_id = ''
+      while params[:hash_id][i] != '¡' do
+        string_id += params[:hash_id][i]
+        i += 1
+      end
+      @user = User.find(string_id.to_i)
       @user.password = params['password']
       @user.save
       redirect_to login_path, notice: 'Contraseña cambiada exitosamente'

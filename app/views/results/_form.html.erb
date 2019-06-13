@@ -12,12 +12,37 @@
   <% end %>
   <h1 class="h2 mb-3 font-weight-normal">Ingresar resultado</h1>
   <p id="notice"><%= notice %></p>
-  <label for="inputTeam1" class="sr-only">Equipo 1</label>
-  <input type="team1" id="inputTeam1" name="team_1" class="form-control" placeholder="Equipo 1" required>
+  <label for="team_1" class="sr-only"> Equipo 1 </label>
+   <select name="team_1" class="form-control"> 
+    <option value="bo">Bolivia</option>
+    <option value="br">Brasil</option>
+    <option value="pe">Perú</option>
+    <option value="ve">Venezuela</option>
+    <option value="ar">Argentina</option>
+    <option value="co">Colombia</option>
+    <option value="py">Paraguay</option>
+    <option value="qa">Qatar</option>
+    <option value="cl">Chile</option>
+    <option value="ec">Ecuador</option>
+    <option value="jp">Japón</option>
+    <option value="uy">Uruguay</option>
+  </select> 
   
-  <label for="inputTeam2" class="sr-only">Equipo 2</label>
-  <input type="team2" id="inputTeam2" name="team_2" class="form-control" placeholder="Equipo 2">
-  
+  <label for="team_2" class="sr-only"> Equipo 2 </label>
+  <select name="team_2" class="form-control"> 
+    <option value="bo">Bolivia</option>
+    <option value="br">Brasil</option>
+    <option value="pe">Perú</option>
+    <option value="ve">Venezuela</option>
+    <option value="ar">Argentina</option>
+    <option value="co">Colombia</option>
+    <option value="py">Paraguay</option>
+    <option value="qa">Qatar</option>
+    <option value="cl">Chile</option>
+    <option value="ec">Ecuador</option>
+    <option value="jp">Japón</option>
+    <option value="uy">Uruguay</option>
+  </select> 
   <label for="inputResultTeam1" class="sr-only">Goles equipo 1</label>
   <input type="result_team1" id="inputResultTeam1" name="result_team_1" class="form-control" placeholder="Goles equipo 1">
   
@@ -27,15 +52,27 @@
   <label for="inputResult" class="sr-only">Ganador (1 para equipo 1, 2 para equipo 2)</label>
   <input type="result" id="inputResult" name="result" class="form-control" placeholder="Ganador (1 o 2)" >
   
-  <label for="inputStage" class="sr-only">Etapa (groups, quarter, semis, third_place, final)</label>
-  <input type="stage" id="inputStage" name="stage" class="form-control" placeholder="Etapa (groups, quarter, semis, third_place, final)" required>
-  
-  <label for="inputPosition" class="sr-only">Posición equipo (solo fase de grupos)</label>
-  <input type="position" id="inputPosition" name="position" class="form-control" placeholder="Posición equipo (1, 2 ,3 o 4)">
-  
-  <label for="inputGroup" class="sr-only">Grupo del equipo (solo fase de grupos)</label>
-  <input type="group" id="inputGroup" name="group" class="form-control" placeholder="Grupo del equipo (a, b o c)">
-  
+  <label for="stage" class="sr-only"> Etapa </label>
+  <select name="stage" class="form-control"> 
+    <option value="groups">Fase de grupos</option>
+    <option value="quarter">Cuartos de final</option>
+    <option value="semis">Semifinales</option>
+    <option value="third_place">Tercer lugar</option>
+    <option value="final">Final</option>
+  </select> 
+  <label for="position" class="sr-only"> Posición </label>
+  <select name="position" class="form-control">
+    <option value=1>1º</option>
+    <option value=2>2º</option>
+    <option value=3>3º</option>
+    <option value=4>4º</option>
+  </select>
+  <label for="group" class="sr-only"> Grupo </label>
+  <select name="group" class="form-control"> 
+    <option value="a">A</option>
+    <option value="b">B</option>
+    <option value="c">C</option>
+  </select>
   
   <br>
   <div class="actions">
