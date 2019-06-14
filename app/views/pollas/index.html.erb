@@ -39,7 +39,7 @@
               <td><%= 'No pagada'%></td>
               <td><a class="toggle-polla" href="#pollaShow" data-target="#pollaShow" data-toggle="modal" id="<%= polla.id %>">Ver Polla</a></td>
             <%end%>
-            <% if Time.now < Time.zone.parse('2019-06-14 15:30:00')%>
+            <% if @fecha_correcta%>
               <td><a href=<%=crear_pago_path(polla)%>> Pagar </a></td>
             <% end %>
             <% if current_user.is_admin || current_user.is_mod || current_user.id == 2%>
