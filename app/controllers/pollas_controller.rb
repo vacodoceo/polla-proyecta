@@ -34,13 +34,13 @@ class PollasController < ApplicationController
   def validar_polla
     @polla.valid_polla = 1
     @polla.save
-    redirect_to pollas_path
+    redirect_to pollas_totales_path
   end
 
   def invalidar_polla
     @polla.valid_polla = 0
     @polla.save
-    redirect_to pollas_path
+    redirect_to pollas_totales_path
   end
 
   def crear_pago_polla#recibe polla y current_user
@@ -98,6 +98,7 @@ class PollasController < ApplicationController
   # POST /pollas
   # POST /pollas.json
   def create
+    puts params
     @polla = current_user.pollas.create(polla_params)
     @polla.valid_polla = 0
     @polla.score = 0
@@ -183,7 +184,7 @@ class PollasController < ApplicationController
       @bet.country_2_name = final[n+1]
       @bet.result_team_1 = final[n+2]
       @bet.result_team_2 = final[n+3]
-      @bet.result = params['final'][n+4]
+      @bet.result = final[n+4]
       @bet.stage = 'final'
       @bet.save
     end
@@ -215,7 +216,15 @@ class PollasController < ApplicationController
 
   # DELETE /pollas/1
   # DELETE /pollas/1.json
+  # p = Polla.create :id=>10000, :valid_polla=>0, :score=>0, :created_at=>"2019-05-05 23:59:23", :updated_at=>"2019-05-05 23:59:23", :name=>"Polla Eliminada", :paying=>0, :user_id=>2
   def destroy
+    @transactions = Transaction.where(:polla_id => @polla.id) 
+    if @transactions.length > 0
+      @transactions.each do |trans|
+        trans.polla_id = 10000
+        trans.save
+      end
+    end
     @polla.destroy
     respond_to do |format|
       format.html { redirect_to pollas_path}
