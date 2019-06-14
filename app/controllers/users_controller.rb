@@ -28,14 +28,13 @@ class UsersController < ApplicationController
             @user = User.create(user_params)
             puts params
             @user.name = params['first_name'] + ' ' + params['last_name']
-            respond_to do |format|
-              if @user.save
-                format.html { redirect_to login_path}
-              else
-                format.html { render :new }
-                format.json { render json: @user.errors, status: :unprocessable_entity }
-              end
+            if @user.save          
+              session[:user_id] = @user.id
+              redirect_to root_path
+            else
+              render :new
             end
+
           else
             redirect_to register_path, notice: 'El formato del teléfono ingresado no es válido'
           end
