@@ -48,10 +48,7 @@
   
   <label for="inputResultTeam2" class="sr-only">Goles equipo 2</label>
   <input type="result_team2" id="inputResultTeam2" name="result_team_2" class="form-control" placeholder="Goles equipo 2">
-  
-  <label for="inputResult" class="sr-only">Ganador (1 para equipo 1, 2 para equipo 2)</label>
-  <input type="result" id="inputResult" name="result" class="form-control" placeholder="Ganador (1 o 2)" >
-  
+    
   <label for="stage" class="sr-only"> Etapa </label>
   <select name="stage" class="form-control"> 
     <option value="groups">Fase de grupos</option>
@@ -60,6 +57,15 @@
     <option value="third_place">Tercer lugar</option>
     <option value="final">Final</option>
   </select> 
+
+  <label for="n" class="sr-only"> Partido cuartos </label>
+  <select name="n" class="form-control"> 
+    <option value=0>1A vs 3B/C</option>
+    <option value=1>2A vs 2B</option>
+    <option value=2>1B vs 2C</option>
+    <option value=3>1C vs 3A/B</option>
+  </select> 
+
   <label for="position" class="sr-only"> Posición </label>
   <select name="position" class="form-control">
     <option value=1>1º</option>
