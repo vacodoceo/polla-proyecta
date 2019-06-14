@@ -14,13 +14,3 @@ development:
 test:
   <<: *default
   database: polla_test
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  timeout: 5000
-  username: "postgres"
-  password: "sogeking2020"
-  database: "polla-proyecta-production"
-  host:   "/cloudsql/bubbly-domain-219202:us-central1:polla-proyecta"
