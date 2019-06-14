@@ -10,20 +10,16 @@ class HomeController < ApplicationController
   def contact
   end
 
-  def remember_pay
-  end
-
-  def remember_to_pay
+  def remember
     @pollas = Polla.where(:valid_polla => 0)
+    puts "YELLLOW"
     @pollas.each do |polla|
-      UserMailer.remember_pay(polla.user).deliver_now
+      @user = User.find(polla.user_id)
+      puts "HIELOOOOO"
+      puts @user.name
+      UserMailer.remember_pay(@user).deliver_now
     end
     redirect_to root_path, notice: "Se han enviado los recordatorios correctamente"
-  end
-
-  def remember_pay(user)
-    @user = user
-    mail(to: @user.email, subject: 'Recordatorio pago Polla Proyecta')
   end
 
   def send_feedback
