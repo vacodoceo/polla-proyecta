@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'ranking', to: 'home#ranking', as:'ranking'
   get 'contact', to: 'home#contact', as:'contact'
   post 'contact', to: 'home#send_feedback'
+  get 'remember', to: 'home#remember', as: 'remember'
 
   get 'register', to: 'users#new', as: 'register'
   get 'crear_pago/:id', to: 'pollas#crear_pago_polla', as:'crear_pago' 

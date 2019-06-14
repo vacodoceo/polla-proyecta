@@ -37,9 +37,54 @@ class ResultsController < ApplicationController
       end
       @bets.each do |bet|
         if params['team_1'] == bet.country_name && bet.position == @result.position
-          bet.polla.score += 10
+          bet.polla.score += 5
           bet.polla.save
         end
+      end
+    elsif @result.stage == 'quarter'
+      @apuestas =  Bet.where(:stage => params['stage'])
+      @bets = []
+      n = params["n"].to_i
+      i = 0
+      @apuestas.each do |ap|
+        if n == i && ap.polla.valid_polla == 1
+          @bets << ap
+        end
+        if i == 3
+          i = 0
+        else
+          i+=1
+        end
+      end
+      @bets.each do |bet|
+        if (params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name)
+          if (@result.result_team_1 > @result.result_team_2 && bet.result_team_1 > bet.result_team_2) || (@result.result_team_1 < @result.result_team_2 && bet.result_team_1 < bet.result_team_2) || (@result.result_team_1 == @result.result_team_2 && bet.result_team_1 == bet.result_team_2)
+            bet.polla.score += 5 
+            if (@result.result_team_1  - @result.result_team_2 == bet.result_team_1 - bet.result_team_2) || (@result.result_team_2 - @result.result_team_1 == bet.result_team_2 - bet.result_team_1)
+              bet.polla.score += 1
+            end 
+          end
+          if @result.result_team_1 == bet.result_team_1 
+            bet.polla.score += 2
+          end 
+          if @result.result_team_2 == bet.result_team_2
+            bet.polla.score += 2
+          end 
+        elsif params['team_2'] == bet.country_1_name && params['team_1'] == bet.country_2_name
+          if (@result.result_team_1 > @result.result_team_2 && bet.result_team_1 < bet.result_team_2) || (@result.result_team_1 < @result.result_team_2 && bet.result_team_1 > bet.result_team_2) || (@result.result_team_1 == @result.result_team_2 && bet.result_team_1 == bet.result_team_2)
+            bet.polla.score += 5 
+            if (@result.result_team_1 - @result.result_team_2 == bet.result_team_2 - bet.result_team_1) || (@result.result_team_2 - @result.result_team_1 == bet.result_team_1 - bet.result_team_2)
+              bet.polla.score += 1
+            end 
+          end
+          if @result.result_team_1 == bet.result_team_2 
+            bet.polla.score += 2
+          end 
+          if @result.result_team_2 == bet.result_team_1
+            bet.polla.score += 2
+          end 
+        end
+        bet.polla.save
       end
     else
       @apuestas =  Bet.where(:stage => params['stage'])
@@ -50,29 +95,34 @@ class ResultsController < ApplicationController
         end
       end
       @bets.each do |bet|
-        if params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name
-          if @result.result_team_1 == bet.result_team_1 && @result.result_team_2 == bet.result_team_2
+        if (params['team_1'] == bet.country_1_name && params['team_2'] == bet.country_2_name)
+          if (@result.result_team_1 > @result.result_team_2 && bet.result_team_1 > bet.result_team_2) || (@result.result_team_1 < @result.result_team_2 && bet.result_team_1 < bet.result_team_2) || (@result.result_team_1 == @result.result_team_2 && bet.result_team_1 == bet.result_team_2)
             bet.polla.score += 5 
-            bet.polla.save
-          elsif @result.result_team_1  > @result.result_team_2 && bet.result_team_1 > bet.result_team_2
+            if (@result.result_team_1  - @result.result_team_2 == bet.result_team_1 - bet.result_team_2) || (@result.result_team_2 - @result.result_team_1 == bet.result_team_2 - bet.result_team_1)
+              bet.polla.score += 1
+            end 
+          end
+          if @result.result_team_1 == bet.result_team_1 
             bet.polla.score += 2
-            bet.polla.save
-          elsif @result.result_team_1  < @result.result_team_2 && bet.result_team_1 < bet.result_team_2
-            bet.polla.score += 2
-            bet.polla.save
           end 
-        elsif params['team_2'] == bet.country_2_name && params['team_1'] == bet.country_1_name
-          if @result.result_team_2 == bet.result_team_2 && @result.result_team_1  == bet.result_team_1
+          if @result.result_team_2 == bet.result_team_2
+            bet.polla.score += 2
+          end 
+        elsif params['team_2'] == bet.country_1_name && params['team_1'] == bet.country_2_name
+          if (@result.result_team_1 > @result.result_team_2 && bet.result_team_1 < bet.result_team_2) || (@result.result_team_1 < @result.result_team_2 && bet.result_team_1 > bet.result_team_2) || (@result.result_team_1 == @result.result_team_2 && bet.result_team_1 == bet.result_team_2)
             bet.polla.score += 5 
-            bet.polla.save
-          elsif @result.result_team_2 > @result.result_team_1  && bet.result_team_2 > bet.result_team_1
+            if (@result.result_team_1 - @result.result_team_2 == bet.result_team_2 - bet.result_team_1) || (@result.result_team_2 - @result.result_team_1 == bet.result_team_1 - bet.result_team_2)
+              bet.polla.score += 1
+            end 
+          end
+          if @result.result_team_1 == bet.result_team_2 
             bet.polla.score += 2
-            bet.polla.save
-          elsif @result.result_team_2 < @result.result_team_1  && bet.result_team_2 < bet.result_team_1
+          end 
+          if @result.result_team_2 == bet.result_team_1
             bet.polla.score += 2
-            bet.polla.save
           end 
         end
+        bet.polla.save
       end
     end
     redirect_to results_path, notice: 'Resultado agregado correctamente'
@@ -95,11 +145,61 @@ class ResultsController < ApplicationController
   # DELETE /results/1
   # DELETE /results/1.json
   def destroy
-    @result.destroy
-    respond_to do |format|
-      format.html { redirect_to results_url, notice: 'Result was successfully destroyed.' }
-      format.json { head :no_content }
+    if @result.stage == 'groups'
+      @apuestas =  FirstRound.where(:group => @result.group)
+      @bets = []
+      @apuestas.each do |ap|
+        if ap.polla.valid_polla == 1
+          @bets << ap
+        end
+      end
+      @bets.each do |bet|
+        if @result.team_1 == bet.country_name && bet.position == @result.position
+          bet.polla.score -= 5
+          bet.polla.save
+        end
+      end
+    else
+      @apuestas =  Bet.where(:stage => @result.stage)
+      @bets = []
+      @apuestas.each do |ap|
+        if ap.polla.valid_polla == 1
+          @bets << ap
+        end
+      end
+      @bets.each do |bet|
+        if (@result.team_1 == bet.country_1_name && @result.team_2 == bet.country_2_name)
+          if (@result.result_team_1 > @result.result_team_2 && bet.result_team_1 > bet.result_team_2) || (@result.result_team_1 < @result.result_team_2 && bet.result_team_1 < bet.result_team_2) || (@result.result_team_1 == @result.result_team_2 && bet.result_team_1 == bet.result_team_2)
+            bet.polla.score -= 5 
+            if (@result.result_team_1  - @result.result_team_2 == bet.result_team_1 - bet.result_team_2) || (@result.result_team_2 - @result.result_team_1 == bet.result_team_2 - bet.result_team_1)
+              bet.polla.score -= 1
+            end 
+          end
+          if @result.result_team_1 == bet.result_team_1 
+            bet.polla.score -= 2
+          end 
+          if @result.result_team_2 == bet.result_team_2
+            bet.polla.score -= 2
+          end 
+        elsif @result.team_2 == bet.country_1_name && @result.team_1 == bet.country_2_name
+          if (@result.result_team_1 > @result.result_team_2 && bet.result_team_1 < bet.result_team_2) || (@result.result_team_1 < @result.result_team_2 && bet.result_team_1 > bet.result_team_2) || (@result.result_team_1 == @result.result_team_2 && bet.result_team_1 == bet.result_team_2)
+            bet.polla.score -= 5 
+            if (@result.result_team_1 - @result.result_team_2 == bet.result_team_2 - bet.result_team_1) || (@result.result_team_2 - @result.result_team_1 == bet.result_team_1 - bet.result_team_2)
+              bet.polla.score -= 1
+            end 
+          end
+          if @result.result_team_1 == bet.result_team_2 
+            bet.polla.score -= 2
+          end 
+          if @result.result_team_2 == bet.result_team_1
+            bet.polla.score -= 2
+          end 
+        end
+        bet.polla.save
+      end
     end
+    @result.destroy
+    redirect_to results_path
   end
 
   private
