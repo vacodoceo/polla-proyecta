@@ -5,6 +5,15 @@ class PollasController < ApplicationController
   before_action :verify_user
   before_action :verify_mod, only: [:pollas_totales]
   def index
+    fecha = Time.now.to_s
+    lista = fecha.split(" ")
+    date = lista[0].split("-")
+    horario = lista[1].split(":")
+    if date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14 && horario[0].to_i <= 7 && horario[1].to_i <= 45
+      @fecha_correcta = true
+    else
+      @fecha_correcta = false
+    end
     @pollas = Polla.where(:user_id => current_user.id)
   end
 
@@ -44,7 +53,11 @@ class PollasController < ApplicationController
   end
 
   def crear_pago_polla#recibe polla y current_user
-    if Time.now > Time.zone.parse('2019-06-14 15:30:00')
+    fecha = Time.now.to_s
+    lista = fecha.split(" ")
+    date = lista[0].split("-")
+    horario = lista[1].split(":")
+    if date[0].to_i > 2019 || date[1].to_i > 6 || date[2].to_i > 14 || horario[0].to_i > 7 || horario[1].to_i > 45
       redirect_to root_path
 
     elsif current_user.credits > 0
@@ -70,7 +83,7 @@ class PollasController < ApplicationController
       amount = 2000
       response = api.payments_post('Pago polla: ' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
           transaction_id: @transaction.id,
-          expires_date: DateTime.new(2019, 6, 14),
+          expires_date: DateTime.new(2019, 6, 15),
           send_email: true,
           payer_name: current_user.name,
           payer_email: current_user.email,
