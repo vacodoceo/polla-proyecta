@@ -4,6 +4,7 @@ let countries_name;
 $(document).on("turbolinks:load", function(){
     $('.toggle-polla').click(function(){
         let polla_id = $(this).attr('id').replace('polla-', '');
+        $('.loading').show();
         Rails.ajax({
             url: "/pollas/"+polla_id,
             type: "get",
@@ -16,15 +17,24 @@ function build_polla(data){
     $(".modal-title").html(data.name);
     container = $(".container-pagination");
     countries_name = data.countries_name;
-    let first_round = handleBuggedData(data.first_round);
 
-    buildGroup('A', first_round.slice(0, 4))
-    buildGroup('B', first_round.slice(4, 8))
-    buildGroup('C', first_round.slice(8, 12))
+    buildGroup('A', data.first_round.slice(0, 4))
+    buildGroup('B', data.first_round.slice(4, 8))
+    buildGroup('C', data.first_round.slice(8, 12))
 
     for (i=1; i<9; i++){
-        buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[i-1]);
+        if (i == 3){
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[1]);
+        }
+        else if (i == 2){
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[2]);
+        }
+        else{
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[i-1]);
+        }
     }
+
+    $('.loading').hide();
 
     $("input[type='number']").prop("disabled", true);
     container.find("button").addClass("disabled");
@@ -33,7 +43,7 @@ function build_polla(data){
 function buildGroup(id, countries){
     let group = container.find("#"+id+" .list-group.groups:last-child");
     group.children().each(function(i){
-        groupAssign($(this), countries[i].country_name);
+        groupAssign($(this), countries[i]);
     })
 }
 
@@ -59,7 +69,6 @@ function handleBuggedData(data){
 }
 
 function buildMatch(element, match_info){
-    console.log(match_info, match_info.result);
     let countries = [
                       {
                         name: match_info.country_1_name,
@@ -76,8 +85,17 @@ function buildMatch(element, match_info){
         changeFlag($(this).find(".flag-icon"), countries[i].name)
         $(this).find("span:nth-child(2)").html(countries_name[countries[i].name])
         $(this).find("input").val(countries[i].score);
+        $(this).removeClass('list-group-item-success');
         if (parseInt(countries[2]) == i+1){
             $(this).addClass('list-group-item-success');
         }
     })
+
+    // Temporal fix for bugged final results
+    // if (countries[0].score > countries[1].score){
+    //     element.children().first().addClass('list-group-item-success');
+    // }
+    // else if (countries[1].score > countries[0].score){
+    //     element.children().last().addClass('list-group-item-success');
+    // }
 }

@@ -18,17 +18,19 @@ class PollasController < ApplicationController
   end
 
   def pollas_totales
-    if current_user && (current_user.is_admin || current_user.is_mod || current_user.id == 2)
-      @pollas = Polla.all
-    else
-      redirect_to root_path
-    end
+    @pollas = Polla.all.order('valid_polla DESC, id');
   end
 
   # GET /pollas/1
   # GET /pollas/1.json
   def show
-    render json: { name: @polla.name, first_round: @polla.first_rounds, matches: @polla.bets, countries_name: COUNTRIES_NAME }
+    groups = []
+    ['a', 'b', 'c'].each do |g|
+      (1..4).each do |n|
+        groups << @polla.first_rounds.find_by({group: g, position: n}).country_name
+      end
+    end
+    render json: { name: @polla.name, first_round: groups, matches: @polla.bets.order(:id), countries_name: COUNTRIES_NAME }
   end
 
   # GET /pollas/new
@@ -83,7 +85,7 @@ class PollasController < ApplicationController
       amount = 2000
       response = api.payments_post('Pago polla: ' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
           transaction_id: @transaction.id,
-          expires_date: DateTime.new(2019, 6, 15),
+          expires_date: DateTime.new(2019, 6, 16),
           send_email: true,
           payer_name: current_user.name,
           payer_email: current_user.email,
@@ -272,6 +274,7 @@ class PollasController < ApplicationController
   
         api    = Khipu::PaymentsApi.new()
         @transactions.each do |trans|
+          if trans.charged == 0
             cosas = trans.payment_url.split("/")
             status = api.payments_id_get(cosas[-1])
             @polla =  Polla.find(trans.polla_id)
@@ -281,6 +284,7 @@ class PollasController < ApplicationController
               trans.save
               @polla.save
             end
+          end
         end
       end
       #redirect_to pollas_path
