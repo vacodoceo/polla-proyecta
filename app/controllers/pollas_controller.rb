@@ -66,7 +66,7 @@ class PollasController < ApplicationController
       amount = 2000
       response = api.payments_post('Pago polla: ' + @polla.name, 'CLP', amount, { #CAMBIAR A 1000
           transaction_id: @transaction.id,
-          expires_date: DateTime.new(2019, 6, 14),
+          expires_date: DateTime.new(2019, 6, 15),
           send_email: true,
           payer_name: current_user.name,
           payer_email: current_user.email,
