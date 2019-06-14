@@ -268,6 +268,8 @@ select.select-country {
 
   .modal-body {
     padding: 0;
+    text-align: center;
+    overflow: hidden;
 
     .page-item {
       width: 25%;
@@ -275,6 +277,22 @@ select.select-country {
   }
 }
 
+.spinner-grow {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 50%;
+}
+
+.loading {
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  height: 99%;
+  top: 0;
+  width: 100%;
+  background: white;
+}
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,

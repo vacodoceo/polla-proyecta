@@ -4,6 +4,7 @@ let countries_name;
 $(document).on("turbolinks:load", function(){
     $('.toggle-polla').click(function(){
         let polla_id = $(this).attr('id').replace('polla-', '');
+        $('.loading').show();
         Rails.ajax({
             url: "/pollas/"+polla_id,
             type: "get",
@@ -32,6 +33,8 @@ function build_polla(data){
             buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[i-1]);
         }
     }
+
+    $('.loading').hide();
 
     $("input[type='number']").prop("disabled", true);
     container.find("button").addClass("disabled");
