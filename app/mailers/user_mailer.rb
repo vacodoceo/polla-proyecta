@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-    default :from => 'ti@trabajosproyecta.cl'
+    default :from => 'T+I Proyecta <ti@trabajosproyecta.cl>'
     def recover_password(user)
         @user = user
         options = 'abcdefghijklmnñopqrstuvwxyz1234567890?¿_:*^─·_:;<>!·$%$%&/()='
@@ -22,5 +22,10 @@ class UserMailer < ApplicationMailer
         @comment = params['comment']
         @email = email
         mail(to: 'ti@trabajosproyecta.cl', subject: params['subject'])
+    end
+
+    def remember_pay(user)
+        @user = user
+        mail(to: @user.email, subject: 'Recordatorio pago Polla Proyecta')
     end
 end
