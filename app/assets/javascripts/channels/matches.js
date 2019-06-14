@@ -48,6 +48,7 @@ function addCountry(match, c1, c2){
             if (i == 1){
                 $(this).parent().parent().children('span').removeClass();
                 $(this).parent().parent().children('span').addClass('flag-icon flag-icon-'+c2[0]);
+                $(this).parent().parent().attr('country', c2[0]);
             }
             $(this).attr('value', c2[i]);
             $(this).addClass(c2[i]);
