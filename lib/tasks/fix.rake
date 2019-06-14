@@ -43,6 +43,16 @@ namespace :fix do
 
   desc "TODO"
   task final_result: :environment do
+    Polla.all().each do |p|
+      final = p.bets.order(:id)[-1]
+      if final.result_team_1 > final.result_team_2
+        final.update(result: "1")
+      elsif final.result_team_1 < final.result_team_2
+        final.update(result: "2")
+      else
+        final.update(result: "")
+      end
+    end
   end
 
 end

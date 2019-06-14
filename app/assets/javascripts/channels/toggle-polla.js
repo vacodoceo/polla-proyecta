@@ -88,10 +88,11 @@ function buildMatch(element, match_info){
         }
     })
 
-    if (countries[0].score > countries[1].score){
-        element.children().first().addClass('list-group-item-success');
-    }
-    else if (countries[1].score > countries[0].score){
-        element.children().last().addClass('list-group-item-success');
-    }
+    // Temporal fix for bugged final results
+    // if (countries[0].score > countries[1].score){
+    //     element.children().first().addClass('list-group-item-success');
+    // }
+    // else if (countries[1].score > countries[0].score){
+    //     element.children().last().addClass('list-group-item-success');
+    // }
 }
