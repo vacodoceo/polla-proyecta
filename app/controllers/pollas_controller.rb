@@ -9,7 +9,7 @@ class PollasController < ApplicationController
     lista = fecha.split(" ")
     date = lista[0].split("-")
     horario = lista[1].split(":")
-    if date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14 && horario[0].to_i <= 7 && horario[1].to_i <= 45
+    if date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14 && horario[0].to_i <= 23 && horario[1].to_i <= 30
       @fecha_correcta = true
     else
       @fecha_correcta = false
@@ -57,7 +57,7 @@ class PollasController < ApplicationController
     lista = fecha.split(" ")
     date = lista[0].split("-")
     horario = lista[1].split(":")
-    if date[0].to_i > 2019 || date[1].to_i > 6 || date[2].to_i > 14 || horario[0].to_i > 7 || horario[1].to_i > 45
+    if date[0].to_i > 2019 || date[1].to_i > 6 || date[2].to_i > 14 || horario[0].to_i > 23 || horario[1].to_i > 30
       redirect_to root_path
 
     elsif current_user.credits > 0
