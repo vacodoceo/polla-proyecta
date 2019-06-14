@@ -5,7 +5,16 @@ class PollasController < ApplicationController
   before_action :verify_user
   before_action :verify_mod, only: [:pollas_totales]
   def index
-    @pollas = current_user.pollas;
+    fecha = Time.now.to_s
+    lista = fecha.split(" ")
+    date = lista[0].split("-")
+    horario = lista[1].split(":")
+    if (date[0].to_i < 2019) || (date[0].to_i <= 2019 && date[1].to_i < 6) || (date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14) ||  (horario[0].to_i < 23) || (horario[0].to_i <= 23 && horario[1].to_i <= 30)
+      @fecha_correcta = true
+    else
+      @fecha_correcta = false
+    end
+    @pollas = Polla.where(:user_id => current_user.id)
   end
 
   def pollas_totales
@@ -36,17 +45,21 @@ class PollasController < ApplicationController
   def validar_polla
     @polla.valid_polla = 1
     @polla.save
-    redirect_to pollas_path
+    redirect_to pollas_totales_path
   end
 
   def invalidar_polla
     @polla.valid_polla = 0
     @polla.save
-    redirect_to pollas_path
+    redirect_to pollas_totales_path
   end
 
   def crear_pago_polla#recibe polla y current_user
-    if Time.now > Time.zone.parse('2019-06-14 15:30:00')
+    fecha = Time.now.to_s
+    lista = fecha.split(" ")
+    date = lista[0].split("-")
+    horario = lista[1].split(":")
+    if !((date[0].to_i < 2019) || (date[0].to_i <= 2019 && date[1].to_i < 6) || (date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14) ||  (horario[0].to_i < 23) || (horario[0].to_i <= 23 && horario[1].to_i <= 30))
       redirect_to root_path
 
     elsif current_user.credits > 0
@@ -100,6 +113,7 @@ class PollasController < ApplicationController
   # POST /pollas
   # POST /pollas.json
   def create
+    puts params
     @polla = current_user.pollas.create(polla_params)
     @polla.valid_polla = 0
     @polla.score = 0
@@ -217,7 +231,15 @@ class PollasController < ApplicationController
 
   # DELETE /pollas/1
   # DELETE /pollas/1.json
+  # p = Polla.create :id=>10000, :valid_polla=>0, :score=>0, :created_at=>"2019-05-05 23:59:23", :updated_at=>"2019-05-05 23:59:23", :name=>"Polla Eliminada", :paying=>0, :user_id=>2
   def destroy
+    @transactions = Transaction.where(:polla_id => @polla.id) 
+    if @transactions.length > 0
+      @transactions.each do |trans|
+        trans.polla_id = 10000
+        trans.save
+      end
+    end
     @polla.destroy
     respond_to do |format|
       format.html { redirect_to pollas_path}
