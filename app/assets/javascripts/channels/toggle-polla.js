@@ -13,25 +13,23 @@ $(document).on("turbolinks:load", function(){
 })
 
 function build_polla(data){
-    console.log(data);
     $(".modal-title").html(data.name);
     container = $(".container-pagination");
     countries_name = data.countries_name;
-    let first_round = handleBuggedData(data.first_round);
 
-    buildGroup('C', first_round.slice(0, 4).reverse())
-    buildGroup('B', first_round.slice(4, 8).reverse())
-    buildGroup('A', first_round.slice(8, 12).reverse())
+    buildGroup('A', data.first_round.slice(0, 4))
+    buildGroup('B', data.first_round.slice(4, 8))
+    buildGroup('C', data.first_round.slice(8, 12))
 
     for (i=1; i<9; i++){
         if (i == 3){
-            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[6]);
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[1]);
         }
         else if (i == 2){
-            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[5]);
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[2]);
         }
         else{
-            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[9-i-1]);
+            buildMatch($(".list-group-match#"+i+" .list-group.groups:last-child"), data.matches[i-1]);
         }
     }
 
@@ -42,7 +40,7 @@ function build_polla(data){
 function buildGroup(id, countries){
     let group = container.find("#"+id+" .list-group.groups:last-child");
     group.children().each(function(i){
-        groupAssign($(this), countries[i].country_name);
+        groupAssign($(this), countries[i]);
     })
 }
 
