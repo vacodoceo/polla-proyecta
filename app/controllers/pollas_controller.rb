@@ -9,11 +9,11 @@ class PollasController < ApplicationController
     lista = fecha.split(" ")
     date = lista[0].split("-")
     horario = lista[1].split(":")
-    if (date[0].to_i < 2019) || (date[0].to_i <= 2019 && date[1].to_i < 6) || (date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14) ||  (horario[0].to_i < 23) || (horario[0].to_i <= 23 && horario[1].to_i <= 30)
-      @fecha_correcta = true
-    else
-      @fecha_correcta = false
-    end
+    # if (date[0].to_i < 2019) || (date[0].to_i <= 2019 && date[1].to_i < 6) || (date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14) ||  (horario[0].to_i < 23) || (horario[0].to_i <= 23 && horario[1].to_i <= 30)
+    #   @fecha_correcta = true
+    # else
+    @fecha_correcta = false
+    # end
     @pollas = Polla.where(:user_id => current_user.id)
   end
 
@@ -59,7 +59,9 @@ class PollasController < ApplicationController
     lista = fecha.split(" ")
     date = lista[0].split("-")
     horario = lista[1].split(":")
-    if !((date[0].to_i < 2019) || (date[0].to_i <= 2019 && date[1].to_i < 6) || (date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14) ||  (horario[0].to_i < 23) || (horario[0].to_i <= 23 && horario[1].to_i <= 30))
+    # if !((date[0].to_i < 2019) || (date[0].to_i <= 2019 && date[1].to_i < 6) || (date[0].to_i <= 2019 && date[1].to_i <= 6 && date[2].to_i <= 14) ||  (horario[0].to_i < 23) || (horario[0].to_i <= 23 && horario[1].to_i <= 30))
+    #   redirect_to root_path
+    if true
       redirect_to root_path
 
     elsif current_user.credits > 0
@@ -67,7 +69,7 @@ class PollasController < ApplicationController
       @polla.valid_polla = 1
       @polla.save
       redirect_to pollas_path
-      
+
     else
       receiver_id = ENV['RECEIVER_ID']
       secret_key = ENV['RECEIVER_SECRET']
@@ -95,7 +97,7 @@ class PollasController < ApplicationController
           notify_api_version: '1.3'
       })
       puts 'response: '
-      puts response 
+      puts response
       @polla.paying = 1
       @transaction.payment_id = response.payment_id
       @transaction.amount = amount
@@ -140,8 +142,8 @@ class PollasController < ApplicationController
       @first_round.country_name = first_round_b[n]
       @first_round.position = n + 1
       @first_round.save!
-    end 
-    
+    end
+
     (0..first_round_c.length-1).each do |n|
       @first_round = FirstRound.new
       @first_round.polla_id = @polla.id
@@ -149,7 +151,7 @@ class PollasController < ApplicationController
       @first_round.country_name = first_round_c[n]
       @first_round.position = n + 1
       @first_round.save!
-    end 
+    end
 
     quarter_final = params['quarter_final'].split(",")
     semifinal = params['semifinal'].split(",")
@@ -233,7 +235,7 @@ class PollasController < ApplicationController
   # DELETE /pollas/1.json
   # p = Polla.create :id=>10000, :valid_polla=>0, :score=>0, :created_at=>"2019-05-05 23:59:23", :updated_at=>"2019-05-05 23:59:23", :name=>"Polla Eliminada", :paying=>0, :user_id=>2
   def destroy
-    @transactions = Transaction.where(:polla_id => @polla.id) 
+    @transactions = Transaction.where(:polla_id => @polla.id)
     if @transactions.length > 0
       @transactions.each do |trans|
         trans.polla_id = 10000
@@ -263,7 +265,7 @@ class PollasController < ApplicationController
       if @transactions
         receiver_id = ENV['RECEIVER_ID']
         secret_key = ENV['RECEIVER_SECRET']
-  
+
         Khipu.configure do |c|
           c.secret = secret_key
           c.receiver_id = receiver_id
@@ -271,7 +273,7 @@ class PollasController < ApplicationController
           c.platform_version = '2.0'
           # c.debugging = true
         end
-  
+
         api    = Khipu::PaymentsApi.new()
         @transactions.each do |trans|
           if trans.charged == 0
